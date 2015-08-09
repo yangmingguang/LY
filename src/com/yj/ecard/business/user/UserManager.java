@@ -325,7 +325,7 @@ public class UserManager {
 					break;
 
 				case Constan.EMPTY_CODE:
-					handler.sendEmptyMessage(onValidateCodeEmpty);
+					handler.sendMessage(handler.obtainMessage(onValidateCodeEmpty, validateCodeResponse.status.msg));
 					break;
 
 				case Constan.ERROR_CODE:
@@ -376,7 +376,7 @@ public class UserManager {
 					break;
 
 				case Constan.EMPTY_CODE:
-					handler.sendEmptyMessage(onCheckCodeEmpty);
+					handler.sendMessage(handler.obtainMessage(onCheckCodeEmpty, checkCodeResponse.status.msg));
 					break;
 
 				case Constan.ERROR_CODE:
@@ -477,7 +477,7 @@ public class UserManager {
 					break;
 
 				case Constan.EMPTY_CODE:
-					handler.sendEmptyMessage(onEmpty);
+					handler.sendMessage(handler.obtainMessage(onEmpty, mGetValidateCodeResponse.status.msg));
 					break;
 
 				case Constan.ERROR_CODE:

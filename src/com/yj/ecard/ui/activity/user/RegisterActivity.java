@@ -80,7 +80,7 @@ public class RegisterActivity extends BaseActivity implements OnClickListener {
 				break;
 
 			case UserManager.onValidateCodeEmpty:
-				ToastUtil.show(context, R.string.reg_validate_failure_tips, ToastUtil.LENGTH_SHORT);
+				ToastUtil.show(context, (String) msg.obj, ToastUtil.LENGTH_SHORT);
 				break;
 
 			case UserManager.onValidateCodeFailure:
@@ -93,7 +93,7 @@ public class RegisterActivity extends BaseActivity implements OnClickListener {
 				break;
 
 			case UserManager.onCheckCodeEmpty:
-				ToastUtil.show(context, R.string.checkcode_failure_tips, ToastUtil.LENGTH_SHORT);
+				ToastUtil.show(context, (String) msg.obj, ToastUtil.LENGTH_SHORT);
 				break;
 
 			case UserManager.onCheckCodeFailure:

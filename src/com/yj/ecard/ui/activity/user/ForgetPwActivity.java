@@ -92,7 +92,7 @@ public class ForgetPwActivity extends BaseActivity {
 				break;
 
 			case UserManager.onEmpty:
-				ToastUtil.show(context, R.string.get_validate_code_failure, ToastUtil.LENGTH_SHORT);
+				ToastUtil.show(context, (String) msg.obj, ToastUtil.LENGTH_SHORT);
 				break;
 
 			case UserManager.onFailure:
