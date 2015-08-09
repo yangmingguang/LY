@@ -50,9 +50,9 @@ public class FloatWindowManager {
 	private int count = 11;
 	private Context context;
 	private boolean isCalling;
-	private View mFloatLayout;
 	private ImageView imageView;
 	private TelAdBean mTelAdBean;
+	private View mFloatLayout, bdLayout;
 	private WindowManager mWindowManager;
 	private TextView textView, tvPhone, tvName;
 	private WindowManager.LayoutParams wmParams;
@@ -93,7 +93,8 @@ public class FloatWindowManager {
 	* @return void    返回类型 
 	* @throws
 	 */
-	public void showFloatView(final Context context, String phoneNumber, boolean isFullScreen, boolean isCalling) {
+	public void showFloatView(final Context context, String phoneNumber, boolean isFullScreen, boolean isCalling,
+			boolean isShowPhone) {
 
 		// 更新通话状态--正在通话中
 		DBService.getInstance(context).updateCall(1);
@@ -109,6 +110,7 @@ public class FloatWindowManager {
 			} else {
 				// 半屏显示
 				mFloatLayout = LayoutInflater.from(context).inflate(R.layout.float_halfscreen_layout, null);
+				bdLayout = mFloatLayout.findViewById(R.id.fl_halfscreen_layout);
 				tvPhone = (TextView) mFloatLayout.findViewById(R.id.tv_phone);
 				tvName = (TextView) mFloatLayout.findViewById(R.id.tv_name);
 			}
@@ -155,8 +157,12 @@ public class FloatWindowManager {
 				advId = mTelAdBean.id;
 				path = mTelAdBean.smallLocalPath;
 				setLargeLocalPath(context, mTelAdBean.largeLocalPath); // 设置大图片路径
-				tvPhone.setText(phoneNumber);// 设置来电去电号码显示
-				tvName.setText(Utils.getContactNameByPhoneNumber(context, phoneNumber));// 设置来电去电名称显示
+				if (isShowPhone) {
+					tvPhone.setText(phoneNumber);// 设置来电去电号码显示
+					tvName.setText(Utils.getContactNameByPhoneNumber(context, phoneNumber));// 设置来电去电名称显示
+				} else {
+					bdLayout.getBackground().setAlpha(0); // 设置背景透明
+				}
 			}
 
 			// 判断文件是否存在
