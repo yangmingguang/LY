@@ -1,0 +1,191 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">乐盈</string>
+    <string name="action_settings">Settings</string>
+    <string name="hello_world">Hello world!</string>
+
+    <!-- DrawerLayout -->
+    <string name="drawer_open">open</string>
+    <string name="drawer_close">close</string>
+
+    <!-- SlidingMenu -->
+    <string name="slidingmenu_account">账号：13410706179</string>
+    <string name="slidingmenu_level">等级：</string>
+    <string name="slidingmenu_notice">活动公告</string>
+    <string name="slidingmenu_password">修改密码</string>
+    <string name="slidingmenu_feedback">意见反馈</string>
+    <string name="slidingmenu_custom">客服热线&#160;&#160;&#160;&#160;400-6588549</string>
+    <string name="slidingmenu_cache">清除缓存</string>
+    <string name="slidingmenu_version">版本更新</string>
+    <string name="slidingmenu_about">关于乐盈</string>
+    <string name="slidingmenu_exit">退出应用</string>
+
+    <!-- PageTitle -->
+    <string name="title_wonderful_ad">精彩广告</string>
+    <string name="title_wonderful_ad_detail">广告详情</string>
+    <string name="title_banner_detail">广告栏详情</string>
+    <string name="title_feature_business">特色商家</string>
+    <string name="title_exchange_gift">兑换礼品</string>
+    <string name="title_value_spike">超值秒杀</string>
+    <string name="title_value_spike_detail">超值详情</string>
+    <string name="title_stroll_preferential">逛优惠</string>
+    <string name="title_stroll_preferential_desc">边逛边赚钱</string>
+    <string name="title_publish_preferential">发优惠</string>
+    <string name="title_publish_preferential_desc">广告免费发</string>
+    <string name="title_preferential_detail">优惠详情</string>
+    <string name="title_business_detail">商家详情</string>
+    <string name="title_exchange_detail">兑换详情</string>
+    <string name="title_income">金币、积分</string>
+    <string name="title_complete_data">完善资料</string>
+    <string name="title_my_preferential">我发的优惠</string>
+    <string name="title_exchange_record">兑换记录</string>
+    <string name="title_ranking_list">排行榜</string>
+    <string name="title_withdraw">账户提现</string>
+    <string name="title_lucky">试手气、赢大奖</string>
+    <string name="title_login">登录</string>
+    <string name="title_register">用户注册</string>
+    <string name="title_forget_pw">忘记密码</string>
+    <string name="title_reset_pw">重置密码</string>
+    <string name="title_friends">朋友圈收入</string>
+    <string name="title_modify_pw">修改密码</string>
+    <string name="title_collect_address">收货地址</string>
+    <string name="title_seckill_record">秒杀记录</string>
+
+    <!-- HomeTab -->
+    <string name="footer_btn_home">首页</string>
+    <string name="footer_btn_business">商家</string>
+    <string name="footer_btn_me">我的</string>
+    <string name="footer_btn_money">赚钱</string>
+    <string name="footer_btn_exchange">兑换</string>
+    <string name="btn_ad_title">精彩广告</string>
+    <string name="btn_ad_subtitle">赚大把的钱</string>
+    <string name="btn_business_title">特色商家</string>
+    <string name="btn_business_subtitle">名店特色风采</string>
+    <string name="btn_exchange_title">兑换礼品</string>
+    <string name="btn_exchange_subtitle">话费充值等</string>
+    <string name="invite_friend_title">邀请好友立赚3元 + 好友收入30%的奖励</string>
+    <string name="btn_invite_friend">邀请好友</string>
+    <string name="total_income_title">82.89元</string>
+    <string name="total_income_subtitle">累计收益</string>
+    <string name="btn_sign">每日签到</string>
+    <string name="btn_task">每日任务</string>
+    <string name="btn_value_spike">超值秒杀</string>
+    <string name="value_spike_desc">每天9:00——16:30点开抢</string>
+    <string name="goods_time">01:09:56</string>
+    <string name="goods_desc">DELUCX鼠标限时大秒杀。走过路过不要错过!!!</string>
+    <string name="tab_overflow">超值兑换</string>
+    <string name="tab_special">乐盈特价</string>
+    <string name="tab_area">话费专区</string>
+    <string name="tab_bomb_screen">弹屏广告</string>
+    <string name="tab_draw_screen">划屏广告</string>
+    <string name="tab_video_screen">视频广告</string>
+    <string name="tab_9">9:00</string>
+    <string name="tab_10">11:00</string>
+    <string name="tab_14">14:30</string>
+    <string name="tab_16">16:30</string>
+    <string name="tab_brief">简介</string>
+    <string name="tab_product">产品</string>
+    <string name="tab_environment">环境</string>
+
+    <!-- MeTab -->
+    <string name="option_1">今日收入：588.0元</string>
+    <string name="option_2">完善资料</string>
+    <string name="option_3">朋友圈人数：100个</string>
+    <string name="option_4">朋友圈收入：588.0元</string>
+    <string name="option_5">我发的优惠</string>
+    <string name="option_6">兑换记录</string>
+    <string name="option_7">排行榜</string>
+    <string name="option_8">账户提现</string>
+    <string name="option_9">秒杀记录</string>
+
+    <!-- other -->
+    <string name="loading">Loading...</string>
+    <string name="hide_text">点击隐藏</string>
+    <string name="clear_cache_success">清除缓存成功!</string>
+    <string name="content_text_tips">&#160;内容详情</string>
+    <string name="seconds_text">10</string>
+    <string name="about_content">&#160;&#160;&#160;&#160;河南乐盈科技有限公司，成立于2014年，前身是成立于2004年的河南古城广告有限公司，业务涵盖纸媒、户外、网站建设、多媒体广告等行业。注册资金1000万元，目前在河南、湖北、安徽等省拥有64家市、县分公司.是目前河南省内DM广告行业的领导者。
+                               \n&#160;&#160;&#160;&#160;乐盈整合了智能手机领域最优质的应用以及广告资源，搭建了广告主和用户间的广告技术服务平台。并借助大规模数据处理的平台优势以及贴近应用开发者的服务模式，为应用开发者提供产品推广服务和收益，以及为致力于在智能手机平台推广产品、品牌的广告主提供高效的服务。
+                               \n&#160;&#160;&#160;&#160;乐盈以智能手机为载体的无线营销，在便携性、互动性、个性识别方面具有无可比拟的优势，为用户体验和广告主创造价值最大化。公司团队在广告和互联网行业有多年的积累，拥有丰富的广告资源，乐盈希望给广告行业带来独特的价值体验。</string>
+    <string name="dialog_negative">取 消</string>
+    <string name="dialog_positive">确 定</string>
+    <string name="dialog_title">新版本提示</string>
+    <string name="dialog_message">Custom Dialog New Style UI.</string>
+    <string name="draw_screen_tips">左划进入详情，右划解锁!</string>
+
+    <!-- User -->
+    <string name="username_hint">请输入手机号码</string>
+    <string name="password_hint">请输入密码</string>
+    <string name="set_password_hint">请设置新密码，4-20个字符</string>
+    <string name="validate_code_hint">请输入验证码</string>
+    <string name="invite_phone_hint">请输入邀请人手机号码</string>
+    <string name="login_btn_text">登 录</string>
+    <string name="reg_btn_text">用户注册</string>
+    <string name="forget_pw_btn_text">忘记密码</string>
+    <string name="reg_btn_next_text">下一步</string>
+    <string name="reg_btn_complete_text">完 成</string>
+    <string name="validate_code_text">验证码</string>
+    <string name="reg_agree_text">同意乐盈协议服务条款</string>
+    <string name="tips_title_text">温馨提示：</string>
+    <string name="tips_subtitle_text">* 注册成功后完成资料立赚1元！</string>
+    <string name="reg_check_tips">手机号、验证码不能为空!</string>
+    <string name="reg_check_tips1">密码、手机号不能为空!</string>
+    <string name="reg_check_phone_tips">请输入手机号码!</string>
+    <string name="reg_success_tips">注册成功！</string>
+    <string name="reg_failure_tips">该手机号已注册过了！</string>
+    <string name="error_tips">网络出现异常！</string>
+    <string name="reg_validate_failure_tips">该设备已被注册，请登录！</string>
+    <string name="reg_validate_code_success_tips">获取验证码成功!</string>
+    <string name="login_check_tips">手机号、密码不能为空!</string>
+    <string name="login_failure_tips">手机号 或 密码错误!</string>
+    <string name="login_success_tips">登录成功!</string>
+    <string name="checkcode_success_tips">验证成功!</string>
+    <string name="checkcode_failure_tips">验证失败!</string>
+    <string name="old_pw_hint">旧密码</string>
+    <string name="old_new_hint">新密码</string>
+    <string name="old_confirm_hint">确认新密码</string>
+    <string name="old_pw_check_tips">请输入旧密码!</string>
+    <string name="new_pw_check_tips">请输入新密码!</string>
+    <string name="confirm_pw_check_tips">请输入确认新密码!</string>
+    <string name="compare_pw_check_tips">两次输入密码不正确!</string>
+    <string name="btn_cancel_text">取消</string>
+    <string name="btn_confirm_text">确定</string>
+    <string name="modify_pw_success">修改密码成功，请重新登录！</string>
+    <string name="modify_pw_failure">修改密码失败，请重试！</string>
+    <string name="pw_errror">原始密码错误，请重试！</string>
+    <string name="forget_pw_text_tips">已经用手机号码注册过或者绑定过手机号码的用户，通过手机短信验证码，可重新自定义密码.</string>
+    <string name="get_validate_code">获取验证码</string>
+    <string name="get_validate_code_success">发送成功！</string>
+    <string name="get_validate_code_failure">发送失败！</string>
+    <string name="reset_pw_title1">已经发送验证到你的手机</string>
+    <string name="reset_pw_title2">如一分钟内没有收到短信，请 </string>
+    <string name="collect_address_hint">请输入收货地址 </string>
+    <string name="postalcode_hint">请输入邮政编码 </string>
+    <string name="collect_name_hint">请输入收货人姓名 </string>
+    <string name="collect_phone_hint">请输入收货人电话 </string>
+    <string name="withdraw_name_hint">姓 名 </string>
+    <string name="withdraw_card_hint">银行卡号 </string>
+    <string name="withdraw_bank_hint">开户银行</string>
+    <string name="withdraw_balance_hint">可用余额</string>
+    <string name="withdraw_cash_balance_hint">提现余额</string>
+    <string name="withdraw_tips">*提现金额为100的倍数，结余金额可下次申请.</string>
+    <string name="withdraw_name_tips">请输入姓名！</string>
+    <string name="withdraw_cardnum_tips">请输入银行卡号!</string>
+    <string name="withdraw_bank_tips">请输入开户银行!</string>
+    <string name="withdraw_balance_tips">请输入可用金额！</string>
+    <string name="withdraw_cash_balance_tips">请输入提现金额！</string>
+    <string name="ok_btn">确定</string>
+    <string name="cancel_btn">取消</string>
+    <string name="take_picture_btn">拍照</string>
+    <string name="photo_select_btn">从相册中选取</string>
+    <string name="publish_take_photo_hint">对准商店内的优惠信息，直接拍照吧</string>
+    <string name="publish_title_hint">请填写优惠信息标题</string>
+    <string name="publish_content_tips">请填写优惠信息内容</string>
+    <string name="publish_content_hint">没有照片，文字也行</string>
+    <string name="publish_phone_hint">请输入联系电话</string>
+    <string name="publish_address_hint">请输入联系地址</string>
+    <string name="publish_btn">发布</string>
+    
+
+</resources>

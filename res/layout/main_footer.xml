@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RadioGroup xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/mf_tab_rg"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_gravity="bottom"
+    android:background="@drawable/tab_bottom"
+    android:orientation="horizontal"
+    android:paddingTop="@dimen/footbar_paddingTop" >
+
+    <RadioButton
+        android:id="@+id/mf_home_tab_rb"
+        style="@style/main_footbar_radio"
+        android:drawableTop="@drawable/selector_item_home"
+        android:text="@string/footer_btn_home" />
+
+    <RadioButton
+        android:id="@+id/mf_apps_tab_rb"
+        style="@style/main_footbar_radio"
+        android:drawableTop="@drawable/selector_item_business"
+        android:text="@string/footer_btn_business" />
+
+    <RadioButton
+        android:id="@+id/mf_games_tab_rb"
+        style="@style/main_footbar_radio"
+        android:drawableTop="@drawable/selector_item_me"
+        android:text="@string/footer_btn_me" />
+
+    <RadioButton
+        android:id="@+id/mf_ringtones_tab_rb"
+        style="@style/main_footbar_radio"
+        android:drawableTop="@drawable/selector_item_money"
+        android:text="@string/footer_btn_money" />
+
+    <RadioButton
+        android:id="@+id/mf_wallpaper_tab_rb"
+        style="@style/main_footbar_radio"
+        android:drawableTop="@drawable/selector_item_exchange"
+        android:text="@string/footer_btn_exchange" />
+
+</RadioGroup>

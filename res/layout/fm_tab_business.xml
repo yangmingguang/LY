@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/choose_rootview"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/app_bg_drawable"
+    android:orientation="vertical" >
+<!-- 
+    <LinearLayout
+        android:id="@+id/tabs"
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        android:background="@color/white"
+        android:gravity="center" >
+
+        <com.yj.ecard.ui.views.dropdownmenu.DropdownButton
+            android:id="@+id/chooseType"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1" />
+
+        <View
+            android:layout_width="0.5dp"
+            android:layout_height="18dp"
+            android:background="#dddddd" />
+
+        <com.yj.ecard.ui.views.dropdownmenu.DropdownButton
+            android:id="@+id/chooseLabel"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1" />
+
+        <View
+            android:layout_width="0.5dp"
+            android:layout_height="18dp"
+            android:background="#dddddd" />
+
+        <com.yj.ecard.ui.views.dropdownmenu.DropdownButton
+            android:id="@+id/chooseOrder"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1" />
+    </LinearLayout> -->
+
+    <com.yj.ecard.ui.views.pulltorefresh.PullToRefreshListView
+        android:id="@+id/lv_business"
+        style="@style/ScrollBarStyle"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:cacheColorHint="@android:color/transparent"
+        android:divider="@android:color/transparent"
+        android:dividerHeight="5dp"
+        android:fadingEdge="none"
+        android:footerDividersEnabled="false"
+        android:headerDividersEnabled="false"
+        android:listSelector="@android:color/transparent"
+        android:smoothScrollbar="true" />
+
+</LinearLayout>

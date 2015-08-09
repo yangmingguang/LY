@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    style="@style/ScrollBarStyle"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent" >
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="20.0dip"
+        android:orientation="vertical" >
+
+        <RelativeLayout
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/bg_publish_border"
+            android:padding="12dp" >
+
+            <TextView
+                android:id="@+id/take_picture_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:text="@string/publish_take_photo_hint"
+                android:textColor="@color/black"
+                android:textSize="16.0sp" />
+
+            <ImageView
+                android:id="@+id/iv_crop_picture"
+                android:layout_width="80dip"
+                android:layout_height="80dip"
+                android:layout_alignParentLeft="true"
+                android:layout_below="@+id/take_picture_title"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="10dip"
+                android:layout_marginTop="12.0dip"
+                android:contentDescription="@null"
+                android:scaleType="centerCrop"
+                android:src="@drawable/app_icon" />
+
+            <ImageView
+                android:id="@+id/btn_take_picture"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_below="@+id/take_picture_title"
+                android:layout_centerVertical="true"
+                android:layout_marginRight="10dip"
+                android:layout_marginTop="12.0dip"
+                android:contentDescription="@null"
+                android:src="@drawable/ic_take_picture" />
+        </RelativeLayout>
+
+        <EditText
+            android:id="@+id/et_content"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="18dp"
+            android:background="@drawable/bg_publish_border"
+            android:gravity="top"
+            android:hint="@string/publish_content_hint"
+            android:lines="4"
+            android:padding="12dp"
+            android:textSize="14.0sp" />
+
+        <EditText
+            android:id="@+id/et_title"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="6dp"
+            android:background="@drawable/bg_publish_border"
+            android:hint="@string/publish_title_hint"
+            android:padding="12dp"
+            android:textSize="14.0sp" />
+
+        <EditText
+            android:id="@+id/et_phone"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="6dp"
+            android:background="@drawable/bg_publish_border"
+            android:hint="@string/publish_phone_hint"
+            android:inputType="phone"
+            android:padding="12dp"
+            android:textSize="14.0sp" />
+
+        <EditText
+            android:id="@+id/et_address"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="6dp"
+            android:background="@drawable/bg_publish_border"
+            android:hint="@string/publish_address_hint"
+            android:lines="2"
+            android:padding="12dp"
+            android:gravity="top"
+            android:textSize="14.0sp" />
+
+        <Button
+            android:id="@+id/btn_pubilsh"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:background="@drawable/selector_red_btn"
+            android:text="@string/publish_btn"
+            android:textColor="@color/white"
+            android:textSize="18sp" />
+    </LinearLayout>
+
+</ScrollView>

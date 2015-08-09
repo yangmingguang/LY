@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    style="@style/ScrollBarStyle"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/app_bg_drawable" >
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="20dp" >
+
+        <LinearLayout
+            android:id="@+id/ll_content"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/bg_y"
+            android:orientation="vertical" >
+
+            <EditText
+                android:id="@+id/et_name"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@null"
+                android:hint="@string/withdraw_name_hint"
+                android:padding="12dp"
+                android:textSize="16sp" />
+
+            <View style="@style/SlidingMenuItemDividerLineStyle" />
+
+            <EditText
+                android:id="@+id/et_cardnum"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@null"
+                android:hint="@string/withdraw_card_hint"
+                android:inputType="number"
+                android:padding="12dp"
+                android:textSize="16sp" />
+
+            <View style="@style/SlidingMenuItemDividerLineStyle" />
+
+            <EditText
+                android:id="@+id/et_bank"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@null"
+                android:hint="@string/withdraw_bank_hint"
+                android:padding="12dp"
+                android:textSize="16sp" />
+
+            <View style="@style/SlidingMenuItemDividerLineStyle" />
+
+            <EditText
+                android:id="@+id/et_balance"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@null"
+                android:hint="@string/withdraw_balance_hint"
+                android:enabled="false"
+                android:padding="12dp"
+                android:textSize="16sp" />
+
+            <View style="@style/SlidingMenuItemDividerLineStyle" />
+
+            <EditText
+                android:id="@+id/et_cash_balance"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@null"
+                android:hint="@string/withdraw_cash_balance_hint"
+                android:inputType="phone"
+                android:padding="12dp"
+                android:textSize="16sp" />
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/tv_withdraw_tips"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/ll_content"
+            android:layout_marginTop="20dp"
+            android:text="@string/withdraw_tips"
+            android:textColor="#ff0000"
+            android:textSize="14sp" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/tv_withdraw_tips"
+            android:layout_marginTop="20dp" >
+
+            <Button
+                android:id="@+id/btn_cancel"
+                android:layout_width="fill_parent"
+                android:layout_height="45.0dip"
+                android:layout_marginRight="8dp"
+                android:layout_weight="1"
+                android:background="@drawable/selector_red_btn"
+                android:gravity="center"
+                android:text="@string/btn_cancel_text"
+                android:textColor="@color/white"
+                android:textSize="18.0sp" />
+
+            <Button
+                android:id="@+id/btn_confirm"
+                android:layout_width="fill_parent"
+                android:layout_height="45.0dip"
+                android:layout_marginLeft="8dp"
+                android:layout_weight="1"
+                android:background="@drawable/selector_red_btn"
+                android:gravity="center"
+                android:text="@string/btn_confirm_text"
+                android:textColor="@color/white"
+                android:textSize="18.0sp" />
+        </LinearLayout>
+    </RelativeLayout>
+
+</ScrollView>

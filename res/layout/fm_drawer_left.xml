@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="@dimen/left_drawer_width"
+    android:layout_height="match_parent"
+    android:layout_gravity="start"
+    android:background="@android:color/white"
+    android:scrollbars="none" >
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="50dp"
+        android:orientation="vertical" >
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/banner_height"
+            android:background="#f7f2f2"
+            android:padding="10dp" >
+
+            <FrameLayout
+                android:id="@+id/fl_head_ll"
+                android:layout_width="60dp"
+                android:layout_height="60dp"
+                android:layout_centerVertical="true" >
+
+                <ImageView
+                    android:id="@+id/iv_user_head"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="@drawable/ic_default_head"
+                    android:contentDescription="@null" />
+                <ImageView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="@drawable/ic_circle_frame_pink"
+                    android:contentDescription="@null" />
+            </FrameLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="10dp"
+                android:layout_toRightOf="@+id/fl_head_ll"
+                android:gravity="center_vertical"
+                android:orientation="vertical" >
+
+                <TextView
+                    android:id="@+id/tv_username"
+                    style="@style/SlidingMenuTextStyle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/slidingmenu_account" />
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:gravity="center" >
+
+                    <TextView
+                        android:id="@+id/tv_level"
+                        style="@style/SlidingMenuTextStyle"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/slidingmenu_level" />
+
+                    <ImageView
+                        android:id="@+id/iv_level"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/ic_user_level"
+                        android:contentDescription="@null" />
+                </LinearLayout>
+            </LinearLayout>
+        </RelativeLayout>
+
+        <TextView
+            android:id="@+id/btn_password"
+            style="@style/SlidingMenuItemStyle"
+            android:drawableLeft="@drawable/ic_slidingmenu_modify"
+            android:text="@string/slidingmenu_password" />
+
+        <View style="@style/SlidingMenuItemDividerLineStyle" />
+
+        <TextView
+            android:id="@+id/btn_custom"
+            style="@style/SlidingMenuItemStyle"
+            android:drawableLeft="@drawable/ic_slidingmenu_phone"
+            android:text="@string/slidingmenu_custom" />
+
+        <View style="@style/SlidingMenuItemDividerLineStyle" />
+
+        <TextView
+            android:id="@+id/btn_cache"
+            style="@style/SlidingMenuItemStyle"
+            android:drawableLeft="@drawable/ic_slidingmenu_cache"
+            android:text="@string/slidingmenu_cache" />
+
+        <View style="@style/SlidingMenuItemDividerLineStyle" />
+
+        <TextView
+            android:id="@+id/btn_version"
+            style="@style/SlidingMenuItemStyle"
+            android:drawableLeft="@drawable/ic_slidingmenu_update"
+            android:text="@string/slidingmenu_version" />
+
+        <View style="@style/SlidingMenuItemDividerLineStyle" />
+
+        <TextView
+            android:id="@+id/btn_about"
+            style="@style/SlidingMenuItemStyle"
+            android:drawableLeft="@drawable/ic_slidingmenu_about"
+            android:text="@string/slidingmenu_about" />
+
+        <View style="@style/SlidingMenuItemDividerLineStyle" />
+
+        <TextView
+            android:id="@+id/btn_exit"
+            style="@style/SlidingMenuItemStyle"
+            android:drawableLeft="@drawable/ic_slidingmenu_exit"
+            android:text="@string/slidingmenu_exit" />
+
+        <View style="@style/SlidingMenuItemDividerLineStyle" />
+    </LinearLayout>
+
+</ScrollView>

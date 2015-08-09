@@ -1,0 +1,142 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <!-- 年龄 -->
+    <integer-array name="ageId">
+        <item>109</item>
+        <item>110</item>
+        <item>111</item>
+        <item>112</item>
+        <item>113</item>
+        <item>133</item>
+        <item>134</item>
+        <item>135</item>
+    </integer-array>
+
+    <string-array name="ageStr">
+        <item>18岁以下</item>
+        <item>18-25岁</item>
+        <item>26-30岁</item>
+        <item>31-35岁</item>
+        <item>36-40岁</item>
+        <item>41-45岁</item>
+        <item>46-50岁</item>
+        <item>50岁以上</item>
+    </string-array>
+
+    <!-- 收入 -->
+    <integer-array name="incomeId">
+        <item>124</item>
+        <item>125</item>
+        <item>126</item>
+        <item>127</item>
+        <item>128</item>
+        <item>137</item>
+    </integer-array>
+
+    <string-array name="incomeStr">
+        <item>3000元以内</item>
+        <item>3001-5000元</item>
+        <item>5001-10000元</item>
+        <item>10001-20000元</item>
+        <item>20001-50000元</item>
+        <item>5万-10万元以上</item>
+    </string-array>
+
+    <!-- 婚姻 -->
+    <integer-array name="marriageId">
+        <item>161</item>
+        <item>162</item>
+        <item>163</item>
+    </integer-array>
+
+    <string-array name="marriageStr">
+        <item>未婚</item>
+        <item>已婚</item>
+        <item>离异</item>
+    </string-array>
+
+    <!-- 专业 -->
+    <integer-array name="professionId">
+        <item>136</item>
+        <item>71</item>
+        <item>70</item>
+        <item>69</item>
+        <item>68</item>
+        <item>67</item>
+        <item>66</item>
+        <item>30</item>
+    </integer-array>
+
+    <string-array name="professionStr">
+        <item>其他</item>
+        <item>大企业主</item>
+        <item>公务员</item>
+        <item>普通职员</item>
+        <item>学生</item>
+        <item>中小企业主</item>
+        <item>企业高管</item>
+        <item>白领精英</item>
+    </string-array>
+
+    <!-- 领域 -->
+    <integer-array name="fieldId">
+        <item>159</item>
+        <item>158</item>
+        <item>157</item>
+        <item>156</item>
+        <item>155</item>
+        <item>154</item>
+        <item>153</item>
+        <item>152</item>
+        <item>151</item>
+        <item>150</item>
+        <item>149</item>
+        <item>148</item>
+        <item>147</item>
+        <item>146</item>
+        <item>145</item>
+        <item>144</item>
+        <item>143</item>
+        <item>142</item>
+        <item>141</item>
+        <item>140</item>
+        <item>139</item>
+    </integer-array>
+
+    <string-array name="fieldStr">
+        <item>新闻信息</item>
+        <item>读书/音乐型</item>
+        <item>教育/幼儿</item>
+        <item>服饰鞋包</item>
+        <item>电器数码</item>
+        <item>婚纱摄影</item>
+        <item>化妆品</item>
+        <item>美容美体</item>
+        <item>旅游</item>
+        <item>酒店</item>
+        <item>休闲娱乐</item>
+        <item>美食</item>
+        <item>房产</item>
+        <item>IT/电子</item>
+        <item>运动/健身</item>
+        <item>时尚/购物</item>
+        <item>理财/投资</item>
+        <item>汽车</item>
+        <item>考试就业</item>
+        <item>电影/戏剧</item>
+        <item>演艺/娱乐</item>
+    </string-array>
+
+    <!-- 性别 -->
+    <integer-array name="sexId">
+        <item>27</item>
+        <item>28</item>
+    </integer-array>
+
+    <string-array name="sexStr">
+        <item>男</item>
+        <item>女</item>
+    </string-array>
+
+</resources>

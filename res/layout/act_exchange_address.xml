@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    style="@style/ScrollBarStyle"
+    android:background="@color/app_bg_drawable" >
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="20dp" >
+
+        <LinearLayout
+            android:id="@+id/ll_content"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/bg_y"
+            android:orientation="vertical" >
+
+            <EditText
+                android:id="@+id/et_address"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@null"
+                android:hint="@string/collect_address_hint"
+                android:lines="2"
+                android:padding="12dp"
+                android:textSize="16sp" />
+
+            <View style="@style/SlidingMenuItemDividerLineStyle" />
+
+            <EditText
+                android:id="@+id/et_postalcode"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@null"
+                android:hint="@string/postalcode_hint"
+                android:inputType="number"
+                android:padding="12dp"
+                android:textSize="16sp" />
+
+            <View style="@style/SlidingMenuItemDividerLineStyle" />
+
+            <EditText
+                android:id="@+id/et_name"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@null"
+                android:hint="@string/collect_name_hint"
+                android:padding="12dp"
+                android:textSize="16sp" />
+
+            <View style="@style/SlidingMenuItemDividerLineStyle" />
+
+            <EditText
+                android:id="@+id/et_phone"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@null"
+                android:hint="@string/collect_phone_hint"
+                android:inputType="phone"
+                android:padding="12dp"
+                android:textSize="16sp" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/ll_content"
+            android:layout_marginTop="20dp" >
+
+            <Button
+                android:id="@+id/btn_cancel"
+                android:layout_width="fill_parent"
+                android:layout_height="45.0dip"
+                android:layout_marginRight="8dp"
+                android:layout_weight="1"
+                android:background="@drawable/selector_red_btn"
+                android:gravity="center"
+                android:text="@string/btn_cancel_text"
+                android:textColor="@color/white"
+                android:textSize="18.0sp" />
+
+            <Button
+                android:id="@+id/btn_confirm"
+                android:layout_width="fill_parent"
+                android:layout_height="45.0dip"
+                android:layout_marginLeft="8dp"
+                android:layout_weight="1"
+                android:background="@drawable/selector_red_btn"
+                android:gravity="center"
+                android:text="@string/btn_confirm_text"
+                android:textColor="@color/white"
+                android:textSize="18.0sp" />
+        </LinearLayout>
+    </RelativeLayout>
+
+</ScrollView>

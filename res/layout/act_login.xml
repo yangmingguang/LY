@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/app_bg_drawable"
+    android:orientation="vertical"
+    android:padding="20dp" >
+
+    <EditText
+        android:id="@+id/et_username"
+        android:layout_width="match_parent"
+        android:layout_height="50.0dip"
+        android:background="@drawable/et_top_bg"
+        android:drawableLeft="@drawable/icon_account"
+        android:hint="@string/username_hint"
+        android:singleLine="true"
+        android:windowSoftInputMode="stateHidden" />
+
+    <EditText
+        android:id="@+id/et_password"
+        android:layout_width="match_parent"
+        android:layout_height="50.0dip"
+        android:background="@drawable/et_bottom_bg"
+        android:drawableLeft="@drawable/icon_lock"
+        android:hint="@string/password_hint"
+        android:inputType="textPassword"
+        android:singleLine="true"
+        android:textSize="16sp"
+        android:windowSoftInputMode="stateHidden" />
+
+    <Button
+        android:id="@+id/btn_login"
+        android:layout_width="fill_parent"
+        android:layout_height="45.0dip"
+        android:layout_marginTop="20dp"
+        android:background="@drawable/selector_red_btn"
+        android:gravity="center"
+        android:text="@string/login_btn_text"
+        android:textColor="@color/white"
+        android:textSize="18.0sp" />
+
+    <LinearLayout
+        android:layout_marginTop="15dp"
+        android:layout_width="fill_parent"
+        android:layout_height="45.0dip" >
+
+        <TextView
+            android:id="@+id/btn_reg"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:background="@drawable/selector_left_btn"
+            android:gravity="center"
+            android:text="@string/reg_btn_text"
+            android:textColor="#787878"
+            android:textSize="18.0sp" />
+
+        <TextView
+            android:id="@+id/btn_forget"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:background="@drawable/selector_right_btn"
+            android:gravity="center"
+            android:text="@string/forget_pw_btn_text"
+            android:textColor="#787878"
+            android:textSize="18.0sp" />
+    </LinearLayout>
+
+</LinearLayout>

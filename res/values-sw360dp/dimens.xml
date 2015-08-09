@@ -1,0 +1,48 @@
+<resources>
+
+    <!-- SlidingMenu -->
+    <dimen name="banner_height">150dp</dimen>
+    <dimen name="left_drawer_width">240dp</dimen>
+    <dimen name="slidingmenu_textSize">16sp</dimen>
+    <dimen name="slidingmenu_drawablePadding">8dp</dimen>
+    <dimen name="slidingmenu_padding">10dp</dimen>
+
+    <!-- homeTab -->
+    <dimen name="btns_height">70dp</dimen>
+    <dimen name="btn_invite_height">50dp</dimen>
+    <dimen name="btn_task_height">100dp</dimen>
+    <dimen name="btn_invite_text_size">13sp</dimen>
+    <dimen name="btn_title_size">16sp</dimen>
+    <dimen name="btn_subtitle_size">10.5sp</dimen>
+    <dimen name="btn_preferential_height">150dp</dimen>
+    <dimen name="desc_text_size">12sp</dimen>
+    <dimen name="value_spike_text_size">14sp</dimen>
+    <dimen name="footbar_radio_text_size">12sp</dimen>
+    <dimen name="footbar_btn_padding">4dp</dimen>
+    <dimen name="footbar_paddingTop">3dp</dimen>
+
+    <!-- MeTab -->
+    <dimen name="me_banner_height">150dp</dimen>
+    <dimen name="me_option_height">50dp</dimen>
+    <dimen name="me_margin_top">20dp</dimen>
+    <dimen name="me_option_textSize">14sp</dimen>
+    <dimen name="me_account_textSize">16sp</dimen>
+    <dimen name="me_amount_textSize">24sp</dimen>
+
+    <!-- 逛优惠 -->
+    <dimen name="stroll_title_text">16sp</dimen>
+    <dimen name="stroll_subtitle_text">13sp</dimen>
+
+    <!-- 兑换 -->
+    <dimen name="exchange_title_text">16sp</dimen>
+    <dimen name="exchange_subtitle_text">12sp</dimen>
+    <dimen name="exchange_image_height">90dp</dimen>
+    <dimen name="exchange_image_width">120dp</dimen>
+    <dimen name="exchange_banner_height">200dp</dimen>
+    <dimen name="exchange_detail_title">17sp</dimen>
+    <dimen name="exchange_detail_subtitle">13sp</dimen>
+    <dimen name="exchange_detail_thirdtitle">16sp</dimen>
+    <dimen name="exchange_detail_fourthtitle">12sp</dimen>
+    <dimen name="exchange_detail_btn_height">40dp</dimen>
+
+</resources>

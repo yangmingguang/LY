@@ -1,0 +1,312 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent" >
+
+    <ScrollView
+        style="@style/ScrollBarStyle"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/app_bg_drawable" >
+
+        <LinearLayout
+            android:id="@+id/ll_content"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:visibility="gone" >
+
+            <RelativeLayout
+                android:id="@+id/btn_head_ll"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:background="@drawable/common_card_bg"
+                android:gravity="center_vertical"
+                android:padding="20dp" >
+
+                <FrameLayout
+                    android:id="@+id/fl_head_ll"
+                    android:layout_width="60dp"
+                    android:layout_height="60dp"
+                    android:layout_centerVertical="true" >
+
+                    <ImageView
+                        android:id="@+id/iv_head_picture"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:background="@drawable/ic_default_head"
+                        android:contentDescription="@null" />
+
+                    <ImageView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:background="@drawable/ic_circle_frame"
+                        android:contentDescription="@null" />
+                </FrameLayout>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="20dp"
+                    android:layout_toRightOf="@+id/fl_head_ll"
+                    android:text="修改头像"
+                    android:textColor="#787878"
+                    android:textSize="16sp" />
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    android:background="@drawable/upomp_bypay_icon_jiantou"
+                    android:contentDescription="@null" />
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:id="@+id/btn_sex_ll"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:background="@drawable/common_card_bg"
+                android:gravity="center_vertical"
+                android:padding="15dp" >
+
+                <TextView
+                    android:id="@+id/tv_label_sex"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:text="性别"
+                    android:textColor="#383838"
+                    android:textSize="16sp" />
+
+                <TextView
+                    android:id="@+id/tv_sex"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="50dp"
+                    android:layout_toRightOf="@+id/tv_label_sex"
+                    android:text="男"
+                    android:textColor="#787878"
+                    android:textSize="16sp" />
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    android:background="@drawable/upomp_bypay_icon_jiantou"
+                    android:contentDescription="@null" />
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:id="@+id/btn_marriage_ll"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/common_card_bg"
+                android:gravity="center_vertical"
+                android:padding="15dp" >
+
+                <TextView
+                    android:id="@+id/tv_label_marriage"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:text="婚姻"
+                    android:textColor="#383838"
+                    android:textSize="16sp" />
+
+                <TextView
+                    android:id="@+id/tv_marriage"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="50dp"
+                    android:layout_toRightOf="@+id/tv_label_marriage"
+                    android:text="婚姻状况"
+                    android:textColor="#787878"
+                    android:textSize="16sp" />
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    android:background="@drawable/upomp_bypay_icon_jiantou"
+                    android:contentDescription="@null" />
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:id="@+id/btn_age_ll"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/common_card_bg"
+                android:gravity="center_vertical"
+                android:padding="15dp" >
+
+                <TextView
+                    android:id="@+id/tv_label_age"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:text="年龄"
+                    android:textColor="#383838"
+                    android:textSize="16sp" />
+
+                <TextView
+                    android:id="@+id/tv_age"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="50dp"
+                    android:layout_toRightOf="@+id/tv_label_age"
+                    android:text="请选择你的年龄"
+                    android:textColor="#787878"
+                    android:textSize="16sp" />
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    android:background="@drawable/upomp_bypay_icon_jiantou"
+                    android:contentDescription="@null" />
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:id="@+id/btn_income_ll"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/common_card_bg"
+                android:gravity="center_vertical"
+                android:padding="15dp" >
+
+                <TextView
+                    android:id="@+id/tv_label_income"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:text="收入"
+                    android:textColor="#383838"
+                    android:textSize="16sp" />
+
+                <TextView
+                    android:id="@+id/tv_income"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="50dp"
+                    android:layout_toRightOf="@+id/tv_label_income"
+                    android:text="请选择你的收入"
+                    android:textColor="#787878"
+                    android:textSize="16sp" />
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    android:background="@drawable/upomp_bypay_icon_jiantou"
+                    android:contentDescription="@null" />
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:id="@+id/btn_occupation_ll"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/common_card_bg"
+                android:gravity="center_vertical"
+                android:padding="15dp" >
+
+                <TextView
+                    android:id="@+id/tv_label_occupation"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:text="职业"
+                    android:textColor="#383838"
+                    android:textSize="16sp" />
+
+                <TextView
+                    android:id="@+id/tv_occupation"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="50dp"
+                    android:layout_toRightOf="@+id/tv_label_occupation"
+                    android:text="请选择你的职业"
+                    android:textColor="#787878"
+                    android:textSize="16sp" />
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    android:background="@drawable/upomp_bypay_icon_jiantou"
+                    android:contentDescription="@null" />
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:id="@+id/btn_field_ll"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/common_card_bg"
+                android:gravity="center_vertical"
+                android:padding="15dp" >
+
+                <TextView
+                    android:id="@+id/tv_label_field"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:text="领域"
+                    android:textColor="#383838"
+                    android:textSize="16sp" />
+
+                <TextView
+                    android:id="@+id/tv_field"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="50dp"
+                    android:layout_marginRight="10dp"
+                    android:layout_toLeftOf="@+id/iv_indicator"
+                    android:layout_toRightOf="@+id/tv_label_field"
+                    android:text="请选择你关心的领域"
+                    android:textColor="#787878"
+                    android:textSize="16sp" />
+
+                <ImageView
+                    android:id="@+id/iv_indicator"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    android:background="@drawable/upomp_bypay_icon_jiantou"
+                    android:contentDescription="@null" />
+            </RelativeLayout>
+
+            <Button
+                android:id="@+id/btn_confirm"
+                android:layout_width="match_parent"
+                android:layout_height="45.0dip"
+                android:layout_margin="20dp"
+                android:background="@drawable/selector_red_btn"
+                android:gravity="center"
+                android:text="@string/btn_confirm_text"
+                android:textColor="@color/white"
+                android:textSize="18.0sp" />
+        </LinearLayout>
+    </ScrollView>
+
+    <include layout="@layout/loading" />
+
+    <include
+        layout="@layout/empty"
+        android:visibility="gone" />
+
+</FrameLayout>

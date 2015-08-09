@@ -1,0 +1,534 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.yj.ecard"
+    android:versionCode="2024"
+    android:versionName="2.0.24" >
+
+    <uses-sdk
+        android:minSdkVersion="9"
+        android:targetSdkVersion="19" />
+
+    <!-- Required  一些系统要求的权限，如访问网络等 -->
+    <uses-permission android:name="android.permission.CAMERA" />
+    <uses-permission android:name="android.permission.RECEIVE_USER_PRESENT" />
+    <uses-permission android:name="android.permission.WAKE_LOCK" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.WRITE_SETTINGS" />
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.CHANGE_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.CHANGE_WIFI_STATE" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
+    <uses-permission android:name="android.permission.MOUNT_UNMOUNT_FILESYSTEMS" />
+    <uses-permission android:name="android.permission.CALL_PHONE" />
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_LOCATION_EXTRA_COMMANDS" />
+    <uses-permission android:name="android.permission.ACCESS_MOCK_LOCATION" />
+    <uses-permission android:name="android.permission.READ_LOGS" />
+    <uses-permission android:name="android.permission.RECEIVE_SMS" />
+    <uses-permission android:name="android.permission.ACCESS_DOWNLOAD_MANAGER" />
+    <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
+    <uses-permission android:name="android.permission.RESTART_PACKAGES" />
+    <uses-permission android:name="android.permission.BROADCAST_STICKY" />
+    <uses-permission android:name="android.permission.RECEIVE_USER_PRESENT" />
+    <uses-permission android:name="android.permission.WAKE_LOCK" />
+    <uses-permission android:name="android.permission.KILL_BACKGROUND_PROCESSES" />
+    <uses-permission android:name="android.permission.VIBRATE" />
+    <uses-permission android:name="android.permission.READ_CONTACTS" />
+
+    <!-- 百度分享 -->
+    <uses-permission android:name="android.permission.DOWNLOAD_WITHOUT_NOTIFICATION" />
+    <uses-permission android:name="android.permission.DISABLE_KEYGUARD" />
+
+    <!-- 来电去电 -->
+    <uses-permission android:name="android.permission.READ_PHONE_STATE" />
+    <uses-permission android:name="android.permission.PROCESS_OUTGOING_CALLS" />
+    <!-- 悬浮窗 -->
+    <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW" />
+
+    <!-- 有米广告SDK -->
+    <uses-permission android:name="android.permission.GET_TASKS" />
+    <uses-permission android:name="com.android.launcher.permission.INSTALL_SHORTCUT" />
+    
+    <application
+        android:name="com.yj.ecard.MyApplication"
+        android:allowBackup="true"
+        android:icon="@drawable/app_icon"
+        android:label="@string/app_name"
+        android:persistent="true"
+        android:theme="@style/AppTheme" >
+        <meta-data
+            android:name="com.amap.api.v2.apikey"
+            android:value="34c595252d1c209277a22ab540316fbd" />
+
+        <!-- 欢迎页 -->
+        <activity
+            android:name="com.yj.ecard.ui.activity.main.WelcomeActivity"
+            android:configChanges="orientation|screenSize|keyboardHidden"
+            android:launchMode="singleTask"
+            android:screenOrientation="portrait"
+            android:theme="@android:style/Theme.Light.NoTitleBar" >
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+
+        <!-- 用户登录 -->
+        <activity
+            android:name="com.yj.ecard.ui.activity.user.LoginActivity"
+            android:configChanges="orientation|screenSize|keyboardHidden"
+            android:label="@string/title_login"
+            android:launchMode="singleTask"
+            android:screenOrientation="portrait" />
+
+        <!-- 用户注册 -->
+        <activity
+            android:name="com.yj.ecard.ui.activity.user.RegisterActivity"
+            android:configChanges="orientation|screenSize|keyboardHidden"
+            android:label="@string/title_register"
+            android:launchMode="singleTask"
+            android:screenOrientation="portrait" />
+
+        <!-- 用户注册邀请 -->
+        <activity
+            android:name="com.yj.ecard.ui.activity.user.RegisterInviteActivity"
+            android:configChanges="orientation|screenSize|keyboardHidden"
+            android:label="@string/title_register"
+            android:launchMode="singleTask"
+            android:screenOrientation="portrait" />
+
+        <!-- 修改密码 -->
+        <activity
+            android:name="com.yj.ecard.ui.activity.user.ModifyPassWordActivity"
+            android:configChanges="orientation|screenSize|keyboardHidden"
+            android:label="@string/title_modify_pw"
+            android:launchMode="singleTask"
+            android:screenOrientation="portrait" />
+
+        <!-- 忘记密码 -->
+        <activity
+            android:name="com.yj.ecard.ui.activity.user.ForgetPwActivity"
+            android:configChanges="orientation|screenSize|keyboardHidden"
+            android:label="@string/title_forget_pw"
+            android:launchMode="singleTask"
+            android:screenOrientation="portrait" />
+
+        <!-- 重置密码 -->
+        <activity
+            android:name="com.yj.ecard.ui.activity.user.ResetPwActivity"
+            android:configChanges="orientation|screenSize|keyboardHidden"
+            android:label="@string/title_reset_pw"
+            android:launchMode="singleTask"
+            android:screenOrientation="portrait" />
+
+        <!-- 主页 -->
+        <activity
+            android:name="com.yj.ecard.ui.activity.main.MainActivity"
+            android:configChanges="orientation|screenSize|keyboardHidden"
+            android:launchMode="singleTask"
+            android:screenOrientation="portrait"
+            android:theme="@style/StyledIndicators" />
+
+        <!-- 精彩广告 -->
+        <activity
+            android:name="com.yj.ecard.ui.activity.main.home.wonderful.WonderfulAdActivity"
+            android:configChanges="orientation|screenSize|keyboardHidden"
+            android:label="@string/title_wonderful_ad"
+            android:launchMode="singleTask"
+            android:screenOrientation="portrait"
+            android:theme="@style/StyledIndicators" />
+
+        <!-- 精彩广告详情 -->
+        <activity
+            android:name="com.yj.ecard.ui.activity.main.home.wonderful.BombAdDetailActivity"
+            android:configChanges="orientation|screenSize|keyboardHidden"
+            android:label="@string/title_wonderful_ad_detail"
+            android:screenOrientation="portrait" />
+
+        <!-- 特色商家 -->
+        <activity
+            android:name="com.yj.ecard.ui.activity.main.home.FeatureBusinessActivity"
+            android:configChanges="orientation|screenSize|keyboardHidden"
+            android:label="@string/title_feature_business"
+            android:launchMode="singleTask"
+            android:screenOrientation="portrait" />
+
+        <!-- 兑换礼品 -->
+        <activity
+            android:name="com.yj.ecard.ui.activity.main.home.ExchangeGiftActivity"
+            android:configChanges="orientation|screenSize|keyboardHidden"
+            android:label="@string/title_exchange_gift"
+            android:launchMode="singleTask"
+            android:screenOrientation="portrait"
+            android:theme="@style/StyledIndicators" />
+
+        <!-- 超值秒杀 -->
+        <activity
+            android:name="com.yj.ecard.ui.activity.main.home.valuespike.ValueSpikeActivity"
+            android:configChanges="orientation|screenSize|keyboardHidden"
+            android:label="@string/title_value_spike"
+            android:launchMode="singleTask"
+            android:screenOrientation="portrait"
+            android:theme="@style/StyledIndicators" />
+
+        <!-- 超值详情 -->
+        <activity
+            android:name="com.yj.ecard.ui.activity.main.home.valuespike.ValueSpikeDetailActivity"
+            android:configChanges="orientation|screenSize|keyboardHidden"
+            android:label="@string/title_value_spike_detail"
+            android:screenOrientation="portrait" />
+
+        <!-- 超值抢购 -->
+        <activity
+            android:name="com.yj.ecard.ui.activity.main.home.valuespike.ValueSpikeExchangeActivity"
+            android:configChanges="orientation|screenSize|keyboardHidden"
+            android:label="@string/title_collect_address"
+            android:launchMode="singleTask"
+            android:screenOrientation="portrait" />
+
+        <!-- 我的秒杀记录 -->
+        <activity
+            android:name="com.yj.ecard.ui.activity.main.home.valuespike.SeckillRecordActivity"
+            android:configChanges="orientation|screenSize|keyboardHidden"
+            android:label="@string/title_seckill_record"
+            android:launchMode="singleTask"
+            android:screenOrientation="portrait" />
+
+        <!-- 逛优惠 -->
+        <activity
+            android:name="com.yj.ecard.ui.activity.main.home.preferential.StrollPreferentialActivity"
+            android:configChanges="orientation|screenSize|keyboardHidden"
+            android:label="@string/title_stroll_preferential"
+            android:launchMode="singleTask"
+            android:screenOrientation="portrait" />
+
+        <!-- 发优惠 -->
+        <activity
+            android:name="com.yj.ecard.ui.activity.main.home.preferential.PublishPreferentialActivity"
+            android:configChanges="orientation|screenSize|keyboardHidden"
+            android:label="@string/title_publish_preferential"
+            android:launchMode="singleTask"
+            android:screenOrientation="portrait" />
+
+        <!-- 商家详情 -->
+        <activity
+            android:name="com.yj.ecard.ui.activity.main.business.BusinessDetailActivity"
+            android:configChanges="orientation|screenSize|keyboardHidden"
+            android:label="@string/title_business_detail"
+            android:screenOrientation="portrait"
+            android:theme="@style/StyledIndicators" />
+
+        <!-- 产品详情 -->
+        <activity
+            android:name="com.yj.ecard.ui.activity.main.exchange.ExchangeDetailActivity"
+            android:configChanges="orientation|screenSize|keyboardHidden"
+            android:label="@string/title_exchange_detail"
+            android:screenOrientation="portrait" />
+
+        <!-- 收益中心 -->
+        <activity
+            android:name="com.yj.ecard.ui.activity.main.me.IncomeActivity"
+            android:configChanges="orientation|screenSize|keyboardHidden"
+            android:label="@string/title_income"
+            android:launchMode="singleTask"
+            android:screenOrientation="portrait" />
+
+        <!-- 完善资料 -->
+        <activity
+            android:name="com.yj.ecard.ui.activity.main.me.CompleteDataActivity"
+            android:configChanges="orientation|screenSize|keyboardHidden"
+            android:label="@string/title_complete_data"
+            android:launchMode="singleTask"
+            android:screenOrientation="portrait" />
+
+        <!-- 朋友圈收入 -->
+        <activity
+            android:name="com.yj.ecard.ui.activity.main.me.FriendsListActivity"
+            android:configChanges="orientation|screenSize|keyboardHidden"
+            android:label="@string/title_friends"
+            android:launchMode="singleTask"
+            android:screenOrientation="portrait" />
+
+        <!-- 我发的优惠 -->
+        <activity
+            android:name="com.yj.ecard.ui.activity.main.me.MyPreferentialActivity"
+            android:configChanges="orientation|screenSize|keyboardHidden"
+            android:label="@string/title_my_preferential"
+            android:launchMode="singleTask"
+            android:screenOrientation="portrait" />
+
+        <!-- 现金提现 -->
+        <activity
+            android:name="com.yj.ecard.ui.activity.main.me.WithdrawActivity"
+            android:configChanges="orientation|screenSize|keyboardHidden"
+            android:label="@string/title_withdraw"
+            android:launchMode="singleTask"
+            android:screenOrientation="portrait" />
+
+        <!-- 兑换记录 -->
+        <activity
+            android:name="com.yj.ecard.ui.activity.main.me.ExchangeRecordActivity"
+            android:configChanges="orientation|screenSize|keyboardHidden"
+            android:label="@string/title_exchange_record"
+            android:launchMode="singleTask"
+            android:screenOrientation="portrait" />
+
+        <!-- 排行榜 -->
+        <activity
+            android:name="com.yj.ecard.ui.activity.main.me.RankingListActivity"
+            android:configChanges="orientation|screenSize|keyboardHidden"
+            android:label="@string/title_ranking_list"
+            android:launchMode="singleTask"
+            android:screenOrientation="portrait" />
+
+        <!-- 优惠详情 -->
+        <activity
+            android:name="com.yj.ecard.ui.activity.main.home.preferential.PreferentialDetailActivity"
+            android:configChanges="orientation|screenSize|keyboardHidden"
+            android:label="@string/title_preferential_detail"
+            android:launchMode="singleTask"
+            android:screenOrientation="portrait" />
+
+        <!-- 关于乐盈 -->
+        <activity
+            android:name="com.yj.ecard.ui.activity.main.slidingmenu.AboutActivity"
+            android:configChanges="orientation|screenSize|keyboardHidden"
+            android:label="@string/slidingmenu_about"
+            android:launchMode="singleTask"
+            android:screenOrientation="portrait" />
+
+        <!-- 兑换详情查看大图ViewPager -->
+        <activity
+            android:name="com.yj.ecard.ui.activity.main.exchange.ViewPagerActivity"
+            android:configChanges="orientation|screenSize|keyboardHidden"
+            android:screenOrientation="portrait"
+            android:theme="@android:style/Theme.Light.NoTitleBar" />
+
+        <!-- 优惠详情查看大图 -->
+        <activity
+            android:name="com.yj.ecard.ui.activity.main.home.preferential.PreferentialDetailPicActivity"
+            android:configChanges="orientation|screenSize|keyboardHidden"
+            android:screenOrientation="portrait"
+            android:theme="@android:style/Theme.Light.NoTitleBar" />
+
+        <!-- WebView -->
+        <activity
+            android:name="com.yj.ecard.ui.activity.main.home.wonderful.WebViewActivity"
+            android:configChanges="orientation|screenSize|keyboardHidden"
+            android:screenOrientation="portrait" />
+
+        <!-- 兑换收货地址 -->
+        <activity
+            android:name="com.yj.ecard.ui.activity.main.exchange.ExchangeAddressActivity"
+            android:configChanges="orientation|screenSize|keyboardHidden"
+            android:label="@string/title_collect_address"
+            android:screenOrientation="portrait" />
+
+        <!-- 图片选择PopupWindow -->
+        <activity
+            android:name="com.yj.ecard.ui.activity.main.home.preferential.SelectPicPopupWindow"
+            android:configChanges="orientation|screenSize|keyboardHidden"
+            android:screenOrientation="portrait"
+            android:theme="@style/MyPopupWindowStyle" />
+
+        <!-- 资料选择PopupWindow -->
+        <activity
+            android:name="com.yj.ecard.ui.activity.main.me.DataSelectorActivity"
+            android:configChanges="orientation|screenSize|keyboardHidden"
+            android:screenOrientation="portrait"
+            android:theme="@style/MyPopupWindowStyle" />
+
+        <!-- 关系领域PopupWindow -->
+        <activity
+            android:name="com.yj.ecard.ui.activity.main.me.FieldActivity"
+            android:configChanges="orientation|screenSize|keyboardHidden"
+            android:screenOrientation="portrait"
+            android:theme="@style/MyPopupWindowStyle" />
+
+        <!-- 图片裁剪 -->
+        <activity
+            android:name="com.yj.ecard.ui.activity.main.home.preferential.CropImageActivity"
+            android:configChanges="orientation|screenSize|keyboardHidden"
+            android:screenOrientation="portrait"
+            android:theme="@android:style/Theme.Black.NoTitleBar" />
+
+        <!-- 广告栏详情 -->
+        <activity
+            android:name="com.yj.ecard.ui.activity.main.home.BannerDetailActivity"
+            android:configChanges="orientation|screenSize|keyboardHidden"
+            android:label="@string/title_banner_detail"
+            android:screenOrientation="portrait" />
+
+        <!-- 视频广告详情 -->
+        <activity
+            android:name="com.yj.ecard.ui.activity.main.home.wonderful.VideoAdDetailActivity"
+            android:configChanges="orientation|screenSize|keyboardHidden"
+            android:screenOrientation="landscape"
+            android:theme="@android:style/Theme.Black.NoTitleBar" />
+
+        <!-- ScreenLock -->
+        <activity
+            android:name="com.yj.ecard.ui.activity.screenlock.ScreenLockActivity"
+            android:configChanges="orientation|screenSize|keyboardHidden"
+            android:theme="@android:style/Theme.Black.NoTitleBar" />
+
+        <!-- ScreenLock详情 -->
+        <activity
+            android:name="com.yj.ecard.ui.activity.screenlock.ScreenLockDetailActivity"
+            android:configChanges="orientation|screenSize|keyboardHidden"
+            android:label="@string/title_wonderful_ad_detail"
+            android:screenOrientation="portrait" />
+
+        <!-- ************************************注册广播类Start*************************************** -->
+        <!-- 系统启动广播接收 -->
+        <receiver android:name="com.yj.ecard.receiver.OSBootReceiver" >
+
+            <!-- 优先级加最高 -->
+            <intent-filter android:priority="2147483647" >
+
+                <!-- 系统启动完成后会调用 -->
+                <action android:name="android.intent.action.BOOT_COMPLETED" />
+                <!-- 解锁完成后会调用 -->
+                <!-- <action android:name="android.intent.action.USER_PRESENT" /> -->
+                <!-- 监听情景切换 -->
+                <action android:name="android.media.RINGER_MODE_CHANGED" />
+                <!-- 网络切换 -->
+                <action android:name="android.net.conn.CONNECTIVITY_CHANGE" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </receiver>
+
+        <!-- 通知栏按钮点击广播 -->
+        <receiver
+            android:name="com.yj.ecard.receiver.NotificationReceiver"
+            android:exported="false" >
+            <intent-filter android:priority="999" >
+                <action android:name="com.yj.ecard.receiver.NotificationReceiver.onClick" />
+            </intent-filter>
+        </receiver>
+
+        <!-- 拨打电话广播 -->
+        <receiver android:name="com.yj.ecard.receiver.CallPhoneReceiver" >
+            <intent-filter android:priority="1000" >
+                <action android:name="android.intent.action.NEW_OUTGOING_CALL" />
+            </intent-filter>
+        </receiver>
+        <!-- ************************************注册广播类End*************************************** -->
+
+
+        <!-- ************************************开启服务类Start*************************************** -->
+        <service
+            android:name="com.yj.ecard.service.PhoneService"
+            android:enabled="true"
+            android:exported="false"
+            android:priority="1000"
+            android:process=":remoteadservice" />
+        <service
+            android:name="com.yj.ecard.service.LocationService"
+            android:enabled="true"
+            android:exported="false"
+            android:priority="1000" />
+        <service
+            android:name="com.yj.ecard.service.ScreenLockService"
+            android:enabled="true"
+            android:exported="false"
+            android:process=":screenlockservice" >
+            <intent-filter>
+                <action android:name="com.yj.ecard.service.IScreenLockService" />
+            </intent-filter>
+        </service>
+
+        <!-- ************************************开启服务类End*************************************** -->
+
+
+        <!-- ************************************有米广告SDK Start*************************************** -->
+        <activity
+            android:name="net.youmi.android.AdBrowser"
+            android:configChanges="keyboard|keyboardHidden|orientation|screenSize"
+            android:theme="@android:style/Theme.Light.NoTitleBar" />
+
+        <service
+            android:name="net.youmi.android.AdService"
+            android:exported="false" />
+        <service
+            android:name="net.youmi.android.ExpService"
+            android:exported="false" />
+
+        <receiver android:name="net.youmi.android.AdReceiver" >
+            <intent-filter>
+                <action android:name="android.intent.action.PACKAGE_ADDED" />
+
+                <data android:scheme="package" />
+            </intent-filter>
+        </receiver>
+        <!-- ************************************有米广告SDK End*************************************** -->
+
+
+        <!-- ************************************百度社会化分享 Start*************************************** -->
+
+
+        <!-- 用于接收系统消息以保证PushService正常运行 -->
+        <!--
+             <receiver
+            android:name="com.baidu.android.pushservice.PushServiceReceiver"
+            android:process=":bdservice_v1" >
+            <intent-filter>
+                <action android:name="android.intent.action.BOOT_COMPLETED" />
+                <action android:name="android.net.conn.CONNECTIVITY_CHANGE" />
+                <action android:name="com.baidu.android.pushservice.action.notification.SHOW" />
+                <action android:name="com.baidu.android.pushservice.action.media.CLICK" />
+                <action android:name="com.baidu.android.pushservice.action.frontia.user" />
+            </intent-filter>
+        </receiver>
+
+        Push服务接收客户端发送的各种请求
+        <receiver
+            android:name="com.baidu.android.pushservice.RegistrationReceiver"
+            android:process=":bdservice_v1" >
+            <intent-filter>
+                <action android:name="com.baidu.android.pushservice.action.METHOD" />
+                <action android:name="com.baidu.android.pushservice.action.BIND_SYNC" />
+            </intent-filter>
+            <intent-filter>
+                <action android:name="android.intent.action.PACKAGE_REMOVED" />
+
+                <data android:scheme="package" />
+            </intent-filter>
+        </receiver>
+
+        <service
+            android:name="com.baidu.android.pushservice.PushService"
+            android:exported="true"
+            android:process=":bdservice_v1" />
+        -->
+
+        <activity
+            android:name="com.baidu.frontia.activity.share.FrontiaSocialOAuthActivity"
+            android:exported="true"
+            android:screenOrientation="portrait"
+            android:theme="@android:style/Theme.Translucent.NoTitleBar.Fullscreen" />
+        <activity
+            android:name="com.baidu.frontia.activity.share.FrontiaLocalShareActivity"
+            android:configChanges="orientation|keyboardHidden"
+            android:launchMode="singleTask" />
+        <activity
+            android:name="com.baidu.frontia.activity.share.FrontiaQQFriendShareReceiverActivity"
+            android:launchMode="singleTask" >
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.BROWSABLE" />
+
+                <data android:scheme="tencent100358052" />
+            </intent-filter>
+        </activity>
+        <!-- ************************************百度社会化分享 End*************************************** -->
+    </application>
+
+</manifest>

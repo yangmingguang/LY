@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@drawable/selector_slidingmenu_item"
+    android:orientation="vertical" >
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_vertical"
+        android:padding="12dp" >
+
+        <TextView
+            android:id="@+id/tv_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:drawableLeft="@drawable/ic_desciption"
+            android:drawablePadding="4dp"
+            android:gravity="center"
+            android:textColor="#FF8847"
+            android:textSize="@dimen/exchange_title_text" />
+
+        <TextView
+            android:id="@+id/tv_exchange_state"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="right"
+            android:textColor="#FF8847"
+            android:textSize="@dimen/exchange_subtitle_text" />
+    </LinearLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="0.1dp"
+        android:background="@color/split_color" />
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="12dp" >
+
+        <ImageView
+            android:id="@+id/iv_logo"
+            android:layout_width="@dimen/exchange_image_width"
+            android:layout_height="@dimen/exchange_image_height"
+            android:layout_centerVertical="true"
+            android:background="@drawable/banner_detail_default"
+            android:contentDescription="@null"
+            android:scaleType="centerCrop" />
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_toLeftOf="@+id/tv_state"
+            android:layout_toRightOf="@+id/iv_logo"
+            android:orientation="vertical"
+            android:padding="6dp" >
+
+            <TextView
+                android:id="@+id/tv_introduction"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:ellipsize="end"
+                android:lines="3"
+                android:textColor="#787878"
+                android:textSize="@dimen/exchange_subtitle_text" />
+
+            <TextView
+                android:id="@+id/tv_phone"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="4dp"
+                android:ellipsize="end"
+                android:lines="1"
+                android:textColor="#787878"
+                android:textSize="@dimen/exchange_subtitle_text" />
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/tv_state"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:background="@drawable/ic_exchange_state"
+            android:contentDescription="@null"
+            android:gravity="center"
+            android:textColor="@color/white"
+            android:textSize="@dimen/exchange_subtitle_text" />
+    </RelativeLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="0.1dp"
+        android:background="@color/split_color" />
+
+    <TextView
+        android:id="@+id/tv_exchange_time"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:drawableLeft="@drawable/ic_clock"
+        android:drawablePadding="4dp"
+        android:gravity="center"
+        android:padding="12dp"
+        android:textColor="#787878"
+        android:textSize="@dimen/exchange_subtitle_text" />
+
+</LinearLayout>

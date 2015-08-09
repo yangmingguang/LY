@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/root"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent" >
+
+    <com.yj.ecard.ui.views.scrollview.OverScrollableScrollView
+        android:id="@+id/ll_content"
+        style="@style/ScrollBarStyle"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:visibility="visible" >
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/white"
+            android:orientation="vertical" >
+
+            <ImageView
+                android:id="@+id/iv_logo"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/exchange_banner_height"
+                android:background="@drawable/banner_detail_default"
+                android:contentDescription="@null"
+                android:scaleType="centerCrop" />
+
+            <TextView
+                android:id="@+id/tv_title"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:drawableLeft="@drawable/ic_business_logo"
+                android:drawablePadding="4dp"
+                android:gravity="center_vertical"
+                android:padding="8dp"
+                android:text="河南乐盈科技有限公司"
+                android:textColor="#383838"
+                android:textSize="18sp"
+                android:textStyle="bold" />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="5dp"
+                android:background="@color/app_bg_drawable" />
+
+            <RelativeLayout
+                android:id="@+id/btn_phone_ll"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/selector_slidingmenu_item"
+                android:padding="10dp" >
+
+                <TextView
+                    android:id="@+id/tv_phoneText"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="联系电话"
+                    android:textColor="#787878"
+                    android:textSize="14sp" />
+
+                <TextView
+                    android:id="@+id/tv_phone"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/tv_phoneText"
+                    android:layout_marginTop="4dp"
+                    android:drawableLeft="@drawable/active_phone"
+                    android:drawablePadding="4dp"
+                    android:gravity="center_vertical"
+                    android:text="13410706179"
+                    android:textColor="#383838"
+                    android:textSize="16sp" />
+            </RelativeLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="0.1dp"
+                android:background="@color/app_bg_drawable" />
+
+            <RelativeLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:padding="10dp" >
+
+                <TextView
+                    android:id="@+id/tv_addressText"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="商家地址"
+                    android:textColor="#787878"
+                    android:textSize="14sp" />
+
+                <TextView
+                    android:id="@+id/tv_address"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/tv_addressText"
+                    android:layout_marginTop="4dp"
+                    android:drawableLeft="@drawable/ic_location"
+                    android:drawablePadding="4dp"
+                    android:gravity="center_vertical"
+                    android:text="深圳西乡地铁站"
+                    android:textColor="#383838"
+                    android:textSize="16sp" />
+            </RelativeLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="5dp"
+                android:background="@color/app_bg_drawable" />
+
+            <include layout="@layout/fm_tab_detail" />
+        </LinearLayout>
+    </com.yj.ecard.ui.views.scrollview.OverScrollableScrollView>
+
+    <include layout="@layout/loading" />
+
+</FrameLayout>

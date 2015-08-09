@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/app_bg_drawable"
+    android:orientation="vertical"
+    android:padding="20dp" >
+
+    <EditText
+        android:id="@+id/et_password"
+        android:layout_width="match_parent"
+        android:layout_height="50.0dip"
+        android:background="@drawable/et_top_bg"
+        android:drawableLeft="@drawable/icon_lock"
+        android:hint="@string/password_hint"
+        android:inputType="textPassword"
+        android:singleLine="true"
+        android:textSize="16sp"
+        android:windowSoftInputMode="stateHidden" />
+
+    <EditText
+        android:id="@+id/et_invite_phone_num"
+        android:layout_width="match_parent"
+        android:layout_height="50.0dip"
+        android:background="@drawable/et_bottom_bg"
+        android:drawableLeft="@drawable/icon_account"
+        android:hint="@string/invite_phone_hint"
+        android:inputType="phone"
+        android:singleLine="true"
+        android:textSize="16sp"
+        android:windowSoftInputMode="stateHidden" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginTop="15dp"
+        android:drawableLeft="@drawable/ic_agree"
+        android:drawablePadding="3dp"
+        android:text="@string/reg_agree_text"
+        android:textColor="#787878"
+        android:textSize="14sp" />
+
+    <TextView
+        android:id="@+id/btn_complete"
+        android:layout_width="match_parent"
+        android:layout_height="45.0dip"
+        android:layout_marginTop="15dp"
+        android:background="@drawable/selector_red_btn"
+        android:gravity="center"
+        android:text="@string/reg_btn_complete_text"
+        android:textColor="@color/white"
+        android:textSize="18.0sp" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:text="@string/tips_title_text"
+        android:textColor="#FF0000"
+        android:textSize="16sp" />
+    
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginTop="4dp"
+        android:text="@string/tips_subtitle_text"
+        android:textColor="#FF0000"
+        android:textSize="16sp" />
+
+</LinearLayout>

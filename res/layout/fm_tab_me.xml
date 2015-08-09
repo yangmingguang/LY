@@ -1,0 +1,265 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/app_bg_drawable" >
+
+    <LinearLayout
+        android:id="@+id/ll_content"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:visibility="gone" >
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1.2dp"
+            android:background="@color/white" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/me_banner_height"
+            android:background="#D00000" >
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:gravity="center" >
+
+                <FrameLayout
+                    android:id="@+id/fl_content_ll"
+                    android:layout_width="60dp"
+                    android:layout_height="60dp"
+                    android:layout_centerVertical="true" >
+
+                    <ImageView
+                        android:id="@+id/iv_user_picture"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:background="@drawable/ic_default_head"
+                        android:contentDescription="@null" />
+
+                    <ImageView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:background="@drawable/ic_circle_frame_red"
+                        android:contentDescription="@null" />
+                </FrameLayout>
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="8dp"
+                    android:layout_toRightOf="@+id/fl_content_ll"
+                    android:orientation="vertical" >
+
+                    <TextView
+                        android:id="@+id/tv_userName"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="账号:13410706179"
+                        android:textColor="@color/white"
+                        android:textSize="@dimen/me_account_textSize" />
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="6dp"
+                        android:gravity="center" >
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:gravity="center_vertical"
+                            android:text="VIP等级:"
+                            android:textColor="@color/white"
+                            android:textSize="@dimen/me_account_textSize" />
+
+                        <ImageView
+                            android:id="@+id/iv_level"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:background="@drawable/ic_user_level"
+                            android:contentDescription="@null" />
+                    </LinearLayout>
+                </LinearLayout>
+            </RelativeLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1.3"
+                android:gravity="center"
+                android:orientation="vertical" >
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="账号余额"
+                    android:textColor="@color/white"
+                    android:textSize="@dimen/me_option_textSize" />
+
+                <TextView
+                    android:id="@+id/tv_amount"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="4dp"
+                    android:text="￥89.0"
+                    android:textColor="@color/white"
+                    android:textSize="@dimen/me_amount_textSize" />
+            </LinearLayout>
+        </LinearLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="0.1dp"
+            android:layout_marginTop="@dimen/me_margin_top"
+            android:background="@color/split_color" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/white"
+            android:gravity="center_vertical" >
+
+            <TextView
+                android:id="@+id/btn_income"
+                style="@style/OptionStyle"
+                android:layout_weight="1"
+                android:drawableLeft="@drawable/ic_income"
+                android:text="@string/option_1" />
+
+            <View
+                android:layout_width="0.1dp"
+                android:layout_height="match_parent"
+                android:background="@color/split_color" />
+
+            <TextView
+                android:id="@+id/btn_complete_data"
+                style="@style/OptionStyle"
+                android:layout_weight="1"
+                android:drawableLeft="@drawable/ic_complete_data"
+                android:text="@string/option_2" />
+        </LinearLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="0.1dp"
+            android:background="@color/split_color" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/me_option_height"
+            android:background="@color/white"
+            android:gravity="center_vertical" >
+
+            <TextView
+                android:id="@+id/btn_friend_num"
+                style="@style/OptionStyle"
+                android:layout_weight="1"
+                android:drawableLeft="@drawable/ic_friend_num"
+                android:text="@string/option_3" />
+
+            <View
+                android:layout_width="0.1dp"
+                android:layout_height="match_parent"
+                android:background="@color/split_color" />
+
+            <TextView
+                android:id="@+id/btn_friend_income"
+                style="@style/OptionStyle"
+                android:layout_weight="1"
+                android:drawableLeft="@drawable/ic_friend_income"
+                android:text="@string/option_4" />
+        </LinearLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="0.1dp"
+            android:background="@color/split_color" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="0.1dp"
+            android:layout_marginTop="@dimen/me_margin_top"
+            android:background="@color/split_color" />
+
+        <TextView
+            android:id="@+id/btn_my_preferential"
+            style="@style/OptionStyle"
+            android:drawableLeft="@drawable/ic_my_preferential"
+            android:text="@string/option_5" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="0.1dp"
+            android:background="@color/split_color" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/me_option_height"
+            android:background="@color/white"
+            android:gravity="center_vertical" >
+
+            <TextView
+                android:id="@+id/btn_exchange_record"
+                style="@style/OptionStyle"
+                android:layout_weight="1"
+                android:drawableLeft="@drawable/ic_exchange_record"
+                android:text="@string/option_6" />
+
+            <View
+                android:layout_width="0.1dp"
+                android:layout_height="match_parent"
+                android:background="@color/split_color" />
+
+            <TextView
+                android:id="@+id/btn_seckill_record"
+                style="@style/OptionStyle"
+                android:layout_weight="1"
+                android:drawableLeft="@drawable/ic_exchange_record"
+                android:text="@string/option_9" />
+        </LinearLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="0.1dp"
+            android:background="@color/split_color" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/me_option_height"
+            android:background="@color/white"
+            android:gravity="center_vertical" >
+
+            <TextView
+                android:id="@+id/btn_ranking_list"
+                style="@style/OptionStyle"
+                android:layout_weight="1"
+                android:drawableLeft="@drawable/ic_ranking_list"
+                android:text="@string/option_7" />
+
+            <View
+                android:layout_width="0.1dp"
+                android:layout_height="match_parent"
+                android:background="@color/split_color" />
+
+            <TextView
+                android:id="@+id/btn_account_withdraw"
+                style="@style/OptionStyle"
+                android:layout_weight="1"
+                android:drawableLeft="@drawable/ic_account_withdraw"
+                android:text="@string/option_8" />
+        </LinearLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="0.1dp"
+            android:background="@color/split_color" />
+    </LinearLayout>
+
+    <include layout="@layout/loading" />
+
+</FrameLayout>
