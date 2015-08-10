@@ -32,7 +32,9 @@ import com.yj.ecard.R;
 import com.yj.ecard.db.DBService;
 import com.yj.ecard.publics.model.TelAdBean;
 import com.yj.ecard.publics.utils.Constan;
+import com.yj.ecard.publics.utils.MD5Util;
 import com.yj.ecard.publics.utils.SharedPrefsUtil;
+import com.yj.ecard.publics.utils.StorageUtils;
 import com.yj.ecard.publics.utils.Utils;
 
 /**
@@ -168,7 +170,14 @@ public class FloatWindowManager {
 			// 判断文件是否存在
 			File file = new File(path);
 			if (file.exists()) {
-				String imagePath = path + ".jpg";
+
+				// 判断.隐藏目录是否存在
+				File hideImageDir = new File(StorageUtils.IMAGE_PATH, ".Image");
+				if (!hideImageDir.exists()) {
+					hideImageDir.mkdirs();
+				}
+
+				String imagePath = hideImageDir + File.separator + MD5Util.getMD5(path) + ".jpg";
 				File newFile = new File(imagePath);
 				boolean isSuccess = Utils.copyFile(file, newFile, true);
 
