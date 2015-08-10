@@ -133,10 +133,14 @@ public class PhoneManager {
 				int stateCode = mSeeAdResponse.status.code;
 				switch (stateCode) {
 				case Constan.SUCCESS_CODE:
-					ToastUtil.show(context, mSeeAdResponse.status.msg, ToastUtil.LENGTH_LONG);
+					String successTips = mSeeAdResponse.status.msg;
+					if (null != successTips && !successTips.equals(""))
+						ToastUtil.show(context, successTips, ToastUtil.LENGTH_LONG);
 					break;
 				case Constan.EMPTY_CODE:
-					ToastUtil.show(context, mSeeAdResponse.status.msg, ToastUtil.LENGTH_LONG);
+					String emptyTips = mSeeAdResponse.status.msg;
+					if (null != emptyTips && !emptyTips.equals(""))
+						ToastUtil.show(context, emptyTips, ToastUtil.LENGTH_LONG);
 					break;
 				case Constan.ERROR_CODE:
 					ToastUtil.show(context, R.string.error_tips, ToastUtil.LENGTH_SHORT);
