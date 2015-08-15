@@ -16,6 +16,7 @@
     <string name="slidingmenu_password">修改密码</string>
     <string name="slidingmenu_feedback">意见反馈</string>
     <string name="slidingmenu_custom">客服热线&#160;&#160;&#160;&#160;400-6588549</string>
+    <string name="slidingmenu_switch">划屏开关</string>
     <string name="slidingmenu_cache">清除缓存</string>
     <string name="slidingmenu_version">版本更新</string>
     <string name="slidingmenu_about">关于乐盈</string>
@@ -113,6 +114,8 @@
     <string name="dialog_title">新版本提示</string>
     <string name="dialog_message">Custom Dialog New Style UI.</string>
     <string name="draw_screen_tips">左划进入详情，右划解锁!</string>
+    <string name="switch_open">开启划屏!</string>
+    <string name="switch_close">关闭划屏!</string>
 
     <!-- User -->
     <string name="username_hint">请输入手机号码</string>

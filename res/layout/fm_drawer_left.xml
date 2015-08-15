@@ -30,7 +30,8 @@
                     android:layout_height="match_parent"
                     android:background="@drawable/ic_default_head"
                     android:contentDescription="@null" />
-                <ImageView
+
+                <ImageView
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:background="@drawable/ic_circle_frame_pink"
@@ -97,6 +98,28 @@
             style="@style/SlidingMenuItemStyle"
             android:drawableLeft="@drawable/ic_slidingmenu_cache"
             android:text="@string/slidingmenu_cache" />
+
+        <View style="@style/SlidingMenuItemDividerLineStyle" />
+
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" >
+
+            <TextView
+                android:id="@+id/btn_switch"
+                style="@style/SlidingMenuItemStyle"
+                android:drawableLeft="@drawable/ic_slidingmenu_switch"
+                android:text="@string/slidingmenu_switch" />
+
+            <ImageView
+                android:id="@+id/iv_switch"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical|right"
+                android:layout_marginRight="26dp"
+                android:contentDescription="@null"
+                android:focusable="false" />
+        </FrameLayout>
 
         <View style="@style/SlidingMenuItemDividerLineStyle" />
 

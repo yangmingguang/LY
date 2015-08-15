@@ -17,6 +17,7 @@ import android.content.IntentFilter;
 import android.os.IBinder;
 import android.util.Log;
 
+import com.yj.ecard.business.common.CommonManager;
 import com.yj.ecard.receiver.ScreenLockReceiver;
 
 /**
@@ -73,10 +74,14 @@ public class ScreenLockService extends Service {
 
 		unregisterReceiver(mReceiver);
 
-		if (startIntent != null) {
+		// 是否开启划屏
+		boolean drawState = CommonManager.getInstance().getSwitchState(getApplicationContext());
+
+		if (startIntent != null && drawState) {
 			Log.e(TAG, "OnDestroy -> startIntent is not null");
 			startService(startIntent);
 		}
+
 		super.onDestroy();
 	}
 

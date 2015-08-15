@@ -77,6 +77,7 @@ public class Constan {
 	public static final String INCOME_ID = "incomeId";
 	public static final String MARRIAGE_ID = "marriageId";
 	public static final String PROFESSION_ID = "professionId";
+	public static final String SWITCH_STATE = "switchState";
 
 	public static final int OPTION_0 = 0;
 	public static final int OPTION_1 = 1;

@@ -55,12 +55,12 @@ import com.yj.ecard.ui.activity.user.ModifyPassWordActivity;
 
 public class MainActivity extends BaseActivity implements OnClickListener, PointsChangeNotify, PointsEarnNotify {
 
-	private ImageView ivHead;
+	private ImageView ivHead, ivSwitch;
 	private DrawerLayout mDrawerLayout;
 	private ActionBarDrawerToggle mDrawerToggle;
 
 	private final int[] btns = { R.id.iv_user_head, R.id.btn_password, R.id.btn_custom, R.id.btn_cache,
-			R.id.btn_version, R.id.btn_about, R.id.btn_exit };
+			R.id.btn_switch, R.id.btn_version, R.id.btn_about, R.id.btn_exit };
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -142,6 +142,7 @@ public class MainActivity extends BaseActivity implements OnClickListener, Point
 		fm.replace(R.id.content_frame, fragment);
 		fm.commit();
 
+		ivSwitch = (ImageView) findViewById(R.id.iv_switch);
 		ivHead = (ImageView) findViewById(R.id.iv_user_head);
 		String userName = "账号:" + UserManager.getInstance().getUserName(context);
 		int resId = Utils.getLevelDrawable(UserManager.getInstance().getLevel(context));
@@ -151,6 +152,25 @@ public class MainActivity extends BaseActivity implements OnClickListener, Point
 		// listener button events
 		for (int btn : btns)
 			findViewById(btn).setOnClickListener(this);
+
+		setSwitchState();
+	}
+
+	/**
+	 * 
+	* @Title: setSwitchState 
+	* @Description: TODO(这里用一句话描述这个方法的作用) 
+	* @param     设定文件 
+	* @return void    返回类型 
+	* @throws
+	 */
+	private void setSwitchState() {
+		boolean state = CommonManager.getInstance().getSwitchState(context);
+		if (state) {
+			ivSwitch.setBackgroundResource(R.drawable.setting_open);
+		} else {
+			ivSwitch.setBackgroundResource(R.drawable.setting_close);
+		}
 	}
 
 	/** 
@@ -162,11 +182,14 @@ public class MainActivity extends BaseActivity implements OnClickListener, Point
 	*/
 	private void loadAllData() {
 		startDownload(); // 开始下载广告列表
-		startScreenLock(); // 开启锁屏后台服务
 		ScreenLockManager.getInstance().getScreenLockListData(context); // 下载锁屏广告
 		CommonManager.getInstance().initLocation(context);// 开启定位服务
 		CommonManager.getInstance().getShareContentData(context); // 获取分享内容
 		CommonManager.getInstance().checkNewVersion(this, true);// 新版本检测
+		boolean state = CommonManager.getInstance().getSwitchState(context);
+		if (state) {
+			startScreenLock(); // 开启锁屏后台服务
+		}
 	}
 
 	/** 
@@ -195,6 +218,19 @@ public class MainActivity extends BaseActivity implements OnClickListener, Point
 		startService(intent);
 	}
 
+	/**
+	 * 
+	* @Title: stopScreenLock 
+	* @Description: TODO(这里用一句话描述这个方法的作用) 
+	* @param     设定文件 
+	* @return void    返回类型 
+	* @throws
+	 */
+	private void stopScreenLock() {
+		Intent intent = new Intent("com.yj.ecard.service.IScreenLockService");
+		stopService(intent);
+	}
+
 	@Override
 	public void onClick(View v) {
 		switch (v.getId()) {
@@ -213,6 +249,22 @@ public class MainActivity extends BaseActivity implements OnClickListener, Point
 		case R.id.btn_cache:
 			Utils.clearAppCache(context);
 			ToastUtil.show(context, R.string.clear_cache_success, ToastUtil.LENGTH_SHORT);
+			break;
+
+		case R.id.btn_switch:
+			int resId = R.string.switch_close;
+			boolean state = CommonManager.getInstance().getSwitchState(context);
+			if (state) {
+				resId = R.string.switch_close;
+				CommonManager.getInstance().setSwitchState(context, false);
+				stopScreenLock();
+			} else {
+				resId = R.string.switch_open;
+				CommonManager.getInstance().setSwitchState(context, true);
+				startScreenLock();
+			}
+			setSwitchState();
+			ToastUtil.show(context, resId, ToastUtil.LENGTH_SHORT);
 			break;
 
 		case R.id.btn_version:
