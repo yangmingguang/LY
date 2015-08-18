@@ -32,7 +32,7 @@
     <string name="title_value_spike_detail">超值详情</string>
     <string name="title_stroll_preferential">逛优惠</string>
     <string name="title_stroll_preferential_desc">边逛边赚钱</string>
-    <string name="title_publish_preferential">发优惠</string>
+    <string name="title_publish_preferential">发广告</string>
     <string name="title_publish_preferential_desc">广告免费发</string>
     <string name="title_preferential_detail">优惠详情</string>
     <string name="title_business_detail">商家详情</string>
@@ -172,7 +172,7 @@
     <string name="withdraw_bank_hint">开户银行</string>
     <string name="withdraw_balance_hint">可用余额</string>
     <string name="withdraw_cash_balance_hint">提现余额</string>
-    <string name="withdraw_tips">*提现金额为100的倍数，结余金额可下次申请.</string>
+    <string name="withdraw_tips">*提现金额为50的倍数，结余金额可下次申请.</string>
     <string name="withdraw_name_tips">请输入姓名！</string>
     <string name="withdraw_cardnum_tips">请输入银行卡号!</string>
     <string name="withdraw_bank_tips">请输入开户银行!</string>
