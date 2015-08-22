@@ -37,7 +37,7 @@
     <dimen name="exchange_title_text">16sp</dimen>
     <dimen name="exchange_subtitle_text">12sp</dimen>
     <dimen name="exchange_image_height">90dp</dimen>
-    <dimen name="exchange_image_width">120dp</dimen>
+    <dimen name="exchange_image_width">110dp</dimen>
     <dimen name="exchange_banner_height">200dp</dimen>
     <dimen name="exchange_detail_title">17sp</dimen>
     <dimen name="exchange_detail_subtitle">13sp</dimen>

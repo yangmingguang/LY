@@ -34,6 +34,7 @@ public class BusinessDetailResponse extends CommonResponse {
 	public double latitude;
 	public double longitude;
 	public String preferential;
+	public int recommended;
 	public List<ProductBean> productList;
 	public List<EnvironmentBean> envirList;
 

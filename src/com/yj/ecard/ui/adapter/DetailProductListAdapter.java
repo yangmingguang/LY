@@ -37,7 +37,7 @@ public class DetailProductListAdapter extends ArrayListBaseAdapter<ProductBean> 
 		DetailProductListViewHolder holder;
 
 		if (null == convertView) {
-			convertView = inflater.inflate(R.layout.listview_detail_product, null);
+			convertView = inflater.inflate(R.layout.listview_detail_product1, null);
 			holder = new DetailProductListViewHolder(convertView);
 			convertView.setTag(holder);
 		} else {

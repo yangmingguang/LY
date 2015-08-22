@@ -10,6 +10,7 @@
 package com.yj.ecard.ui.adapter;
 
 import android.content.Context;
+import android.graphics.Paint;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -31,13 +32,15 @@ public class DetailProductListViewHolder {
 
 	private ImageView ivLogo;
 	private boolean hasInited;
-	private TextView tvTitle, tvContent;
+	private TextView tvTitle, tvPrice, tvMarketPrice, tvSaleNum;
 
 	public DetailProductListViewHolder(View view) {
 		if (view != null) {
 			ivLogo = (ImageView) view.findViewById(R.id.iv_logo);
 			tvTitle = (TextView) view.findViewById(R.id.tv_title);
-			tvContent = (TextView) view.findViewById(R.id.tv_content);
+			tvPrice = (TextView) view.findViewById(R.id.tv_price);
+			tvMarketPrice = (TextView) view.findViewById(R.id.tv_marketPrice);
+			tvSaleNum = (TextView) view.findViewById(R.id.tv_saleNum);
 			hasInited = true;
 		}
 	}
@@ -52,9 +55,12 @@ public class DetailProductListViewHolder {
 	*/
 	public void initData(Context context, ProductBean productBean) {
 		if (hasInited) {
-			tvTitle.setText(productBean.productName);
-			tvContent.setText(productBean.productInfo);
-			ImageLoaderUtil.load(context, ImageType.NETWORK, productBean.productPic, R.drawable.banner_detail_default,
+			tvTitle.setText(productBean.title);
+			tvPrice.setText("￥" + productBean.price);
+			tvMarketPrice.setText("￥" + productBean.marketPrice);
+			tvMarketPrice.setPaintFlags(Paint.STRIKE_THRU_TEXT_FLAG); // 中划线
+			tvSaleNum.setText("已售" + productBean.sales);
+			ImageLoaderUtil.load(context, ImageType.NETWORK, productBean.imgUrl, R.drawable.banner_detail_default,
 					R.drawable.banner_detail_default, ivLogo);
 		}
 	}

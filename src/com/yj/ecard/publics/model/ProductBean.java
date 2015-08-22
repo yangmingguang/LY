@@ -20,8 +20,10 @@ package com.yj.ecard.publics.model;
 public class ProductBean {
 
 	public int id;
-	public String productName;
-	public String productPic;
-	public String productInfo;
+	public String title;
+	public String imgUrl;
+	public double marketPrice;
+	public double price;
+	public int sales;
 
 }

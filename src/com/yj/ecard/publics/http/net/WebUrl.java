@@ -74,7 +74,7 @@ public class WebUrl {
 
 	// 17.商家详情
 	public static final String GET_BUSINESS_DETAIL_URL = NEW_BASE_URL
-			+ "shangjia/GetSjinfo?id=%s&latitude=%s&longitude=%s";
+			+ "shangjia/GetNewSjinfo?id=%s&latitude=%s&longitude=%s";
 
 	// 18.用户登录
 	public static final String GET_USER_LOGIN_URL = NEW_BASE_URL + "users/Logins";

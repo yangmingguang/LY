@@ -17,7 +17,7 @@ import android.view.ViewGroup;
 
 import com.yj.ecard.R;
 import com.yj.ecard.publics.model.BusinessBean;
-import com.yj.ecard.ui.activity.main.business.BusinessDetailActivity;
+import com.yj.ecard.ui.activity.main.business.BusinessDetailActivity1;
 import com.yj.ecard.ui.adapter.base.ArrayListBaseAdapter;
 
 /**
@@ -53,7 +53,7 @@ public class BusinessListAdapter extends ArrayListBaseAdapter<BusinessBean> {
 
 			@Override
 			public void onClick(View view) {
-				Intent intent = new Intent(context, BusinessDetailActivity.class);
+				Intent intent = new Intent(context, BusinessDetailActivity1.class);
 				intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
 				intent.putExtra("id", businessBean.id);
 				context.startActivity(intent);

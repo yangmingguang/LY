@@ -40,7 +40,7 @@
 
             <View
                 android:layout_width="match_parent"
-                android:layout_height="5dp"
+                android:layout_height="8dp"
                 android:background="@color/app_bg_drawable" />
 
             <RelativeLayout
@@ -104,12 +104,87 @@
                     android:textSize="16sp" />
             </RelativeLayout>
 
+            <!-- 公司产品 -->
+
+            <LinearLayout
+                android:id="@+id/ll_product_layout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical" >
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="8dp"
+                    android:background="@color/app_bg_drawable" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:drawableLeft="@drawable/icon_product"
+                    android:drawablePadding="8dp"
+                    android:gravity="center_vertical"
+                    android:padding="10dp"
+                    android:text="公司产品"
+                    android:textColor="#383838"
+                    android:textSize="17sp"
+                    android:textStyle="bold" />
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="0.5dp"
+                    android:background="@color/red" />
+
+                <com.yj.ecard.ui.views.custom.MyListView
+                    android:id="@+id/lv_product"
+                    style="@style/ScrollBarStyle"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@color/app_bg_drawable"
+                    android:cacheColorHint="@android:color/transparent"
+                    android:divider="@android:color/transparent"
+                    android:dividerHeight="0dp"
+                    android:fadingEdge="none"
+                    android:footerDividersEnabled="false"
+                    android:headerDividersEnabled="false"
+                    android:listSelector="@android:color/transparent"
+                    android:smoothScrollbar="true" />
+            </LinearLayout>
+
             <View
                 android:layout_width="match_parent"
-                android:layout_height="5dp"
+                android:layout_height="8dp"
                 android:background="@color/app_bg_drawable" />
 
-            <include layout="@layout/fm_tab_detail" />
+            <!-- 公司简介 -->
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical" >
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:drawableLeft="@drawable/icon_desc"
+                    android:drawablePadding="8dp"
+                    android:gravity="center_vertical"
+                    android:padding="10dp"
+                    android:text="公司简介"
+                    android:textColor="#383838"
+                    android:textSize="17sp"
+                    android:textStyle="bold" />
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="0.5dp"
+                    android:background="@color/red" />
+
+                <com.yj.ecard.ui.views.webview.CustomWebView
+                    android:id="@+id/webview"
+                    style="@style/ScrollBarStyle"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent" />
+            </LinearLayout>
         </LinearLayout>
     </com.yj.ecard.ui.views.scrollview.OverScrollableScrollView>
 

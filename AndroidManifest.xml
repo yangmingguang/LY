@@ -216,7 +216,7 @@
 
         <!-- 商家详情 -->
         <activity
-            android:name="com.yj.ecard.ui.activity.main.business.BusinessDetailActivity"
+            android:name="com.yj.ecard.ui.activity.main.business.BusinessDetailActivity1"
             android:configChanges="orientation|screenSize|keyboardHidden"
             android:label="@string/title_business_detail"
             android:screenOrientation="portrait"
