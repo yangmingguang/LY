@@ -165,4 +165,8 @@ public class WebUrl {
 	// 45.获取锁屏列表
 	public static final String GET_SCREENLOCK_LIST_URL = NEW_BASE_URL + "advs/GetHpList?userName=%s";
 
+	// 46.获取商家产品详情
+	public static final String GET_BUSINESS_PRODUCT_DETAIL_URL = NEW_BASE_URL
+			+ "shangjia/GetProInfo?id=%s&longitude=%s&latitude=%s";
+
 }

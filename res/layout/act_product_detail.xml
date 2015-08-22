@@ -29,11 +29,11 @@
                 android:id="@+id/tv_title"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:drawableLeft="@drawable/ic_shop"
+                android:drawableLeft="@drawable/ic_business_logo"
                 android:drawablePadding="4dp"
                 android:gravity="center_vertical"
                 android:padding="8dp"
-                android:text="河南乐盈科技有限公司"
+                android:text="Mac Pro"
                 android:textColor="#383838"
                 android:textSize="18sp"
                 android:textStyle="bold" />
@@ -90,65 +90,51 @@
                     android:textColor="#787878"
                     android:textSize="14sp" />
 
-                <TextView
-                    android:id="@+id/tv_address"
+                <RelativeLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_below="@+id/tv_addressText"
-                    android:layout_marginTop="4dp"
-                    android:drawableLeft="@drawable/location_normal"
-                    android:drawablePadding="8dp"
-                    android:gravity="center_vertical"
-                    android:text="深圳西乡地铁站"
-                    android:textColor="#383838"
-                    android:textSize="16sp" />
+                    android:layout_marginTop="4dp" >
+
+                    <ImageView
+                        android:id="@+id/iv_location"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:background="@drawable/location_normal"
+                        android:contentDescription="@null" />
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:layout_marginLeft="8dp"
+                        android:layout_toRightOf="@+id/iv_location"
+                        android:orientation="vertical" >
+
+                        <TextView
+                            android:id="@+id/tv_shop_name"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:drawablePadding="8dp"
+                            android:gravity="center_vertical"
+                            android:text="深圳西乡地铁站"
+                            android:textColor="#383838"
+                            android:textSize="16sp" />
+
+                        <TextView
+                            android:id="@+id/tv_address"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="2dp"
+                            android:drawablePadding="8dp"
+                            android:gravity="center_vertical"
+                            android:text="深圳西乡地铁站"
+                            android:textColor="#787878"
+                            android:textSize="13sp" />
+                    </LinearLayout>
+                </RelativeLayout>
             </RelativeLayout>
-
-            <!-- 公司产品 -->
-
-            <LinearLayout
-                android:id="@+id/ll_product_layout"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical" >
-
-                <View
-                    android:layout_width="match_parent"
-                    android:layout_height="8dp"
-                    android:background="@color/app_bg_drawable" />
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:drawableLeft="@drawable/icon_product"
-                    android:drawablePadding="8dp"
-                    android:gravity="center_vertical"
-                    android:padding="10dp"
-                    android:text="公司产品"
-                    android:textColor="#383838"
-                    android:textSize="17sp"
-                    android:textStyle="bold" />
-
-                <View
-                    android:layout_width="match_parent"
-                    android:layout_height="0.5dp"
-                    android:background="@color/red" />
-
-                <com.yj.ecard.ui.views.custom.MyListView
-                    android:id="@+id/lv_product"
-                    style="@style/ScrollBarStyle"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:background="@color/app_bg_drawable"
-                    android:cacheColorHint="@android:color/transparent"
-                    android:divider="@android:color/transparent"
-                    android:dividerHeight="0dp"
-                    android:fadingEdge="none"
-                    android:footerDividersEnabled="false"
-                    android:headerDividersEnabled="false"
-                    android:listSelector="@android:color/transparent"
-                    android:smoothScrollbar="true" />
-            </LinearLayout>
 
             <View
                 android:layout_width="match_parent"
@@ -169,7 +155,7 @@
                     android:drawablePadding="8dp"
                     android:gravity="center_vertical"
                     android:padding="10dp"
-                    android:text="公司简介"
+                    android:text="产品详情"
                     android:textColor="#383838"
                     android:textSize="17sp"
                     android:textStyle="bold" />

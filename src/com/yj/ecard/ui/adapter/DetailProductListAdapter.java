@@ -10,12 +10,14 @@
 package com.yj.ecard.ui.adapter;
 
 import android.content.Context;
+import android.content.Intent;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 
 import com.yj.ecard.R;
 import com.yj.ecard.publics.model.ProductBean;
+import com.yj.ecard.ui.activity.main.business.ProductDetailActivity;
 import com.yj.ecard.ui.adapter.base.ArrayListBaseAdapter;
 
 /**
@@ -51,11 +53,10 @@ public class DetailProductListAdapter extends ArrayListBaseAdapter<ProductBean> 
 
 			@Override
 			public void onClick(View view) {
-				/*	Intent intent = new Intent(context, WonderfulAdDetailActivity.class);
-					intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-					intent.putExtra("id", wonderfulAdBean.id);
-					intent.putExtra("sortId", wonderfulAdBean.sortId);
-					context.startActivity(intent);*/
+				Intent intent = new Intent(context, ProductDetailActivity.class);
+				intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+				intent.putExtra("id", productBean.id);
+				context.startActivity(intent);
 			}
 		});
 

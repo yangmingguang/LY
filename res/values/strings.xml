@@ -52,6 +52,7 @@
     <string name="title_modify_pw">修改密码</string>
     <string name="title_collect_address">收货地址</string>
     <string name="title_seckill_record">秒杀记录</string>
+    <string name="title_product_detail">产品详情</string>
 
     <!-- HomeTab -->
     <string name="footer_btn_home">首页</string>

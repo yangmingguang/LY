@@ -32,6 +32,7 @@ import com.yj.ecard.publics.http.model.request.ModifyPwRequest;
 import com.yj.ecard.publics.http.model.request.MyPreferentialListRequest;
 import com.yj.ecard.publics.http.model.request.PreferentialDetailRequest;
 import com.yj.ecard.publics.http.model.request.PreferentialListRequest;
+import com.yj.ecard.publics.http.model.request.ProductDetailRequest;
 import com.yj.ecard.publics.http.model.request.PublishPreferentialRequest;
 import com.yj.ecard.publics.http.model.request.RankingListRequest;
 import com.yj.ecard.publics.http.model.request.RegisterRequest;
@@ -917,4 +918,21 @@ public class DataFetcher {
 		get(requestUrl, listener, errorListener, shouldCache);
 	}
 
+	/**
+	 * 
+	* @Title: getBusinessProductDetailResult 
+	* @Description: 获取产品详情
+	* @param @param request
+	* @param @param listener
+	* @param @param errorListener
+	* @param @param shouldCache    设定文件 
+	* @return void    返回类型 
+	* @throws
+	 */
+	public void getBusinessProductDetailResult(ProductDetailRequest request, Listener<JSONObject> listener,
+			ErrorListener errorListener, boolean shouldCache) {
+		String requestUrl = String.format(WebUrl.GET_BUSINESS_PRODUCT_DETAIL_URL, request.id, request.longitude,
+				request.latitude);
+		get(requestUrl, listener, errorListener, shouldCache);
+	}
 }
