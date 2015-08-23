@@ -389,6 +389,13 @@
             android:configChanges="orientation|screenSize|keyboardHidden"
             android:label="@string/title_product_detail"
             android:screenOrientation="portrait" />
+        
+        <!-- 订单详情 -->
+        <activity
+            android:name="com.yj.ecard.ui.activity.order.OrderDetailActivity"
+            android:configChanges="orientation|screenSize|keyboardHidden"
+            android:label="@string/title_order_detail"
+            android:screenOrientation="portrait" />
 
         <!-- ************************************注册广播类Start*************************************** -->
         <!-- 系统启动广播接收 -->

@@ -11,6 +11,7 @@ package com.yj.ecard.ui.activity.main.business;
 
 import org.json.JSONObject;
 
+import android.content.Intent;
 import android.graphics.Paint;
 import android.os.Bundle;
 import android.view.View;
@@ -36,6 +37,7 @@ import com.yj.ecard.publics.utils.JsonUtil;
 import com.yj.ecard.publics.utils.LogUtil;
 import com.yj.ecard.publics.utils.Utils;
 import com.yj.ecard.ui.activity.base.BaseActivity;
+import com.yj.ecard.ui.activity.order.OrderDetailActivity;
 import com.yj.ecard.ui.views.webview.CustomWebView;
 
 /**
@@ -53,6 +55,7 @@ public class ProductDetailActivity extends BaseActivity implements OnClickListen
 	private ImageView ivLogo;
 	private String phoneNumber;
 	private CustomWebView mWebView;
+	private ProductDetailResponse productDetailResponse;
 	private TextView tvTitle, tvPhone, tvAddress, tvShopName, tvPrice, tvMarketPrice;
 
 	private final int[] btns = { R.id.btn_phone_ll, R.id.btn_buy };
@@ -122,7 +125,7 @@ public class ProductDetailActivity extends BaseActivity implements OnClickListen
 			public void onResponse(JSONObject response) {
 				// TODO Auto-generated method stub
 				LogUtil.getLogger().d("response==>" + response.toString());
-				ProductDetailResponse productDetailResponse = (ProductDetailResponse) JsonUtil.jsonToBean(response,
+				productDetailResponse = (ProductDetailResponse) JsonUtil.jsonToBean(response,
 						ProductDetailResponse.class);
 				// 数据响应状态
 				int stateCode = productDetailResponse.status.code;
@@ -176,9 +179,15 @@ public class ProductDetailActivity extends BaseActivity implements OnClickListen
 			break;
 
 		case R.id.btn_buy:
-
+			if (productDetailResponse != null) {
+				Intent intent = new Intent(context, OrderDetailActivity.class);
+				intent.putExtra("shopName", productDetailResponse.merchantsName);
+				intent.putExtra("productName", productDetailResponse.title);
+				intent.putExtra("price", "￥" + productDetailResponse.price);
+				intent.putExtra("imgUrl", productDetailResponse.imgUrl);
+				startActivity(intent);
+			}
 			break;
 		}
 	}
-
 }
