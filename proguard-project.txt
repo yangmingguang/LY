@@ -19,15 +19,15 @@
 #   public *;
 #}
 
--optimizationpasses 5  
--dontusemixedcaseclassnames  
--dontskipnonpubliclibraryclasses  
--dontpreverify  
--verbose  
--optimizations !code/simplification/arithmetic,!field/*,!class/merging/*  
+-optimizationpasses 5
+-dontusemixedcaseclassnames
+-dontskipnonpubliclibraryclasses
+-dontpreverify
+-verbose
+-optimizations !code/simplification/arithmetic,!field/*,!class/merging/*
   
--keepattributes *Annotation*  
--keepattributes Signature 
+-keepattributes *Annotation*
+-keepattributes Signature
 
 #把所有你的jar包都申明进来
 -libraryjars libs/Baidu-Frontia-Android-2.0.7.jar
@@ -52,13 +52,13 @@
 
 -keep class net.youmi.android.** { *; }
 -keep class com.lidroid.xutils.** { *; }
--keep class com.lidroid.xutils.db.table.** { *; } 
+-keep class com.lidroid.xutils.db.table.** { *; }
 -keep class org.jsoup.** { *; }
 -keep class com.ab.** { *; }
 
 
 #将你不需要混淆的部分申明进来
--keep public class * extends android.app.Fragment  
+-keep public class * extends android.app.Fragment
 -keep public class * extends android.app.Activity
 -keep public class * extends android.app.Application
 -keep public class * extends android.app.Service
@@ -69,22 +69,22 @@
 -keep public class * extends android.support.v4.**
 -keep public class com.android.vending.licensing.ILicensingService
 
--keep class com.google.gson.** { *; }  
--keep class com.google.gson.stream.** { *; }  
--keep class com.google.gson.examples.android.model.** { *; }  
--keep class com.uuhelper.Application.** { *; }  
--keep class net.sourceforge.zbar.** { *; }  
--keep class com.google.android.gms.** { *; }   
--keep class com.android.vending.licensing.ILicensingService  
--keep class android.support.v4.** { *; }    
--keep class org.apache.commons.net.** { *; }    
--keep class com.tencent.** { *; }  
+-keep class com.google.gson.** { *; }
+-keep class com.google.gson.stream.** { *; }
+-keep class com.google.gson.examples.android.model.** { *; }
+-keep class com.uuhelper.Application.** { *; }
+-keep class net.sourceforge.zbar.** { *; }
+-keep class com.google.android.gms.** { *; }
+-keep class com.android.vending.licensing.ILicensingService
+-keep class android.support.v4.** { *; }
+-keep class org.apache.commons.net.** { *; }
+-keep class com.tencent.** { *; }
 
 # model 否则报错
--keep class com.yj.ecard.publics.model.** { *; }  
--keep class com.yj.ecard.publics.http.model.** { *; }  
--keep class com.yj.ecard.business.** { *; }  
--keep class com.yj.ecard.publics.http.volley.** { *; }  
+-keep class com.yj.ecard.publics.model.** { *; }
+-keep class com.yj.ecard.publics.http.model.** { *; } 
+-keep class com.yj.ecard.business.** { *; }
+-keep class com.yj.ecard.publics.http.volley.** { *; } 
 -keep class com.yj.ecard.business.download.** { *; }  
  
 
