@@ -11,11 +11,13 @@ package com.yj.ecard.ui.activity.main.business;
 
 import org.json.JSONObject;
 
+import android.graphics.Paint;
 import android.os.Bundle;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.webkit.WebSettings;
 import android.webkit.WebSettings.LayoutAlgorithm;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -46,13 +48,14 @@ import com.yj.ecard.ui.views.webview.CustomWebView;
 
 public class ProductDetailActivity extends BaseActivity implements OnClickListener {
 
+	private Button btnBuy;
 	private View loadingView;
 	private ImageView ivLogo;
 	private String phoneNumber;
 	private CustomWebView mWebView;
-	private TextView tvTitle, tvPhone, tvAddress, tvShopName;
+	private TextView tvTitle, tvPhone, tvAddress, tvShopName, tvPrice, tvMarketPrice;
 
-	private final int[] btns = { R.id.btn_phone_ll };
+	private final int[] btns = { R.id.btn_phone_ll, R.id.btn_buy };
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -70,11 +73,15 @@ public class ProductDetailActivity extends BaseActivity implements OnClickListen
 	* @throws 
 	*/
 	private void initViews() {
+
 		ivLogo = (ImageView) findViewById(R.id.iv_logo);
 		tvTitle = (TextView) findViewById(R.id.tv_title);
 		tvPhone = (TextView) findViewById(R.id.tv_phone);
 		tvAddress = (TextView) findViewById(R.id.tv_address);
 		tvShopName = (TextView) findViewById(R.id.tv_shop_name);
+		btnBuy = (Button) findViewById(R.id.btn_buy);
+		tvPrice = (TextView) findViewById(R.id.tv_price);
+		tvMarketPrice = (TextView) findViewById(R.id.tv_marketPrice);
 		loadingView = findViewById(R.id.l_loading_rl);
 
 		// webView 
@@ -126,6 +133,14 @@ public class ProductDetailActivity extends BaseActivity implements OnClickListen
 					tvPhone.setText(phoneNumber);
 					tvShopName.setText(productDetailResponse.merchantsName);
 					tvAddress.setText(productDetailResponse.address);
+					tvPrice.setText("￥" + productDetailResponse.price);
+					tvMarketPrice.setText("￥" + productDetailResponse.marketPrice);
+					tvMarketPrice.setPaintFlags(Paint.STRIKE_THRU_TEXT_FLAG); // 中划线
+					if (productDetailResponse.canBuy == 0) {
+						btnBuy.setBackgroundResource(R.drawable.round_shape_gray);
+					} else {
+						btnBuy.setBackgroundResource(R.drawable.round_shape_yellow);
+					}
 					ImageLoaderUtil.load(context, ImageType.NETWORK, productDetailResponse.imgUrl,
 							R.drawable.banner_detail_default, R.drawable.banner_detail_default, ivLogo);
 					// 公司简介
@@ -158,6 +173,10 @@ public class ProductDetailActivity extends BaseActivity implements OnClickListen
 		case R.id.btn_phone_ll:
 			if (null != phoneNumber)
 				Utils.telCall(context, phoneNumber);
+			break;
+
+		case R.id.btn_buy:
+
 			break;
 		}
 	}
