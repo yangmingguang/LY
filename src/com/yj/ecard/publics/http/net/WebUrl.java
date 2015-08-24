@@ -169,4 +169,8 @@ public class WebUrl {
 	public static final String GET_BUSINESS_PRODUCT_DETAIL_URL = NEW_BASE_URL
 			+ "shangjia/GetProInfo?id=%s&longitude=%s&latitude=%s";
 
+	// 47.获取默认地址
+	public static final String GET_DEFAULT_ADDRESS_URL = NEW_BASE_URL
+			+ "address/GetDefaultAddress?userId=%s&userPwd=%s";
+
 }

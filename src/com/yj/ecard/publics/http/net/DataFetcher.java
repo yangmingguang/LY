@@ -20,6 +20,7 @@ import com.yj.ecard.publics.http.model.request.BusinessListRequest;
 import com.yj.ecard.publics.http.model.request.CheckCodeRequest;
 import com.yj.ecard.publics.http.model.request.CrashRequest;
 import com.yj.ecard.publics.http.model.request.DailyAttendanceRequest;
+import com.yj.ecard.publics.http.model.request.DefaultAddressRequest;
 import com.yj.ecard.publics.http.model.request.DeletePreferentialRequest;
 import com.yj.ecard.publics.http.model.request.ExchangeAddressRequest;
 import com.yj.ecard.publics.http.model.request.ExchangeDetailRequest;
@@ -933,6 +934,23 @@ public class DataFetcher {
 			ErrorListener errorListener, boolean shouldCache) {
 		String requestUrl = String.format(WebUrl.GET_BUSINESS_PRODUCT_DETAIL_URL, request.id, request.longitude,
 				request.latitude);
+		get(requestUrl, listener, errorListener, shouldCache);
+	}
+
+	/**
+	 * 
+	* @Title: getDefaultAddressResult 
+	* @Description: 获取默认收货地址
+	* @param @param request
+	* @param @param listener
+	* @param @param errorListener
+	* @param @param shouldCache    设定文件 
+	* @return void    返回类型 
+	* @throws
+	 */
+	public void getDefaultAddressResult(DefaultAddressRequest request, Listener<JSONObject> listener,
+			ErrorListener errorListener, boolean shouldCache) {
+		String requestUrl = String.format(WebUrl.GET_DEFAULT_ADDRESS_URL, request.userId, request.userPwd);
 		get(requestUrl, listener, errorListener, shouldCache);
 	}
 }
