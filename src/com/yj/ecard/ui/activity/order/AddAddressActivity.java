@@ -9,6 +9,8 @@
 
 package com.yj.ecard.ui.activity.order;
 
+import org.json.JSONObject;
+
 import android.os.Bundle;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -16,6 +18,17 @@ import android.widget.EditText;
 import android.widget.ImageView;
 
 import com.yj.ecard.R;
+import com.yj.ecard.business.user.UserManager;
+import com.yj.ecard.publics.http.model.request.AddAddressRequest;
+import com.yj.ecard.publics.http.model.response.AddAddressResponse;
+import com.yj.ecard.publics.http.net.DataFetcher;
+import com.yj.ecard.publics.http.volley.Response.ErrorListener;
+import com.yj.ecard.publics.http.volley.Response.Listener;
+import com.yj.ecard.publics.http.volley.VolleyError;
+import com.yj.ecard.publics.utils.JsonUtil;
+import com.yj.ecard.publics.utils.LogUtil;
+import com.yj.ecard.publics.utils.ToastUtil;
+import com.yj.ecard.publics.utils.Utils;
 import com.yj.ecard.ui.activity.base.BaseActivity;
 
 /**
@@ -56,6 +69,47 @@ public class AddAddressActivity extends BaseActivity implements OnClickListener 
 			findViewById(btn).setOnClickListener(this);
 	}
 
+	/**
+	 * 
+	* @Title: addAddressData 
+	* @Description: TODO(这里用一句话描述这个方法的作用) 
+	* @param     设定文件 
+	* @return void    返回类型 
+	* @throws
+	 */
+	private void addAddressData() {
+		Utils.showProgressDialog(this);
+		AddAddressRequest request = new AddAddressRequest();
+		request.setUserId(UserManager.getInstance().getUserId(context));
+		request.setUserPwd(UserManager.getInstance().getPassword(context));
+		request.setRealName(etName.getText().toString());
+		request.setPhone(etPhone.getText().toString());
+		request.setAddress(etAddress.getText().toString());
+		int result = (isDefault == true) ? 1 : 0;
+		request.setIsDefault(result);
+		DataFetcher.getInstance().addAddressResult(request, new Listener<JSONObject>() {
+
+			@Override
+			public void onResponse(JSONObject response) {
+				// TODO Auto-generated method stub
+				Utils.dismissProgressDialog();
+				LogUtil.getLogger().d("response==>" + response.toString());
+				AddAddressResponse adddAddressResponse = (AddAddressResponse) JsonUtil.jsonToBean(response,
+						AddAddressResponse.class);
+				ToastUtil.show(context, adddAddressResponse.status.msg, ToastUtil.LENGTH_SHORT);
+			}
+
+		}, new ErrorListener() {
+
+			@Override
+			public void onErrorResponse(VolleyError error) {
+				// TODO Auto-generated method stub
+				Utils.dismissProgressDialog();
+				ToastUtil.show(context, R.string.error_tips, ToastUtil.LENGTH_SHORT);
+			}
+		});
+	}
+
 	@Override
 	public void onClick(View v) {
 		switch (v.getId()) {
@@ -70,7 +124,7 @@ public class AddAddressActivity extends BaseActivity implements OnClickListener 
 			break;
 
 		case R.id.btn_save:
-
+			addAddressData();
 			break;
 		}
 

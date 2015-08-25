@@ -173,4 +173,7 @@ public class WebUrl {
 	public static final String GET_DEFAULT_ADDRESS_URL = NEW_BASE_URL
 			+ "address/GetDefaultAddress?userId=%s&userPwd=%s";
 
+	// 48.添加收货地址
+	public static final String POST_ADD_ADDRESS_URL = NEW_BASE_URL + "address/addMyAddress";
+
 }

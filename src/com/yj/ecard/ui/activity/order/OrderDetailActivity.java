@@ -21,6 +21,7 @@ import android.widget.TextView;
 import com.nostra13.universalimageloader.core.assist.ImageType;
 import com.yj.ecard.R;
 import com.yj.ecard.business.address.AddressManager;
+import com.yj.ecard.publics.model.AddressBean;
 import com.yj.ecard.publics.utils.ImageLoaderUtil;
 import com.yj.ecard.publics.utils.WeakHandler;
 import com.yj.ecard.ui.activity.base.BaseActivity;
@@ -36,7 +37,7 @@ import com.yj.ecard.ui.activity.base.BaseActivity;
 public class OrderDetailActivity extends BaseActivity implements OnClickListener {
 
 	private ImageView ivLogo;
-	private TextView tvShopName, tvProductName, tvPrice, tvDefaultTips;
+	private TextView tvName, tvAddress, tvPhone, tvShopName, tvProductName, tvPrice, tvDefaultTips;
 	private final int[] btns = { R.id.btn_address, R.id.btn_submit };
 
 	@Override
@@ -55,6 +56,9 @@ public class OrderDetailActivity extends BaseActivity implements OnClickListener
 	* @throws 
 	*/
 	private void initView() {
+		tvName = (TextView) findViewById(R.id.tv_name);
+		tvPhone = (TextView) findViewById(R.id.tv_phone);
+		tvAddress = (TextView) findViewById(R.id.tv_address);
 		tvShopName = (TextView) findViewById(R.id.tv_shop_name);
 		tvProductName = (TextView) findViewById(R.id.tv_product_name);
 		tvDefaultTips = (TextView) findViewById(R.id.tv_default_tips);
@@ -94,10 +98,10 @@ public class OrderDetailActivity extends BaseActivity implements OnClickListener
 		public boolean handleMessage(Message msg) {
 			switch (msg.what) {
 			case AddressManager.onSuccess:
-				/*	ToastUtil.show(context, R.string.login_success_tips, ToastUtil.LENGTH_SHORT);
-					startActivity(new Intent(context, MainActivity.class));
-					UserManager.getInstance().setLogin(context, true);
-					finish();*/
+				AddressBean bean = (AddressBean) msg.obj;
+				tvName.setText(bean.realName);
+				tvPhone.setText(bean.phone);
+				tvAddress.setText(bean.address);
 				break;
 
 			case AddressManager.onEmpty:

@@ -102,6 +102,5 @@ public class AddressManager {
 				handler.sendEmptyMessage(onFailure);
 			}
 		}, true);
-
 	}
 }

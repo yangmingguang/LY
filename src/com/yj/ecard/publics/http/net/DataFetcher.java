@@ -11,6 +11,7 @@ package com.yj.ecard.publics.http.net;
 
 import org.json.JSONObject;
 
+import com.yj.ecard.publics.http.model.request.AddAddressRequest;
 import com.yj.ecard.publics.http.model.request.AreaIdRequest;
 import com.yj.ecard.publics.http.model.request.BalanceRequest;
 import com.yj.ecard.publics.http.model.request.BannerDetailRequest;
@@ -952,5 +953,25 @@ public class DataFetcher {
 			ErrorListener errorListener, boolean shouldCache) {
 		String requestUrl = String.format(WebUrl.GET_DEFAULT_ADDRESS_URL, request.userId, request.userPwd);
 		get(requestUrl, listener, errorListener, shouldCache);
+	}
+
+	/**
+	 * 
+	* @Title: addAddressResult 
+	* @Description: 添加收货地址
+	* @param @param request
+	* @param @param listener
+	* @param @param errorListener    设定文件 
+	* @return void    返回类型 
+	* @throws
+	 */
+	public void addAddressResult(AddAddressRequest request, Listener<JSONObject> listener, ErrorListener errorListener) {
+		JSONObject requestObejct = null;
+		try {
+			requestObejct = new JSONObject(JsonUtil.objectToJson(request));
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		post(WebUrl.POST_ADD_ADDRESS_URL, requestObejct, listener, errorListener);
 	}
 }
