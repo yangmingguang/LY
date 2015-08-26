@@ -65,7 +65,7 @@ public class AddressListActivity extends BaseActivity {
 		mListView = (PullToRefreshListView) findViewById(R.id.lv_address);
 		mListView.setMode(Mode.DISABLED);
 		mListView.setEmptyView(loadingView);
-		mAdapter = new AddressListAdapter(context);
+		mAdapter = new AddressListAdapter(this);
 		mListView.setAdapter(mAdapter);
 
 		getAddressListData();

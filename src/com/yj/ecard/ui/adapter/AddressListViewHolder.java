@@ -27,13 +27,14 @@ import com.yj.ecard.publics.model.AddressBean;
 public class AddressListViewHolder {
 
 	private boolean hasInited;
-	private TextView tvName, tvPhone, tvAddress;
+	public TextView tvName, tvPhone, tvAddress, btnDelete;
 
 	public AddressListViewHolder(View view) {
 		if (view != null) {
 			tvName = (TextView) view.findViewById(R.id.tv_name);
 			tvPhone = (TextView) view.findViewById(R.id.tv_phone);
 			tvAddress = (TextView) view.findViewById(R.id.tv_address);
+			btnDelete = (TextView) view.findViewById(R.id.btn_delete);
 			hasInited = true;
 		}
 	}

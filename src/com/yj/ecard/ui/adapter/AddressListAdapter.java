@@ -15,6 +15,7 @@ import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 
 import com.yj.ecard.R;
+import com.yj.ecard.business.address.AddressManager;
 import com.yj.ecard.publics.model.AddressBean;
 import com.yj.ecard.ui.adapter.base.ArrayListBaseAdapter;
 
@@ -46,6 +47,15 @@ public class AddressListAdapter extends ArrayListBaseAdapter<AddressBean> {
 
 		final AddressBean addressBean = mList.get(position);
 		holder.initData(context, addressBean);
+
+		holder.btnDelete.setOnClickListener(new OnClickListener() {
+
+			@Override
+			public void onClick(View v) {
+				// TODO Auto-generated method stub
+				AddressManager.getInstance().deleteAddressData(context, AddressListAdapter.this, addressBean);
+			}
+		});
 
 		convertView.setOnClickListener(new OnClickListener() {
 

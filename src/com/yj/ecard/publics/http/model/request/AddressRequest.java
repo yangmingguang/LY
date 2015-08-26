@@ -1,5 +1,5 @@
 /**   
-* @Title: DefaultAddressRequest.java
+* @Title: AddressRequest.java
 * @Package com.yj.ecard.publics.http.model.request
 * @Description: TODO(用一句话描述该文件做什么)
 * @author YangMingGuang
@@ -10,17 +10,34 @@
 package com.yj.ecard.publics.http.model.request;
 
 /**
-* @ClassName: DefaultAddressRequest
+* @ClassName: AddressRequest
 * @Description: TODO(这里用一句话描述这个类的作用)
 * @author YangMingGuang
 * @date 2015-8-23 下午11:08:41
 * 
 */
 
-public class DefaultAddressRequest {
+public class AddressRequest {
 
+	public int id;
 	public int userId;
 	public String userPwd;
+
+	/** 
+	* @return id 
+	*/
+
+	public int getId() {
+		return id;
+	}
+
+	/** 
+	* @param id 要设置的 id 
+	*/
+
+	public void setId(int id) {
+		this.id = id;
+	}
 
 	/** 
 	* @return userId 

@@ -13,6 +13,7 @@ import org.json.JSONObject;
 
 import com.yj.ecard.publics.http.model.request.AddAddressRequest;
 import com.yj.ecard.publics.http.model.request.AddressListRequest;
+import com.yj.ecard.publics.http.model.request.AddressRequest;
 import com.yj.ecard.publics.http.model.request.AreaIdRequest;
 import com.yj.ecard.publics.http.model.request.BalanceRequest;
 import com.yj.ecard.publics.http.model.request.BannerDetailRequest;
@@ -22,7 +23,6 @@ import com.yj.ecard.publics.http.model.request.BusinessListRequest;
 import com.yj.ecard.publics.http.model.request.CheckCodeRequest;
 import com.yj.ecard.publics.http.model.request.CrashRequest;
 import com.yj.ecard.publics.http.model.request.DailyAttendanceRequest;
-import com.yj.ecard.publics.http.model.request.DefaultAddressRequest;
 import com.yj.ecard.publics.http.model.request.DeletePreferentialRequest;
 import com.yj.ecard.publics.http.model.request.ExchangeAddressRequest;
 import com.yj.ecard.publics.http.model.request.ExchangeDetailRequest;
@@ -950,7 +950,7 @@ public class DataFetcher {
 	* @return void    返回类型 
 	* @throws
 	 */
-	public void getDefaultAddressResult(DefaultAddressRequest request, Listener<JSONObject> listener,
+	public void getDefaultAddressResult(AddressRequest request, Listener<JSONObject> listener,
 			ErrorListener errorListener, boolean shouldCache) {
 		String requestUrl = String.format(WebUrl.GET_DEFAULT_ADDRESS_URL, request.userId, request.userPwd);
 		get(requestUrl, listener, errorListener, shouldCache);
@@ -990,6 +990,23 @@ public class DataFetcher {
 	public void getAddressListResult(AddressListRequest request, Listener<JSONObject> listener,
 			ErrorListener errorListener, boolean shouldCache) {
 		String requestUrl = String.format(WebUrl.GET_ADDRESS_LIST_URL, request.userId, request.userPwd);
+		get(requestUrl, listener, errorListener, shouldCache);
+	}
+
+	/**
+	 * 
+	* @Title: deleteAddressResult 
+	* @Description: 删除收货地址
+	* @param @param request
+	* @param @param listener
+	* @param @param errorListener
+	* @param @param shouldCache    设定文件 
+	* @return void    返回类型 
+	* @throws
+	 */
+	public void deleteAddressResult(AddressRequest request, Listener<JSONObject> listener, ErrorListener errorListener,
+			boolean shouldCache) {
+		String requestUrl = String.format(WebUrl.DELETE_ADDRESS_URL, request.userId, request.userPwd, request.id);
 		get(requestUrl, listener, errorListener, shouldCache);
 	}
 

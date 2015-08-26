@@ -19,7 +19,7 @@ import com.yj.ecard.publics.model.AddressBean;
 * 
 */
 
-public class DefaultAddressResponse extends CommonResponse {
+public class AddressResponse extends CommonResponse {
 
 	public AddressBean data;
 
