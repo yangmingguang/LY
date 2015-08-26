@@ -36,6 +36,7 @@ import com.yj.ecard.ui.activity.base.BaseActivity;
 
 public class OrderDetailActivity extends BaseActivity implements OnClickListener {
 
+	private boolean hasData;
 	private ImageView ivLogo;
 	private TextView tvName, tvAddress, tvPhone, tvShopName, tvProductName, tvPrice, tvDefaultTips;
 	private final int[] btns = { R.id.btn_address, R.id.btn_submit };
@@ -98,6 +99,7 @@ public class OrderDetailActivity extends BaseActivity implements OnClickListener
 		public boolean handleMessage(Message msg) {
 			switch (msg.what) {
 			case AddressManager.onSuccess:
+				hasData = true;
 				AddressBean bean = (AddressBean) msg.obj;
 				tvName.setText(bean.realName);
 				tvPhone.setText(bean.phone);
@@ -106,6 +108,7 @@ public class OrderDetailActivity extends BaseActivity implements OnClickListener
 
 			case AddressManager.onEmpty:
 			case AddressManager.onFailure:
+				hasData = false;
 				tvDefaultTips.setVisibility(View.VISIBLE);
 				break;
 			}
@@ -118,7 +121,11 @@ public class OrderDetailActivity extends BaseActivity implements OnClickListener
 	public void onClick(View v) {
 		switch (v.getId()) {
 		case R.id.btn_address:
-			startActivity(new Intent(context, AddAddressActivity.class));
+			if (hasData) {
+				startActivity(new Intent(context, AddressListActivity.class));
+			} else {
+				startActivity(new Intent(context, AddAddressActivity.class));
+			}
 			break;
 
 		case R.id.btn_submit:

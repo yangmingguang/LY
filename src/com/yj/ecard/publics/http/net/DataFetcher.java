@@ -12,6 +12,7 @@ package com.yj.ecard.publics.http.net;
 import org.json.JSONObject;
 
 import com.yj.ecard.publics.http.model.request.AddAddressRequest;
+import com.yj.ecard.publics.http.model.request.AddressListRequest;
 import com.yj.ecard.publics.http.model.request.AreaIdRequest;
 import com.yj.ecard.publics.http.model.request.BalanceRequest;
 import com.yj.ecard.publics.http.model.request.BannerDetailRequest;
@@ -974,4 +975,22 @@ public class DataFetcher {
 		}
 		post(WebUrl.POST_ADD_ADDRESS_URL, requestObejct, listener, errorListener);
 	}
+
+	/**
+	 * 
+	* @Title: getAddressListResult 
+	* @Description: 获取收货地址列表
+	* @param @param request
+	* @param @param listener
+	* @param @param errorListener
+	* @param @param shouldCache    设定文件 
+	* @return void    返回类型 
+	* @throws
+	 */
+	public void getAddressListResult(AddressListRequest request, Listener<JSONObject> listener,
+			ErrorListener errorListener, boolean shouldCache) {
+		String requestUrl = String.format(WebUrl.GET_ADDRESS_LIST_URL, request.userId, request.userPwd);
+		get(requestUrl, listener, errorListener, shouldCache);
+	}
+
 }

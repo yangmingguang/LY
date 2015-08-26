@@ -176,4 +176,7 @@ public class WebUrl {
 	// 48.添加收货地址
 	public static final String POST_ADD_ADDRESS_URL = NEW_BASE_URL + "address/addMyAddress";
 
+	// 49.获取收货地址列表
+	public static final String GET_ADDRESS_LIST_URL = NEW_BASE_URL + "address/getAddressList?userId=%s&userPwd=%s";
+
 }
