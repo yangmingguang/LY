@@ -178,22 +178,57 @@
                     android:textSize="14.0sp" />
             </LinearLayout>
 
-            <TextView
+            <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="right"
                 android:layout_marginBottom="10dp"
                 android:layout_marginTop="10dp"
-                android:padding="8dp"
-                android:text="合计  ￥79.0"
-                android:textColor="#383838"
-                android:textSize="18sp"
-                android:textStyle="bold" />
+                android:gravity="center"
+                android:padding="8dp" >
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="合计 :"
+                    android:textColor="#383838"
+                    android:textSize="16sp" />
+
+                <TextView
+                    android:id="@+id/tv_amount"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="￥79.0"
+                    android:textColor="@color/red"
+                    android:textSize="22sp"
+                    android:textStyle="bold" />
+            </LinearLayout>
 
             <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="60dp"
-                android:background="@color/app_bg_drawable" />
+                android:background="@color/app_bg_drawable"
+                android:padding="10dp" >
+
+                <TextView
+                    android:id="@+id/tv_my_amount"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:text="账户余额抵现  -￥25.9"
+                    android:textColor="#383838"
+                    android:textSize="16sp" />
+
+                <ImageView
+                    android:id="@+id/iv_switch"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    android:background="@drawable/setting_open"
+                    android:contentDescription="@null"
+                    android:focusable="false" />
+            </RelativeLayout>
         </LinearLayout>
     </ScrollView>
     <!-- 底部 -->
@@ -206,11 +241,11 @@
         android:padding="6dp" >
 
         <TextView
-            android:id="@+id/tv_marketPrice"
+            android:id="@+id/tv_need_pay"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerVertical="true"
-            android:text="￥99"
+            android:text="共1件，需付总金额：￥24.90"
             android:textColor="#787878"
             android:textSize="16sp" />
 

@@ -149,6 +149,7 @@ public class HomeTabManager {
 				switch (stateCode) {
 				case Constan.SUCCESS_CODE:
 					tvBalance.setText(mBalanceResponse.myamont + "元");
+					UserManager.getInstance().setAmount(context, mBalanceResponse.myamont + "");
 					break;
 				case Constan.EMPTY_CODE:
 					//handler.sendEmptyMessage(onEmpty);

@@ -90,7 +90,7 @@ public class HomeFragment extends BaseFragment implements OnClickListener {
 		// 设置金额
 		String amount = UserManager.getInstance().getAmount(context);
 		tvBalance = (TextView) rootView.findViewById(R.id.tv_amount);
-		tvBalance.setText(amount);
+		tvBalance.setText(amount + "元");
 
 		// listener button events
 		for (int btn : btns)

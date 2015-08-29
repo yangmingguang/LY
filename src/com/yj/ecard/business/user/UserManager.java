@@ -136,7 +136,7 @@ public class UserManager {
 	}
 
 	public String getAmount(Context context) {
-		return SharedPrefsUtil.getValue(context, Constan.AMOUNT, "0.0元");
+		return SharedPrefsUtil.getValue(context, Constan.AMOUNT, "0.0");
 	}
 
 	public void setCanAmount(Context context, String canAmount) {

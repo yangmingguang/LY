@@ -183,7 +183,7 @@ public class ProductDetailActivity extends BaseActivity implements OnClickListen
 				Intent intent = new Intent(context, OrderDetailActivity.class);
 				intent.putExtra("shopName", productDetailResponse.merchantsName);
 				intent.putExtra("productName", productDetailResponse.title);
-				intent.putExtra("price", "￥" + productDetailResponse.price);
+				intent.putExtra("price", productDetailResponse.price);
 				intent.putExtra("imgUrl", productDetailResponse.imgUrl);
 				startActivity(intent);
 			}
