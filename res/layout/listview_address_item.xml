@@ -10,13 +10,23 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentRight="true"
-        android:drawablePadding="4dp"
         android:drawableTop="@drawable/ic_delete" />
+
+    <ImageView
+        android:id="@+id/iv_switch"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_below="@+id/btn_delete"
+        android:background="@drawable/setting_open"
+        android:contentDescription="@null"
+        android:focusable="false" />
 
     <TextView
         android:id="@+id/tv_name"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="6dp"
         android:textColor="#383838"
         android:textSize="16sp" />
 
@@ -25,6 +35,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginLeft="20dp"
+        android:layout_marginTop="6dp"
         android:layout_toRightOf="@+id/tv_name"
         android:textColor="#383838"
         android:textSize="16sp" />
@@ -34,7 +45,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@+id/tv_name"
-        android:layout_marginTop="4dp"
+        android:layout_marginTop="8dp"
         android:textColor="#383838"
         android:textSize="16sp" />
 

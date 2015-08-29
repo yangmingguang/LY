@@ -11,6 +11,7 @@ package com.yj.ecard.ui.adapter;
 
 import android.content.Context;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.yj.ecard.R;
@@ -27,6 +28,7 @@ import com.yj.ecard.publics.model.AddressBean;
 public class AddressListViewHolder {
 
 	private boolean hasInited;
+	private ImageView ivSwitch;
 	public TextView tvName, tvPhone, tvAddress, btnDelete;
 
 	public AddressListViewHolder(View view) {
@@ -35,6 +37,7 @@ public class AddressListViewHolder {
 			tvPhone = (TextView) view.findViewById(R.id.tv_phone);
 			tvAddress = (TextView) view.findViewById(R.id.tv_address);
 			btnDelete = (TextView) view.findViewById(R.id.btn_delete);
+			ivSwitch = (ImageView) view.findViewById(R.id.iv_switch);
 			hasInited = true;
 		}
 	}
@@ -52,6 +55,11 @@ public class AddressListViewHolder {
 			tvName.setText(addressBean.realName);
 			tvPhone.setText(addressBean.phone);
 			tvAddress.setText(addressBean.address);
+			if (addressBean.isDefault == 1) { // 0为不设置  1为设置默认
+				ivSwitch.setBackgroundResource(R.drawable.setting_open);
+			} else {
+				ivSwitch.setBackgroundResource(R.drawable.setting_close);
+			}
 		}
 	}
 

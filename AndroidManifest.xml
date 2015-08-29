@@ -401,7 +401,7 @@
         <activity
             android:name="com.yj.ecard.ui.activity.order.AddAddressActivity"
             android:configChanges="orientation|screenSize|keyboardHidden"
-            android:label="@string/title_order_detail"
+            android:label="@string/title_collect_address"
             android:screenOrientation="portrait" />
         
         <!-- 收货地址列表 -->
