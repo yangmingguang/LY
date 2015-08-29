@@ -12,12 +12,15 @@ package com.yj.ecard.ui.activity.order;
 import org.json.JSONObject;
 
 import android.os.Bundle;
+import android.os.Handler.Callback;
+import android.os.Message;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.EditText;
 import android.widget.ImageView;
 
 import com.yj.ecard.R;
+import com.yj.ecard.business.address.AddressManager;
 import com.yj.ecard.business.user.UserManager;
 import com.yj.ecard.publics.http.model.request.AddAddressRequest;
 import com.yj.ecard.publics.http.model.response.AddAddressResponse;
@@ -25,10 +28,12 @@ import com.yj.ecard.publics.http.net.DataFetcher;
 import com.yj.ecard.publics.http.volley.Response.ErrorListener;
 import com.yj.ecard.publics.http.volley.Response.Listener;
 import com.yj.ecard.publics.http.volley.VolleyError;
+import com.yj.ecard.publics.model.AddressBean;
 import com.yj.ecard.publics.utils.JsonUtil;
 import com.yj.ecard.publics.utils.LogUtil;
 import com.yj.ecard.publics.utils.ToastUtil;
 import com.yj.ecard.publics.utils.Utils;
+import com.yj.ecard.publics.utils.WeakHandler;
 import com.yj.ecard.ui.activity.base.BaseActivity;
 
 /**
@@ -41,6 +46,8 @@ import com.yj.ecard.ui.activity.base.BaseActivity;
 
 public class AddAddressActivity extends BaseActivity implements OnClickListener {
 
+	private int id;
+	private View loadingView;
 	private ImageView ivSwitch;
 	private boolean isDefault = true;
 	private EditText etName, etPhone, etAddress;
@@ -51,6 +58,7 @@ public class AddAddressActivity extends BaseActivity implements OnClickListener 
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.act_add_address);
 		initView();
+		loadAllData();
 	}
 
 	/** 
@@ -61,13 +69,67 @@ public class AddAddressActivity extends BaseActivity implements OnClickListener 
 	* @throws 
 	*/
 	private void initView() {
+		id = getIntent().getIntExtra("id", 0);
 		etName = (EditText) findViewById(R.id.et_name);
 		etPhone = (EditText) findViewById(R.id.et_phone);
 		etAddress = (EditText) findViewById(R.id.et_address);
 		ivSwitch = (ImageView) findViewById(R.id.iv_switch);
+		loadingView = findViewById(R.id.l_loading_rl);
+		if (id != 0) {
+			loadingView.setVisibility(View.VISIBLE);
+		} else {
+			loadingView.setVisibility(View.GONE);
+		}
 		for (int btn : btns)
 			findViewById(btn).setOnClickListener(this);
 	}
+
+	/** 
+	* @Title: loadAllData 
+	* @Description: TODO(这里用一句话描述这个方法的作用) 
+	* @param     设定文件 
+	* @return void    返回类型 
+	* @throws 
+	*/
+	private void loadAllData() {
+		if (id != 0) {
+			AddressManager.getInstance().getDefaultAddress(context, handler, id);
+		}
+	}
+
+	/**
+	 * Android Weak Handler
+	 */
+	private WeakHandler handler = new WeakHandler(new Callback() {
+
+		@Override
+		public boolean handleMessage(Message msg) {
+			switch (msg.what) {
+			case AddressManager.onSuccess:
+				AddressBean bean = (AddressBean) msg.obj;
+				etName.setText(bean.realName);
+				etPhone.setText(bean.phone);
+				etAddress.setText(bean.address);
+				if (bean.isDefault == 1) { // 0为不设置  1为设置默认
+					isDefault = true;
+					ivSwitch.setBackgroundResource(R.drawable.setting_open);
+				} else {
+					isDefault = false;
+					ivSwitch.setBackgroundResource(R.drawable.setting_close);
+				}
+
+				loadingView.setVisibility(View.GONE);
+				break;
+
+			case AddressManager.onEmpty:
+			case AddressManager.onFailure:
+
+				break;
+			}
+
+			return true;
+		}
+	});
 
 	/**
 	 * 
@@ -87,6 +149,12 @@ public class AddAddressActivity extends BaseActivity implements OnClickListener 
 		request.setAddress(etAddress.getText().toString());
 		int result = (isDefault == true) ? 1 : 0;
 		request.setIsDefault(result);
+		if (id != 0) {
+			request.setId(id);
+			request.setUpdate(true);
+		} else {
+			request.setUpdate(false);
+		}
 		DataFetcher.getInstance().addAddressResult(request, new Listener<JSONObject>() {
 
 			@Override
@@ -97,6 +165,7 @@ public class AddAddressActivity extends BaseActivity implements OnClickListener 
 				AddAddressResponse adddAddressResponse = (AddAddressResponse) JsonUtil.jsonToBean(response,
 						AddAddressResponse.class);
 				ToastUtil.show(context, adddAddressResponse.status.msg, ToastUtil.LENGTH_SHORT);
+				finish();
 			}
 
 		}, new ErrorListener() {

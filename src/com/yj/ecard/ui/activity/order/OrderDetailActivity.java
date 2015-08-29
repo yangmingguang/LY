@@ -46,6 +46,11 @@ public class OrderDetailActivity extends BaseActivity implements OnClickListener
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.act_order_detail);
 		initView();
+	}
+
+	@Override
+	protected void onResume() {
+		super.onResume();
 		loadAllData();
 	}
 
@@ -87,7 +92,7 @@ public class OrderDetailActivity extends BaseActivity implements OnClickListener
 	*/
 	private void loadAllData() {
 		// TODO Auto-generated method stub
-		AddressManager.getInstance().getDefaultAddress(context, handler);
+		AddressManager.getInstance().getDefaultAddress(context, handler, 0);
 	}
 
 	/**
@@ -100,6 +105,7 @@ public class OrderDetailActivity extends BaseActivity implements OnClickListener
 			switch (msg.what) {
 			case AddressManager.onSuccess:
 				hasData = true;
+				tvDefaultTips.setVisibility(View.GONE);
 				AddressBean bean = (AddressBean) msg.obj;
 				tvName.setText(bean.realName);
 				tvPhone.setText(bean.phone);
@@ -109,6 +115,9 @@ public class OrderDetailActivity extends BaseActivity implements OnClickListener
 			case AddressManager.onEmpty:
 			case AddressManager.onFailure:
 				hasData = false;
+				tvName.setText("");
+				tvPhone.setText("");
+				tvAddress.setText("");
 				tvDefaultTips.setVisibility(View.VISIBLE);
 				break;
 			}

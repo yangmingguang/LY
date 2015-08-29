@@ -182,4 +182,10 @@ public class WebUrl {
 	// 50.获取收货地址列表
 	public static final String DELETE_ADDRESS_URL = NEW_BASE_URL + "address/delMyaddress?userId=%s&userPwd=%s&id=%s";
 
+	// 51.根据id获取地址
+	public static final String GET_ADDRESS_URL = NEW_BASE_URL + "address/GetAddress?userId=%s&userPwd=%s&id=%s";
+
+	// 52.修改收货地址
+	public static final String POST_UPDATE_ADDRESS_URL = NEW_BASE_URL + "address/updateMyAddress";
+
 }

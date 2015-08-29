@@ -952,7 +952,12 @@ public class DataFetcher {
 	 */
 	public void getDefaultAddressResult(AddressRequest request, Listener<JSONObject> listener,
 			ErrorListener errorListener, boolean shouldCache) {
-		String requestUrl = String.format(WebUrl.GET_DEFAULT_ADDRESS_URL, request.userId, request.userPwd);
+		String requestUrl = null;
+		if (request.id != 0) {
+			requestUrl = String.format(WebUrl.GET_ADDRESS_URL, request.userId, request.userPwd, request.id);
+		} else {
+			requestUrl = String.format(WebUrl.GET_DEFAULT_ADDRESS_URL, request.userId, request.userPwd);
+		}
 		get(requestUrl, listener, errorListener, shouldCache);
 	}
 
@@ -973,7 +978,14 @@ public class DataFetcher {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		post(WebUrl.POST_ADD_ADDRESS_URL, requestObejct, listener, errorListener);
+
+		String url = null;
+		if (request.isUpdate) {
+			url = WebUrl.POST_UPDATE_ADDRESS_URL;
+		} else {
+			url = WebUrl.POST_ADD_ADDRESS_URL;
+		}
+		post(url, requestObejct, listener, errorListener);
 	}
 
 	/**

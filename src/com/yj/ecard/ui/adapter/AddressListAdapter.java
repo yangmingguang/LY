@@ -10,6 +10,7 @@
 package com.yj.ecard.ui.adapter;
 
 import android.content.Context;
+import android.content.Intent;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
@@ -17,6 +18,7 @@ import android.view.ViewGroup;
 import com.yj.ecard.R;
 import com.yj.ecard.business.address.AddressManager;
 import com.yj.ecard.publics.model.AddressBean;
+import com.yj.ecard.ui.activity.order.AddAddressActivity;
 import com.yj.ecard.ui.adapter.base.ArrayListBaseAdapter;
 
 /**
@@ -61,10 +63,10 @@ public class AddressListAdapter extends ArrayListBaseAdapter<AddressBean> {
 
 			@Override
 			public void onClick(View view) {
-				/*		Intent intent = new Intent(context, BusinessDetailActivity1.class);
-						intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-						intent.putExtra("id", businessBean.id);
-						context.startActivity(intent);*/
+				Intent intent = new Intent(context, AddAddressActivity.class);
+				intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+				intent.putExtra("id", addressBean.id);
+				context.startActivity(intent);
 			}
 		});
 

@@ -11,9 +11,11 @@ package com.yj.ecard.ui.activity.order;
 
 import org.json.JSONObject;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.View.OnClickListener;
 
 import com.yj.ecard.R;
 import com.yj.ecard.business.user.UserManager;
@@ -41,8 +43,8 @@ import com.yj.ecard.ui.views.pulltorefresh.PullToRefreshListView;
 
 public class AddressListActivity extends BaseActivity {
 
+	private View emptyView;
 	private AddressListAdapter mAdapter;
-	private View loadingView, emptyView;
 	private PullToRefreshListView mListView;
 
 	@Override
@@ -50,6 +52,12 @@ public class AddressListActivity extends BaseActivity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.act_address_list);
 		initView();
+	}
+
+	@Override
+	protected void onResume() {
+		super.onResume();
+		loadAllData();
 	}
 
 	/** 
@@ -61,14 +69,22 @@ public class AddressListActivity extends BaseActivity {
 	*/
 	private void initView() {
 		emptyView = LayoutInflater.from(context).inflate(R.layout.empty, null);
-		loadingView = LayoutInflater.from(context).inflate(R.layout.loading, null);
 		mListView = (PullToRefreshListView) findViewById(R.id.lv_address);
 		mListView.setMode(Mode.DISABLED);
-		mListView.setEmptyView(loadingView);
+		mListView.setEmptyView(emptyView);
 		mAdapter = new AddressListAdapter(this);
 		mListView.setAdapter(mAdapter);
 
-		getAddressListData();
+		findViewById(R.id.btn_add).setOnClickListener(new OnClickListener() {
+
+			@Override
+			public void onClick(View arg0) {
+				// TODO Auto-generated method stub
+				Intent intent = new Intent(context, AddAddressActivity.class);
+				intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+				context.startActivity(intent);
+			}
+		});
 	}
 
 	/**
@@ -79,7 +95,7 @@ public class AddressListActivity extends BaseActivity {
 	* @return void    返回类型 
 	* @throws
 	 */
-	private void getAddressListData() {
+	private void loadAllData() {
 		AddressListRequest request = new AddressListRequest();
 		request.setUserId(UserManager.getInstance().getUserId(context));
 		request.setUserPwd(UserManager.getInstance().getPassword(context));

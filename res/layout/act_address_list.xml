@@ -1,15 +1,39 @@
 <?xml version="1.0" encoding="utf-8"?>
-<com.yj.ecard.ui.views.pulltorefresh.PullToRefreshListView xmlns:android="http://schemas.android.com/apk/res/android"
-    android:id="@+id/lv_address"
-    style="@style/ScrollBarStyle"
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:cacheColorHint="@android:color/transparent"
-    android:divider="@android:color/transparent"
-    android:dividerHeight="8dp"
-    android:fadingEdge="none"
-    android:footerDividersEnabled="false"
-    android:headerDividersEnabled="false"
-    android:listSelector="@android:color/transparent"
-    android:background="@color/app_bg_drawable"
-    android:smoothScrollbar="true" />
+    android:layout_height="match_parent" >
+
+    <com.yj.ecard.ui.views.pulltorefresh.PullToRefreshListView
+        android:id="@+id/lv_address"
+        style="@style/ScrollBarStyle"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/app_bg_drawable"
+        android:cacheColorHint="@android:color/transparent"
+        android:divider="@android:color/transparent"
+        android:dividerHeight="8dp"
+        android:fadingEdge="none"
+        android:footerDividersEnabled="false"
+        android:headerDividersEnabled="false"
+        android:listSelector="@android:color/transparent"
+        android:smoothScrollbar="true" />
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="56dp"
+        android:layout_gravity="bottom"
+        android:background="@drawable/card_common_bg_normal"
+        android:padding="6dp" >
+
+        <Button
+            android:id="@+id/btn_add"
+            android:layout_width="match_parent"
+            android:layout_height="46dp"
+            android:layout_centerVertical="true"
+            android:background="@drawable/round_shape_red"
+            android:text="添加收货地址"
+            android:textColor="@color/white"
+            android:textSize="16sp" />
+    </RelativeLayout>
+
+</FrameLayout>

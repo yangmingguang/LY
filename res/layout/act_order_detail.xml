@@ -73,8 +73,8 @@
                     android:layout_centerVertical="true"
                     android:text="添加收货地址"
                     android:textColor="#787878"
-                    android:visibility="gone"
-                    android:textSize="16sp" />
+                    android:textSize="16sp"
+                    android:visibility="gone" />
             </RelativeLayout>
 
             <View

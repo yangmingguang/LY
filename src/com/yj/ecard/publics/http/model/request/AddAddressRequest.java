@@ -19,12 +19,30 @@ package com.yj.ecard.publics.http.model.request;
 
 public class AddAddressRequest {
 
+	public int id;
 	public String realName;
 	public String phone;
 	public String address;
 	public int isDefault; // 0为不设置  1为设置默认
 	public int userId;
 	public String userPwd;
+	public boolean isUpdate;
+
+	/** 
+	* @return id 
+	*/
+
+	public int getId() {
+		return id;
+	}
+
+	/** 
+	* @param id 要设置的 id 
+	*/
+
+	public void setId(int id) {
+		this.id = id;
+	}
 
 	/** 
 	* @return realName 
@@ -120,6 +138,22 @@ public class AddAddressRequest {
 
 	public void setUserPwd(String userPwd) {
 		this.userPwd = userPwd;
+	}
+
+	/** 
+	* @return isUpdate 
+	*/
+
+	public boolean isUpdate() {
+		return isUpdate;
+	}
+
+	/** 
+	* @param isUpdate 要设置的 isUpdate 
+	*/
+
+	public void setUpdate(boolean isUpdate) {
+		this.isUpdate = isUpdate;
 	}
 
 }

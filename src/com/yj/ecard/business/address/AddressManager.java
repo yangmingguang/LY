@@ -71,8 +71,9 @@ public class AddressManager {
 	* @return void    返回类型 
 	* @throws
 	 */
-	public void getDefaultAddress(final Context context, final WeakHandler handler) {
+	public void getDefaultAddress(final Context context, final WeakHandler handler, int id) {
 		AddressRequest request = new AddressRequest();
+		request.setId(id);
 		request.setUserId(UserManager.getInstance().getUserId(context));
 		request.setUserPwd(UserManager.getInstance().getPassword(context));
 		DataFetcher.getInstance().getDefaultAddressResult(request, new Listener<JSONObject>() {
