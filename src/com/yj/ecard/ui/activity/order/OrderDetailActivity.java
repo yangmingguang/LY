@@ -28,7 +28,9 @@ import com.yj.ecard.R;
 import com.yj.ecard.business.address.AddressManager;
 import com.yj.ecard.business.alipay.AlipayManager;
 import com.yj.ecard.business.user.UserManager;
+import com.yj.ecard.publics.http.model.request.BalanceRequest;
 import com.yj.ecard.publics.http.model.request.OrderRequest;
+import com.yj.ecard.publics.http.model.response.BalanceResponse;
 import com.yj.ecard.publics.http.model.response.OrderResponse;
 import com.yj.ecard.publics.http.net.DataFetcher;
 import com.yj.ecard.publics.http.volley.Response.ErrorListener;
@@ -57,6 +59,7 @@ public class OrderDetailActivity extends BaseActivity implements OnClickListener
 
 	private int id;
 	private boolean hasData;
+	private View loadingView;
 	private String productName;
 	private int isAddmyamont = 1;
 	private EditText etFeedback;
@@ -78,6 +81,7 @@ public class OrderDetailActivity extends BaseActivity implements OnClickListener
 	@Override
 	protected void onResume() {
 		super.onResume();
+		getBalanceData();
 		loadAllData();
 	}
 
@@ -91,8 +95,6 @@ public class OrderDetailActivity extends BaseActivity implements OnClickListener
 	private void initView() {
 		id = getIntent().getIntExtra("id", 0);
 		price = getIntent().getDoubleExtra("price", 0);
-		myAmount = Double.parseDouble(UserManager.getInstance().getAmount(context));
-		needPay = myAmount - price;
 
 		tvName = (TextView) findViewById(R.id.tv_name);
 		tvPhone = (TextView) findViewById(R.id.tv_phone);
@@ -107,6 +109,8 @@ public class OrderDetailActivity extends BaseActivity implements OnClickListener
 		tvMyAmount = (TextView) findViewById(R.id.tv_my_amount);
 		tvNeedPay = (TextView) findViewById(R.id.tv_need_pay);
 		etFeedback = (EditText) findViewById(R.id.et_feedback);
+		loadingView = findViewById(R.id.l_loading_rl);
+
 		for (int btn : btns) {
 			findViewById(btn).setOnClickListener(this);
 		}
@@ -117,13 +121,7 @@ public class OrderDetailActivity extends BaseActivity implements OnClickListener
 		tvProductName.setText(productName);
 		tvPrice.setText("￥" + price);
 		tvAmount.setText("￥" + price);
-		tvMyAmount.setText("账户余额，可抵现  ￥" + myAmount);
 
-		if (needPay > 0) {
-			tvNeedPay.setText("共1件，应需付金额：￥0.0");
-		} else {
-			tvNeedPay.setText("共1件，应需付金额：￥" + mDecimalFormat.format((-needPay)));
-		}
 		ImageLoaderUtil.load(context, ImageType.NETWORK, getIntent().getStringExtra("imgUrl"),
 				R.drawable.banner_detail_default, R.drawable.banner_detail_default, ivLogo);
 
@@ -170,6 +168,9 @@ public class OrderDetailActivity extends BaseActivity implements OnClickListener
 
 		@Override
 		public boolean handleMessage(Message msg) {
+
+			loadingView.setVisibility(View.GONE);
+
 			switch (msg.what) {
 			case AddressManager.onSuccess:
 				hasData = true;
@@ -224,6 +225,60 @@ public class OrderDetailActivity extends BaseActivity implements OnClickListener
 			submitOrder();
 			break;
 		}
+	}
+
+	/**
+	 * 
+	* @Title: getBalanceData 
+	* @Description: 获取余额
+	* @param @param context
+	* @param @param tvBalance    设定文件 
+	* @return void    返回类型 
+	* @throws
+	 */
+	public void getBalanceData() {
+		BalanceRequest request = new BalanceRequest();
+		request.setUserId(UserManager.getInstance().getUserId(context));
+		request.setUserName(UserManager.getInstance().getUserName(context));
+		request.setPassWord(UserManager.getInstance().getPassword(context));
+		DataFetcher.getInstance().getBalanceResult(request, new Listener<JSONObject>() {
+
+			@Override
+			public void onResponse(JSONObject response) {
+				// TODO Auto-generated method stub
+				LogUtil.getLogger().d("response==>" + response.toString());
+				BalanceResponse mBalanceResponse = (BalanceResponse) JsonUtil.jsonToBean(response,
+						BalanceResponse.class);
+
+				// 数据响应状态
+				int stateCode = mBalanceResponse.status.code;
+				switch (stateCode) {
+				case Constan.SUCCESS_CODE:
+					myAmount = mBalanceResponse.myamont;
+					tvMyAmount.setText("账户余额，可抵现  ￥" + myAmount);
+
+					needPay = myAmount - price;
+					if (needPay > 0) {
+						tvNeedPay.setText("共1件，应需付金额：￥0.0");
+					} else {
+						tvNeedPay.setText("共1件，应需付金额：￥" + mDecimalFormat.format((-needPay)));
+					}
+					break;
+				case Constan.EMPTY_CODE:
+					//handler.sendEmptyMessage(onEmpty);
+					break;
+				case Constan.ERROR_CODE:
+					//handler.sendEmptyMessage(onFailure);
+					break;
+				}
+			}
+		}, new ErrorListener() {
+
+			@Override
+			public void onErrorResponse(VolleyError error) {
+				// TODO Auto-generated method stub
+			}
+		}, true);
 	}
 
 	private void submitOrder() {

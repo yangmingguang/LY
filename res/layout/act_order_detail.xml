@@ -138,7 +138,6 @@
                         android:layout_marginLeft="10dp"
                         android:layout_marginTop="8dp"
                         android:layout_toRightOf="@+id/iv_logo"
-                        android:text="$80.0"
                         android:textColor="#089688"
                         android:textSize="16sp"
                         android:textStyle="bold" />
@@ -198,7 +197,7 @@
                     android:id="@+id/tv_amount"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="￥79.0"
+                    android:text="￥0.0"
                     android:textColor="@color/red"
                     android:textSize="22sp"
                     android:textStyle="bold" />
@@ -215,7 +214,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_centerVertical="true"
-                    android:text="账户余额抵现  -￥25.9"
+                    android:text="账户余额抵现  -￥0.0"
                     android:textColor="#383838"
                     android:textSize="16sp" />
 
@@ -245,7 +244,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerVertical="true"
-            android:text="共1件，需付总金额：￥24.90"
+            android:text="共1件，需付总金额：￥0.0"
             android:textColor="#787878"
             android:textSize="16sp" />
 
@@ -261,4 +260,6 @@
             android:textSize="16sp" />
     </RelativeLayout>
 
+    <!-- loading -->
+    <include layout="@layout/loading"/>
 </FrameLayout>
