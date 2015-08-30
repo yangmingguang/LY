@@ -40,6 +40,15 @@
 -libraryjars libs/libammsdk.jar
 -libraryjars libs/xUtils-2.6.14.jar
 -libraryjars libs/YoumiSdk_v5.1.0_2015-04-01.jar
+-libraryjars libs/alipaySDK-20150724.jar
+
+#支付宝相关
+-keep class com.alipay.android.app.IAlixPay{*;}
+-keep class com.alipay.android.app.IAlixPay$Stub{*;}
+-keep class com.alipay.android.app.IRemoteServiceCallback{*;}
+-keep class com.alipay.android.app.IRemoteServiceCallback$Stub{*;}
+-keep class com.alipay.sdk.app.PayTask{ public *;}
+-keep class com.alipay.sdk.app.AuthTask{ public *;}
 
 #有些很特殊的，例如百度地图，第三方相关、你需要添加以下申明
 -keep class com.baidu.** { *; }

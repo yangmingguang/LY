@@ -9,6 +9,8 @@
 
 package com.yj.ecard.ui.activity.order;
 
+import java.text.DecimalFormat;
+
 import org.json.JSONObject;
 
 import android.content.Intent;
@@ -24,6 +26,7 @@ import android.widget.TextView;
 import com.nostra13.universalimageloader.core.assist.ImageType;
 import com.yj.ecard.R;
 import com.yj.ecard.business.address.AddressManager;
+import com.yj.ecard.business.alipay.AlipayManager;
 import com.yj.ecard.business.user.UserManager;
 import com.yj.ecard.publics.http.model.request.OrderRequest;
 import com.yj.ecard.publics.http.model.response.OrderResponse;
@@ -54,6 +57,7 @@ public class OrderDetailActivity extends BaseActivity implements OnClickListener
 
 	private int id;
 	private boolean hasData;
+	private String productName;
 	private int isAddmyamont = 1;
 	private EditText etFeedback;
 	private boolean isUsed = true;
@@ -61,6 +65,7 @@ public class OrderDetailActivity extends BaseActivity implements OnClickListener
 	private double price, myAmount, needPay;
 	private TextView tvName, tvAddress, tvPhone, tvShopName, tvProductName, tvPrice, tvDefaultTips, tvAmount,
 			tvMyAmount, tvNeedPay;
+	private DecimalFormat mDecimalFormat = new DecimalFormat("######0.00");
 	private final int[] btns = { R.id.btn_address, R.id.btn_submit };
 
 	@Override
@@ -108,13 +113,16 @@ public class OrderDetailActivity extends BaseActivity implements OnClickListener
 
 		// 设置参数
 		tvShopName.setText(getIntent().getStringExtra("shopName"));
-		tvProductName.setText(getIntent().getStringExtra("productName"));
+		productName = getIntent().getStringExtra("productName");
+		tvProductName.setText(productName);
 		tvPrice.setText("￥" + price);
 		tvAmount.setText("￥" + price);
 		tvMyAmount.setText("账户余额，可抵现  ￥" + myAmount);
 
 		if (needPay > 0) {
-			tvNeedPay.setText("共1件，需付总金额：￥0.0");
+			tvNeedPay.setText("共1件，应需付金额：￥0.0");
+		} else {
+			tvNeedPay.setText("共1件，应需付金额：￥" + mDecimalFormat.format((-needPay)));
 		}
 		ImageLoaderUtil.load(context, ImageType.NETWORK, getIntent().getStringExtra("imgUrl"),
 				R.drawable.banner_detail_default, R.drawable.banner_detail_default, ivLogo);
@@ -129,13 +137,15 @@ public class OrderDetailActivity extends BaseActivity implements OnClickListener
 					isAddmyamont = 1;
 					ivSwitch.setBackgroundResource(R.drawable.setting_open);
 					if (needPay > 0) {
-						tvNeedPay.setText("共1件，需付总金额：￥0.0");
+						tvNeedPay.setText("共1件，应需付金额：￥0.0");
+					} else {
+						tvNeedPay.setText("共1件，应需付金额：￥" + mDecimalFormat.format((-needPay)));
 					}
 				} else {
 					isUsed = false;
 					isAddmyamont = 0;
 					ivSwitch.setBackgroundResource(R.drawable.setting_close);
-					tvNeedPay.setText("共1件，需付总金额：￥" + price);
+					tvNeedPay.setText("共1件，应需付金额：￥" + price);
 				}
 			}
 		});
@@ -178,6 +188,21 @@ public class OrderDetailActivity extends BaseActivity implements OnClickListener
 				tvAddress.setText("");
 				tvDefaultTips.setVisibility(View.VISIBLE);
 				break;
+
+			case AlipayManager.SDK_PAY_FLAG:
+				String result = (String) msg.obj;
+				if (result.contains("9000")) {
+					ToastUtil.show(context, "支付成功！", ToastUtil.LENGTH_LONG);
+					handler.postDelayed(new Runnable() {
+
+						@Override
+						public void run() {
+							// TODO Auto-generated method stub
+							finish();
+						}
+					}, 1000);
+				}
+				break;
 			}
 
 			return true;
@@ -202,6 +227,7 @@ public class OrderDetailActivity extends BaseActivity implements OnClickListener
 	}
 
 	private void submitOrder() {
+		Utils.showProgressDialog(this);
 		int userId = UserManager.getInstance().getUserId(context);
 		String phone = tvPhone.getText().toString();
 		String address = tvAddress.getText().toString();
@@ -226,20 +252,33 @@ public class OrderDetailActivity extends BaseActivity implements OnClickListener
 			@Override
 			public void onResponse(JSONObject response) {
 				// TODO Auto-generated method stub
+				Utils.dismissProgressDialog();
 				LogUtil.getLogger().d("response==>" + response.toString());
 				OrderResponse orderResponse = (OrderResponse) JsonUtil.jsonToBean(response, OrderResponse.class);
 
-				ToastUtil.show(context, response.toString(), ToastUtil.LENGTH_SHORT);
 				// 数据响应状态
 				int stateCode = orderResponse.status.code;
 				switch (stateCode) {
 				case Constan.SUCCESS_CODE:
+					// 使用支付宝支付
+					if (orderResponse.needPay > 0) {
+						toAliPay(productName, productName, orderResponse.orderNum, orderResponse.needPay + "");
+					} else {
+						handler.postDelayed(new Runnable() {
+
+							@Override
+							public void run() {
+								// TODO Auto-generated method stub
+								finish();
+							}
+						}, 1000);
+						ToastUtil.show(context, orderResponse.status.msg, ToastUtil.LENGTH_LONG);
+					}
 					break;
+
 				case Constan.EMPTY_CODE:
-
-					break;
 				case Constan.ERROR_CODE:
-
+					ToastUtil.show(context, orderResponse.status.msg, ToastUtil.LENGTH_LONG);
 					break;
 				}
 			}
@@ -249,8 +288,26 @@ public class OrderDetailActivity extends BaseActivity implements OnClickListener
 			@Override
 			public void onErrorResponse(VolleyError error) {
 				// TODO Auto-generated method stub
+				Utils.dismissProgressDialog();
 			}
 		});
+	}
+
+	/**
+	 * 
+	* @Title: toAliPay 
+	* @Description: TODO(这里用一句话描述这个方法的作用) 
+	* @param @param subject 商品名称
+	* @param @param shopDesc  商品描述
+	* @param @param price 支付金额
+	* @return void    返回类型 
+	* @throws
+	 */
+	private void toAliPay(String shopName, String shopDesc, String orderNum, String amount) {
+		/*String subject = "测试的商品";
+		String body = "该测试商品的详细描述";
+		String price = "0.01";*/
+		AlipayManager.getInstance().SDKPay(this, handler, shopName, shopDesc, orderNum, amount);
 	}
 
 }

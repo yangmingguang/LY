@@ -51,7 +51,7 @@
     <!-- 有米广告SDK -->
     <uses-permission android:name="android.permission.GET_TASKS" />
     <uses-permission android:name="com.android.launcher.permission.INSTALL_SHORTCUT" />
-    
+
     <application
         android:name="com.yj.ecard.MyApplication"
         android:allowBackup="true"
@@ -382,28 +382,28 @@
             android:configChanges="orientation|screenSize|keyboardHidden"
             android:label="@string/title_wonderful_ad_detail"
             android:screenOrientation="portrait" />
-        
+
         <!-- 商家产品详情 -->
         <activity
             android:name="com.yj.ecard.ui.activity.main.business.ProductDetailActivity"
             android:configChanges="orientation|screenSize|keyboardHidden"
             android:label="@string/title_product_detail"
             android:screenOrientation="portrait" />
-        
+
         <!-- 订单详情 -->
         <activity
             android:name="com.yj.ecard.ui.activity.order.OrderDetailActivity"
             android:configChanges="orientation|screenSize|keyboardHidden"
             android:label="@string/title_order_detail"
             android:screenOrientation="portrait" />
-        
+
         <!-- 添加收货地址 -->
         <activity
             android:name="com.yj.ecard.ui.activity.order.AddAddressActivity"
             android:configChanges="orientation|screenSize|keyboardHidden"
             android:label="@string/title_collect_address"
             android:screenOrientation="portrait" />
-        
+
         <!-- 收货地址列表 -->
         <activity
             android:name="com.yj.ecard.ui.activity.order.AddressListActivity"
@@ -557,6 +557,22 @@
             </intent-filter>
         </activity>
         <!-- ************************************百度社会化分享 End*************************************** -->
+
+
+        <!-- ************************************alipay sdk begin*************************************** -->
+        <activity
+            android:name="com.alipay.sdk.app.H5PayActivity"
+            android:configChanges="orientation|keyboardHidden|navigation"
+            android:exported="false"
+            android:screenOrientation="behind" >
+        </activity>
+        <activity
+            android:name="com.alipay.sdk.auth.AuthActivity"
+            android:configChanges="orientation|keyboardHidden|navigation"
+            android:exported="false"
+            android:screenOrientation="behind" >
+        </activity>
+        <!-- ************************************alipay sdk end*************************************** -->
     </application>
 
 </manifest>
