@@ -50,6 +50,7 @@ import com.yj.ecard.ui.views.webview.CustomWebView;
 
 public class ProductDetailActivity extends BaseActivity implements OnClickListener {
 
+	private int id;
 	private Button btnBuy;
 	private View loadingView;
 	private ImageView ivLogo;
@@ -111,7 +112,7 @@ public class ProductDetailActivity extends BaseActivity implements OnClickListen
 	* @throws 
 	*/
 	private void loadAllData() {
-		int id = getIntent().getIntExtra("id", 0);
+		id = getIntent().getIntExtra("id", 0);
 		double latitude = Double.parseDouble(CommonManager.getInstance().getLocationlat(context));
 		double longitude = Double.parseDouble(CommonManager.getInstance().getLocationlng(context));
 
@@ -181,6 +182,7 @@ public class ProductDetailActivity extends BaseActivity implements OnClickListen
 		case R.id.btn_buy:
 			if (productDetailResponse != null) {
 				Intent intent = new Intent(context, OrderDetailActivity.class);
+				intent.putExtra("id", id);
 				intent.putExtra("shopName", productDetailResponse.merchantsName);
 				intent.putExtra("productName", productDetailResponse.title);
 				intent.putExtra("price", productDetailResponse.price);

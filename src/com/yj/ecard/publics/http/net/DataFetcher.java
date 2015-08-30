@@ -33,6 +33,7 @@ import com.yj.ecard.publics.http.model.request.GetValidateCodeRequest;
 import com.yj.ecard.publics.http.model.request.IncomeListRequest;
 import com.yj.ecard.publics.http.model.request.ModifyPwRequest;
 import com.yj.ecard.publics.http.model.request.MyPreferentialListRequest;
+import com.yj.ecard.publics.http.model.request.OrderRequest;
 import com.yj.ecard.publics.http.model.request.PreferentialDetailRequest;
 import com.yj.ecard.publics.http.model.request.PreferentialListRequest;
 import com.yj.ecard.publics.http.model.request.ProductDetailRequest;
@@ -1020,6 +1021,26 @@ public class DataFetcher {
 			boolean shouldCache) {
 		String requestUrl = String.format(WebUrl.DELETE_ADDRESS_URL, request.userId, request.userPwd, request.id);
 		get(requestUrl, listener, errorListener, shouldCache);
+	}
+
+	/**
+	 * 
+	* @Title: postOrderResult 
+	* @Description: 提交订单
+	* @param @param request
+	* @param @param listener
+	* @param @param errorListener    设定文件 
+	* @return void    返回类型 
+	* @throws
+	 */
+	public void postOrderResult(OrderRequest request, Listener<JSONObject> listener, ErrorListener errorListener) {
+		JSONObject requestObejct = null;
+		try {
+			requestObejct = new JSONObject(JsonUtil.objectToJson(request));
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		post(WebUrl.POST_ORDER_URL, requestObejct, listener, errorListener);
 	}
 
 }

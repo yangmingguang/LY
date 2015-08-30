@@ -9,12 +9,15 @@
 
 package com.yj.ecard.ui.activity.order;
 
+import org.json.JSONObject;
+
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler.Callback;
 import android.os.Message;
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -22,8 +25,19 @@ import com.nostra13.universalimageloader.core.assist.ImageType;
 import com.yj.ecard.R;
 import com.yj.ecard.business.address.AddressManager;
 import com.yj.ecard.business.user.UserManager;
+import com.yj.ecard.publics.http.model.request.OrderRequest;
+import com.yj.ecard.publics.http.model.response.OrderResponse;
+import com.yj.ecard.publics.http.net.DataFetcher;
+import com.yj.ecard.publics.http.volley.Response.ErrorListener;
+import com.yj.ecard.publics.http.volley.Response.Listener;
+import com.yj.ecard.publics.http.volley.VolleyError;
 import com.yj.ecard.publics.model.AddressBean;
+import com.yj.ecard.publics.utils.Constan;
 import com.yj.ecard.publics.utils.ImageLoaderUtil;
+import com.yj.ecard.publics.utils.JsonUtil;
+import com.yj.ecard.publics.utils.LogUtil;
+import com.yj.ecard.publics.utils.MD5Util;
+import com.yj.ecard.publics.utils.Utils;
 import com.yj.ecard.publics.utils.WeakHandler;
 import com.yj.ecard.ui.activity.base.BaseActivity;
 
@@ -37,7 +51,10 @@ import com.yj.ecard.ui.activity.base.BaseActivity;
 
 public class OrderDetailActivity extends BaseActivity implements OnClickListener {
 
+	private int id;
 	private boolean hasData;
+	private int isAddmyamont = 1;
+	private EditText etFeedback;
 	private boolean isUsed = true;
 	private ImageView ivLogo, ivSwitch;
 	private double price, myAmount, needPay;
@@ -66,6 +83,7 @@ public class OrderDetailActivity extends BaseActivity implements OnClickListener
 	* @throws 
 	*/
 	private void initView() {
+		id = getIntent().getIntExtra("id", 0);
 		price = getIntent().getDoubleExtra("price", 0);
 		myAmount = Double.parseDouble(UserManager.getInstance().getAmount(context));
 		needPay = myAmount - price;
@@ -82,6 +100,7 @@ public class OrderDetailActivity extends BaseActivity implements OnClickListener
 		tvAmount = (TextView) findViewById(R.id.tv_amount);
 		tvMyAmount = (TextView) findViewById(R.id.tv_my_amount);
 		tvNeedPay = (TextView) findViewById(R.id.tv_need_pay);
+		etFeedback = (EditText) findViewById(R.id.et_feedback);
 		for (int btn : btns) {
 			findViewById(btn).setOnClickListener(this);
 		}
@@ -106,12 +125,14 @@ public class OrderDetailActivity extends BaseActivity implements OnClickListener
 				// TODO Auto-generated method stub
 				if (!isUsed) {
 					isUsed = true;
+					isAddmyamont = 1;
 					ivSwitch.setBackgroundResource(R.drawable.setting_open);
 					if (needPay > 0) {
 						tvNeedPay.setText("共1件，需付总金额：￥0.0");
 					}
 				} else {
 					isUsed = false;
+					isAddmyamont = 0;
 					ivSwitch.setBackgroundResource(R.drawable.setting_close);
 					tvNeedPay.setText("共1件，需付总金额：￥" + price);
 				}
@@ -174,9 +195,61 @@ public class OrderDetailActivity extends BaseActivity implements OnClickListener
 			break;
 
 		case R.id.btn_submit:
-
+			submitOrder();
 			break;
 		}
+	}
+
+	private void submitOrder() {
+		int userId = UserManager.getInstance().getUserId(context);
+		String phone = tvPhone.getText().toString();
+		String address = tvAddress.getText().toString();
+		String realName = tvName.getText().toString();
+		String feedBack = etFeedback.getText().toString();
+		String imei = Utils.getIMEI(context);
+		String sign = MD5Util.getMD5(imei + userId + id); // MD5加密
+
+		OrderRequest request = new OrderRequest();
+		request.setProductId(id);
+		request.setOrderType(2);
+		request.setPhone(phone);
+		request.setAddress(address);
+		request.setIsAddmyamont(isAddmyamont);
+		request.setRealName(realName);
+		request.setFeedBack(feedBack);
+		request.setSign(sign);
+		request.setUserId(userId);
+
+		DataFetcher.getInstance().postOrderResult(request, new Listener<JSONObject>() {
+
+			@Override
+			public void onResponse(JSONObject response) {
+				// TODO Auto-generated method stub
+				LogUtil.getLogger().d("response==>" + response.toString());
+				OrderResponse orderResponse = (OrderResponse) JsonUtil.jsonToBean(response, OrderResponse.class);
+
+				// 数据响应状态
+				int stateCode = orderResponse.status.code;
+				switch (stateCode) {
+				case Constan.SUCCESS_CODE:
+
+					break;
+				case Constan.EMPTY_CODE:
+
+					break;
+				case Constan.ERROR_CODE:
+
+					break;
+				}
+			}
+
+		}, new ErrorListener() {
+
+			@Override
+			public void onErrorResponse(VolleyError error) {
+				// TODO Auto-generated method stub
+			}
+		});
 	}
 
 }
