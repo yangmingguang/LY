@@ -263,6 +263,8 @@ public class OrderDetailActivity extends BaseActivity implements OnClickListener
 					} else {
 						tvNeedPay.setText("共1件，应需付金额：￥" + mDecimalFormat.format((-needPay)));
 					}
+
+					UserManager.getInstance().setAmount(context, myAmount + "");
 					break;
 				case Constan.EMPTY_CODE:
 					//handler.sendEmptyMessage(onEmpty);
