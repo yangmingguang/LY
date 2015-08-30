@@ -189,6 +189,6 @@ public class WebUrl {
 	public static final String POST_UPDATE_ADDRESS_URL = NEW_BASE_URL + "address/updateMyAddress";
 
 	// 53.提交订单
-	public static final String POST_ORDER_URL = NEW_BASE_URL + "lyorder/AddOrders";
+	public static final String POST_ORDER_URL = NEW_BASE_URL + "lyorder/AddOrder";
 
 }

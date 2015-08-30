@@ -37,6 +37,7 @@ import com.yj.ecard.publics.utils.ImageLoaderUtil;
 import com.yj.ecard.publics.utils.JsonUtil;
 import com.yj.ecard.publics.utils.LogUtil;
 import com.yj.ecard.publics.utils.MD5Util;
+import com.yj.ecard.publics.utils.ToastUtil;
 import com.yj.ecard.publics.utils.Utils;
 import com.yj.ecard.publics.utils.WeakHandler;
 import com.yj.ecard.ui.activity.base.BaseActivity;
@@ -228,11 +229,11 @@ public class OrderDetailActivity extends BaseActivity implements OnClickListener
 				LogUtil.getLogger().d("response==>" + response.toString());
 				OrderResponse orderResponse = (OrderResponse) JsonUtil.jsonToBean(response, OrderResponse.class);
 
+				ToastUtil.show(context, response.toString(), ToastUtil.LENGTH_SHORT);
 				// 数据响应状态
 				int stateCode = orderResponse.status.code;
 				switch (stateCode) {
 				case Constan.SUCCESS_CODE:
-
 					break;
 				case Constan.EMPTY_CODE:
 
