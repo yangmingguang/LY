@@ -28,6 +28,8 @@
   
 -keepattributes *Annotation*
 -keepattributes Signature
+ 
+-ignorewarnings 
 
 #把所有你的jar包都申明进来
 -libraryjars libs/Baidu-Frontia-Android-2.0.7.jar
@@ -49,6 +51,10 @@
 -keep class com.alipay.android.app.IRemoteServiceCallback$Stub{*;}
 -keep class com.alipay.sdk.app.PayTask{ public *;}
 -keep class com.alipay.sdk.app.AuthTask{ public *;}
+#-keep class com.alipay.**{ *;}
+#-keep class com.ta.utdid2.**{ *;}
+#-keep class com.ut.device.**{ *;}
+#-keep class org.json.alipay.**{ *;}
 
 #有些很特殊的，例如百度地图，第三方相关、你需要添加以下申明
 -keep class com.baidu.** { *; }
