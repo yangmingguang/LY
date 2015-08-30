@@ -141,8 +141,10 @@ public class ProductDetailActivity extends BaseActivity implements OnClickListen
 					tvMarketPrice.setText("￥" + productDetailResponse.marketPrice);
 					tvMarketPrice.setPaintFlags(Paint.STRIKE_THRU_TEXT_FLAG); // 中划线
 					if (productDetailResponse.canBuy == 0) {
+						btnBuy.setClickable(false);
 						btnBuy.setBackgroundResource(R.drawable.round_shape_gray);
 					} else {
+						btnBuy.setClickable(true);
 						btnBuy.setBackgroundResource(R.drawable.round_shape_yellow);
 					}
 					ImageLoaderUtil.load(context, ImageType.NETWORK, productDetailResponse.imgUrl,
