@@ -17,6 +17,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler.Callback;
 import android.os.Message;
+import android.text.TextUtils;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.EditText;
@@ -65,6 +66,7 @@ public class OrderDetailActivity extends BaseActivity implements OnClickListener
 	private EditText etFeedback;
 	private boolean isUsed = true;
 	private ImageView ivLogo, ivSwitch;
+	private String name, address, phone;
 	private double price, myAmount, needPay;
 	private TextView tvName, tvAddress, tvPhone, tvShopName, tvProductName, tvPrice, tvDefaultTips, tvAmount,
 			tvMyAmount, tvNeedPay;
@@ -222,7 +224,19 @@ public class OrderDetailActivity extends BaseActivity implements OnClickListener
 			break;
 
 		case R.id.btn_submit:
-			submitOrder();
+			name = tvName.getText().toString();
+			phone = tvPhone.getText().toString();
+			address = tvAddress.getText().toString();
+			if (TextUtils.isEmpty(name)) {
+				ToastUtil.show(context, R.string.name_tips, ToastUtil.LENGTH_SHORT);
+			} else if (TextUtils.isEmpty(phone)) {
+				ToastUtil.show(context, R.string.phone_tips, ToastUtil.LENGTH_SHORT);
+			} else if (TextUtils.isEmpty(address)) {
+				ToastUtil.show(context, R.string.address_tips, ToastUtil.LENGTH_SHORT);
+			} else {
+				submitOrder();
+			}
+
 			break;
 		}
 	}
@@ -286,9 +300,6 @@ public class OrderDetailActivity extends BaseActivity implements OnClickListener
 	private void submitOrder() {
 		Utils.showProgressDialog(this);
 		int userId = UserManager.getInstance().getUserId(context);
-		String phone = tvPhone.getText().toString();
-		String address = tvAddress.getText().toString();
-		String realName = tvName.getText().toString();
 		String feedBack = etFeedback.getText().toString();
 		String imei = Utils.getIMEI(context);
 		String sign = MD5Util.getMD5(imei + userId + id); // MD5加密
@@ -299,7 +310,7 @@ public class OrderDetailActivity extends BaseActivity implements OnClickListener
 		request.setPhone(phone);
 		request.setAddress(address);
 		request.setIsAddmyamont(isAddmyamont);
-		request.setRealName(realName);
+		request.setRealName(name);
 		request.setFeedBack(feedBack);
 		request.setSign(sign);
 		request.setUserId(userId);

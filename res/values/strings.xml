@@ -192,6 +192,9 @@
     <string name="publish_phone_hint">请输入联系电话</string>
     <string name="publish_address_hint">请输入联系地址</string>
     <string name="publish_btn">发布</string>
+    <string name="name_tips">请填写收货人名称！</string>
+    <string name="phone_tips">请填写收货人手机号！</string>
+    <string name="address_tips">请填写收货人地址！</string>
     
 
 </resources>

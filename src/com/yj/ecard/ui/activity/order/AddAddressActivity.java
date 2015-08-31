@@ -14,6 +14,7 @@ import org.json.JSONObject;
 import android.os.Bundle;
 import android.os.Handler.Callback;
 import android.os.Message;
+import android.text.TextUtils;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.EditText;
@@ -50,6 +51,7 @@ public class AddAddressActivity extends BaseActivity implements OnClickListener 
 	private View loadingView;
 	private ImageView ivSwitch;
 	private boolean isDefault = true;
+	private String name, address, phone;
 	private EditText etName, etPhone, etAddress;
 	private final int[] btns = { R.id.btn_state, R.id.btn_save };
 
@@ -144,9 +146,9 @@ public class AddAddressActivity extends BaseActivity implements OnClickListener 
 		AddAddressRequest request = new AddAddressRequest();
 		request.setUserId(UserManager.getInstance().getUserId(context));
 		request.setUserPwd(UserManager.getInstance().getPassword(context));
-		request.setRealName(etName.getText().toString());
-		request.setPhone(etPhone.getText().toString());
-		request.setAddress(etAddress.getText().toString());
+		request.setRealName(name);
+		request.setPhone(phone);
+		request.setAddress(address);
 		int result = (isDefault == true) ? 1 : 0;
 		request.setIsDefault(result);
 		if (id != 0) {
@@ -193,10 +195,20 @@ public class AddAddressActivity extends BaseActivity implements OnClickListener 
 			break;
 
 		case R.id.btn_save:
-			addAddressData();
+			name = etName.getText().toString();
+			phone = etPhone.getText().toString();
+			address = etAddress.getText().toString();
+			if (TextUtils.isEmpty(name)) {
+				ToastUtil.show(context, R.string.name_tips, ToastUtil.LENGTH_SHORT);
+			} else if (TextUtils.isEmpty(phone)) {
+				ToastUtil.show(context, R.string.phone_tips, ToastUtil.LENGTH_SHORT);
+			} else if (TextUtils.isEmpty(address)) {
+				ToastUtil.show(context, R.string.address_tips, ToastUtil.LENGTH_SHORT);
+			} else {
+				addAddressData();
+			}
 			break;
 		}
-
 	}
 
 }
