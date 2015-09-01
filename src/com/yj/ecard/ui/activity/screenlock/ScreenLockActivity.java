@@ -132,39 +132,43 @@ public class ScreenLockActivity extends Activity {
 		isShow = true;
 
 		int count = DBService.getInstance(context).getScreenLockCount();
-		for (int i = 0; i < count; i++) {
-			// 随机获取一张图片显示
-			mScreenLockBean = DBService.getInstance(context).randomValue();
-			if (null != mScreenLockBean) {
-				if (addRecord(context, count, mScreenLockBean.imgUrl)) {
-					break;
+		if (count > 0) {
+			for (int i = 0; i < count; i++) {
+				// 随机获取一张图片显示
+				mScreenLockBean = DBService.getInstance(context).randomValue();
+				if (null != mScreenLockBean) {
+					if (addRecord(context, count, mScreenLockBean.imgUrl)) {
+						break;
+					}
 				}
 			}
-		}
 
-		advId = mScreenLockBean.id;
-		webUrl = mScreenLockBean.webUrl;
-		String path = mScreenLockBean.screenLockLocalPath;
-		// 判断文件是否存在
-		File file = new File(path);
-		if (file.exists()) {
+			advId = mScreenLockBean.id;
+			webUrl = mScreenLockBean.webUrl;
+			String path = mScreenLockBean.screenLockLocalPath;
+			// 判断文件是否存在
+			File file = new File(path);
+			if (file.exists()) {
 
-			// 判断.隐藏目录是否存在
-			File hideImageDir = new File(StorageUtils.IMAGE_PATH, ".Image");
-			if (!hideImageDir.exists()) {
-				hideImageDir.mkdirs();
+				// 判断.隐藏目录是否存在
+				File hideImageDir = new File(StorageUtils.IMAGE_PATH, ".Image");
+				if (!hideImageDir.exists()) {
+					hideImageDir.mkdirs();
+				}
+
+				String imagePath = hideImageDir + File.separator + MD5Util.getMD5(path) + ".jpg";
+				File newFile = new File(imagePath);
+				boolean isSuccess = Utils.copyFile(file, newFile, true);
+
+				// 判断复制文件是否成功.
+				if (isSuccess) {
+					Bitmap bitmap = BitmapFactory.decodeFile(imagePath);
+					// 图片加载完成才显示
+					imageView.setImageBitmap(bitmap);
+				}
 			}
-
-			String imagePath = hideImageDir + File.separator + MD5Util.getMD5(path) + ".jpg";
-			File newFile = new File(imagePath);
-			boolean isSuccess = Utils.copyFile(file, newFile, true);
-
-			// 判断复制文件是否成功.
-			if (isSuccess) {
-				Bitmap bitmap = BitmapFactory.decodeFile(imagePath);
-				// 图片加载完成才显示
-				imageView.setImageBitmap(bitmap);
-			}
+		} else {
+			finish();
 		}
 	}
 
