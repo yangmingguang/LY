@@ -26,5 +26,6 @@ public class ExchangeBean {
 	public String picUrl;
 	public int selled;
 	public boolean canExchange;
+	public String companyName;
 
 }

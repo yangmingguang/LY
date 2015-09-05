@@ -18,7 +18,7 @@ import android.view.ViewGroup;
 import com.yj.ecard.R;
 import com.yj.ecard.publics.model.ValueSpikeBean;
 import com.yj.ecard.ui.activity.main.home.valuespike.ValueSpikeDetailActivity;
-import com.yj.ecard.ui.activity.main.home.valuespike.ValueSpikeExchangeActivity;
+import com.yj.ecard.ui.activity.order.OrderDetailActivity;
 import com.yj.ecard.ui.adapter.base.ArrayListBaseAdapter;
 
 /**
@@ -56,8 +56,19 @@ public class ValueSpikeListAdapter extends ArrayListBaseAdapter<ValueSpikeBean> 
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
 				if (valueSpikeBean.canbuy == 1 && valueSpikeBean.isStart) {
-					Intent intent = new Intent(context, ValueSpikeExchangeActivity.class);
+					// 旧版支付
+					/*Intent intent = new Intent(context, ValueSpikeExchangeActivity.class);
 					intent.putExtra("id", valueSpikeBean.id);
+					context.startActivity(intent);*/
+
+					// 新版支付
+					Intent intent = new Intent(context, OrderDetailActivity.class);
+					intent.putExtra("id", valueSpikeBean.id);
+					intent.putExtra("shopName", valueSpikeBean.companyName);
+					intent.putExtra("productName", valueSpikeBean.title);
+					intent.putExtra("price", valueSpikeBean.price);
+					intent.putExtra("imgUrl", valueSpikeBean.picUrl);
+					intent.putExtra("orderType", 1); // 1=秒杀订单，2=兑换订单
 					context.startActivity(intent);
 				}
 			}
@@ -72,6 +83,10 @@ public class ValueSpikeListAdapter extends ArrayListBaseAdapter<ValueSpikeBean> 
 				intent.putExtra("id", valueSpikeBean.id);
 				intent.putExtra("canBuy", valueSpikeBean.canbuy);
 				intent.putExtra("isStart", valueSpikeBean.isStart);
+				intent.putExtra("imgUrl", valueSpikeBean.picUrl);
+				intent.putExtra("shopName", valueSpikeBean.companyName);
+				intent.putExtra("title", valueSpikeBean.title);
+				intent.putExtra("price", valueSpikeBean.price);
 				context.startActivity(intent);
 			}
 		});

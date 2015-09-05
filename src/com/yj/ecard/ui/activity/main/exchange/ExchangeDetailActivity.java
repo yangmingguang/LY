@@ -32,6 +32,7 @@ import com.yj.ecard.publics.utils.JsonUtil;
 import com.yj.ecard.publics.utils.LogUtil;
 import com.yj.ecard.publics.utils.Utils;
 import com.yj.ecard.ui.activity.base.BaseActivity;
+import com.yj.ecard.ui.activity.order.OrderDetailActivity;
 import com.yj.ecard.ui.views.viewflow.DetailBannerViewFlow;
 
 /**
@@ -51,6 +52,8 @@ public class ExchangeDetailActivity extends BaseActivity {
 	private DetailBannerViewFlow mDetailBannerViewFlow;
 	private View mScrollView, loadingView, containerView;
 	private TextView tvTitle, tvType, tvMarketPrice, tvInventory, btnExchange;
+	private String title, imgUrl, shopName;
+	private double price;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -69,6 +72,10 @@ public class ExchangeDetailActivity extends BaseActivity {
 	*/
 	private void initViews() {
 		id = getIntent().getIntExtra("id", 0);
+		title = getIntent().getStringExtra("title");
+		imgUrl = getIntent().getStringExtra("imgUrl");
+		price = getIntent().getDoubleExtra("price", 0);
+		shopName = getIntent().getStringExtra("shopName");
 		canExchange = getIntent().getBooleanExtra("canExchange", false);
 		account = UserManager.getInstance().getUserName(context);
 
@@ -106,8 +113,18 @@ public class ExchangeDetailActivity extends BaseActivity {
 			public void onClick(View v) {
 				// TODO Auto-generated method stub 
 				if (canExchange) {
-					Intent intent = new Intent(context, ExchangeAddressActivity.class);
+					/*Intent intent = new Intent(context, ExchangeAddressActivity.class);
 					intent.putExtra("id", id);
+					startActivity(intent);*/
+
+					// 新版支付
+					Intent intent = new Intent(context, OrderDetailActivity.class);
+					intent.putExtra("id", id);
+					intent.putExtra("shopName", shopName);
+					intent.putExtra("productName", title);
+					intent.putExtra("price", price);
+					intent.putExtra("imgUrl", imgUrl);
+					intent.putExtra("orderType", 2); // 1=秒杀订单，2=兑换订单
 					startActivity(intent);
 				}
 			}

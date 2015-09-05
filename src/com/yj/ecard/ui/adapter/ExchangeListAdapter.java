@@ -17,8 +17,8 @@ import android.view.ViewGroup;
 
 import com.yj.ecard.R;
 import com.yj.ecard.publics.model.ExchangeBean;
-import com.yj.ecard.ui.activity.main.exchange.ExchangeAddressActivity;
 import com.yj.ecard.ui.activity.main.exchange.ExchangeDetailActivity;
+import com.yj.ecard.ui.activity.order.OrderDetailActivity;
 import com.yj.ecard.ui.adapter.base.ArrayListBaseAdapter;
 
 /**
@@ -55,8 +55,19 @@ public class ExchangeListAdapter extends ArrayListBaseAdapter<ExchangeBean> {
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
 				if (productBean.canExchange) {
-					Intent intent = new Intent(context, ExchangeAddressActivity.class);
+					// 旧版支付
+					/*Intent intent = new Intent(context, ExchangeAddressActivity.class);
 					intent.putExtra("id", productBean.id);
+					context.startActivity(intent);*/
+
+					// 新版支付
+					Intent intent = new Intent(context, OrderDetailActivity.class);
+					intent.putExtra("id", productBean.id);
+					intent.putExtra("shopName", productBean.companyName);
+					intent.putExtra("productName", productBean.title);
+					intent.putExtra("price", productBean.price);
+					intent.putExtra("imgUrl", productBean.picUrl);
+					intent.putExtra("orderType", 2); // 1=秒杀订单，2=兑换订单
 					context.startActivity(intent);
 				}
 			}
@@ -69,6 +80,9 @@ public class ExchangeListAdapter extends ArrayListBaseAdapter<ExchangeBean> {
 				intent.putExtra("id", productBean.id);
 				intent.putExtra("title", productBean.title);
 				intent.putExtra("canExchange", productBean.canExchange);
+				intent.putExtra("shopName", productBean.companyName);
+				intent.putExtra("price", productBean.price);
+				intent.putExtra("imgUrl", productBean.picUrl);
 				context.startActivity(intent);
 			}
 		});

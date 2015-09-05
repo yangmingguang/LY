@@ -28,5 +28,6 @@ public class ValueSpikeBean {
 	public int count;
 	public int canbuy;
 	public boolean isStart;
+	public String companyName;
 
 }

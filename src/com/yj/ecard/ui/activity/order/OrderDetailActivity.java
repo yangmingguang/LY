@@ -58,7 +58,7 @@ import com.yj.ecard.ui.activity.base.BaseActivity;
 
 public class OrderDetailActivity extends BaseActivity implements OnClickListener {
 
-	private int id;
+	private int id, orderType;
 	private boolean hasData;
 	private View loadingView;
 	private String productName;
@@ -97,6 +97,7 @@ public class OrderDetailActivity extends BaseActivity implements OnClickListener
 	private void initView() {
 		id = getIntent().getIntExtra("id", 0);
 		price = getIntent().getDoubleExtra("price", 0);
+		orderType = getIntent().getIntExtra("orderType", 2);
 
 		tvName = (TextView) findViewById(R.id.tv_name);
 		tvPhone = (TextView) findViewById(R.id.tv_phone);
@@ -306,7 +307,7 @@ public class OrderDetailActivity extends BaseActivity implements OnClickListener
 
 		OrderRequest request = new OrderRequest();
 		request.setProductId(id);
-		request.setOrderType(2);
+		request.setOrderType(orderType); // 1=秒杀订单，2=兑换订单
 		request.setPhone(phone);
 		request.setAddress(address);
 		request.setIsAddmyamont(isAddmyamont);

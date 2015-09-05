@@ -32,6 +32,7 @@ import com.yj.ecard.publics.utils.JsonUtil;
 import com.yj.ecard.publics.utils.LogUtil;
 import com.yj.ecard.publics.utils.Utils;
 import com.yj.ecard.ui.activity.base.BaseActivity;
+import com.yj.ecard.ui.activity.order.OrderDetailActivity;
 import com.yj.ecard.ui.views.viewflow.DetailBannerViewFlow;
 
 /**
@@ -51,6 +52,8 @@ public class ValueSpikeDetailActivity extends BaseActivity {
 	private DetailBannerViewFlow mDetailBannerViewFlow;
 	private View mScrollView, loadingView, containerView;
 	private TextView tvTitle, tvType, tvMarketPrice, tvPrice, btnState;
+	private String title, imgUrl, shopName;
+	private double price;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -69,6 +72,10 @@ public class ValueSpikeDetailActivity extends BaseActivity {
 	*/
 	private void initViews() {
 		id = getIntent().getIntExtra("id", 0);
+		imgUrl = getIntent().getStringExtra("imgUrl");
+		title = getIntent().getStringExtra("title");
+		shopName = getIntent().getStringExtra("shopName");
+		price = getIntent().getDoubleExtra("price", 0);
 		canBuy = getIntent().getIntExtra("canBuy", 0);
 		isStart = getIntent().getBooleanExtra("isStart", false);
 		userId = UserManager.getInstance().getUserId(context);
@@ -108,8 +115,20 @@ public class ValueSpikeDetailActivity extends BaseActivity {
 			public void onClick(View v) {
 				// TODO Auto-generated method stub 
 				if (canBuy == 1 && isStart) {
-					Intent intent = new Intent(context, ValueSpikeExchangeActivity.class);
+
+					// 旧版支付
+					/*Intent intent = new Intent(context, ValueSpikeExchangeActivity.class);
 					intent.putExtra("id", id);
+					startActivity(intent);*/
+
+					// 新版支付
+					Intent intent = new Intent(context, OrderDetailActivity.class);
+					intent.putExtra("id", id);
+					intent.putExtra("shopName", shopName);
+					intent.putExtra("productName", title);
+					intent.putExtra("price", price);
+					intent.putExtra("imgUrl", imgUrl);
+					intent.putExtra("orderType", 1); // 1=秒杀订单，2=兑换订单
 					startActivity(intent);
 				}
 			}
@@ -138,6 +157,7 @@ public class ValueSpikeDetailActivity extends BaseActivity {
 
 				// 解析数据
 				if (valueSpikeDetailResponse.status.code == 1) {
+
 					tvTitle.setText(valueSpikeDetailResponse.title);
 					tvMarketPrice.setText("市场价：￥" + valueSpikeDetailResponse.marketPrice);
 					tvPrice.setText("乐盈价：￥" + valueSpikeDetailResponse.price);
