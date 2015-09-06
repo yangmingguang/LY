@@ -58,15 +58,15 @@ import com.yj.ecard.ui.activity.base.BaseActivity;
 
 public class OrderDetailActivity extends BaseActivity implements OnClickListener {
 
-	private int id, orderType;
 	private boolean hasData;
 	private View loadingView;
 	private String productName;
 	private int isAddmyamont = 1;
-	private EditText etFeedback;
+	private EditText etFeedback, etPhone;
 	private boolean isUsed = true;
+	private int id, orderType, sortId;
 	private ImageView ivLogo, ivSwitch;
-	private String name, address, phone;
+	private String name, address, phone, phoneNum;
 	private double price, myAmount, needPay;
 	private TextView tvName, tvAddress, tvPhone, tvShopName, tvProductName, tvPrice, tvDefaultTips, tvAmount,
 			tvMyAmount, tvNeedPay;
@@ -97,7 +97,8 @@ public class OrderDetailActivity extends BaseActivity implements OnClickListener
 	private void initView() {
 		id = getIntent().getIntExtra("id", 0);
 		price = getIntent().getDoubleExtra("price", 0);
-		orderType = getIntent().getIntExtra("orderType", 2);
+		orderType = getIntent().getIntExtra("orderType", 2);// 1=秒杀订单，2=商品订单，3=兑换订单
+		sortId = getIntent().getIntExtra("sortId", 0);
 
 		tvName = (TextView) findViewById(R.id.tv_name);
 		tvPhone = (TextView) findViewById(R.id.tv_phone);
@@ -112,6 +113,7 @@ public class OrderDetailActivity extends BaseActivity implements OnClickListener
 		tvMyAmount = (TextView) findViewById(R.id.tv_my_amount);
 		tvNeedPay = (TextView) findViewById(R.id.tv_need_pay);
 		etFeedback = (EditText) findViewById(R.id.et_feedback);
+		etPhone = (EditText) findViewById(R.id.et_phone);
 		loadingView = findViewById(R.id.l_loading_rl);
 
 		for (int btn : btns) {
@@ -124,6 +126,13 @@ public class OrderDetailActivity extends BaseActivity implements OnClickListener
 		tvProductName.setText(productName);
 		tvPrice.setText("￥" + price);
 		tvAmount.setText("￥" + price);
+
+		// 话费充值
+		if (sortId == 3) {
+			etPhone.setVisibility(View.VISIBLE);
+			findViewById(R.id.btn_address).setClickable(false);
+			((TextView) findViewById(R.id.tv_title_tips)).setText("请填写充值号码");
+		}
 
 		ImageLoaderUtil.load(context, ImageType.NETWORK, getIntent().getStringExtra("imgUrl"),
 				R.drawable.banner_detail_default, R.drawable.banner_detail_default, ivLogo);
@@ -228,14 +237,24 @@ public class OrderDetailActivity extends BaseActivity implements OnClickListener
 			name = tvName.getText().toString();
 			phone = tvPhone.getText().toString();
 			address = tvAddress.getText().toString();
-			if (TextUtils.isEmpty(name)) {
-				ToastUtil.show(context, R.string.name_tips, ToastUtil.LENGTH_SHORT);
-			} else if (TextUtils.isEmpty(phone)) {
-				ToastUtil.show(context, R.string.phone_tips, ToastUtil.LENGTH_SHORT);
-			} else if (TextUtils.isEmpty(address)) {
-				ToastUtil.show(context, R.string.address_tips, ToastUtil.LENGTH_SHORT);
+			phoneNum = etPhone.getText().toString();
+
+			if (sortId == 3) { // 话费充值
+				if (TextUtils.isEmpty(phoneNum)) {
+					ToastUtil.show(context, R.string.phone_number_tips, ToastUtil.LENGTH_SHORT);
+				} else {
+					submitOrder();
+				}
 			} else {
-				submitOrder();
+				if (TextUtils.isEmpty(name)) {
+					ToastUtil.show(context, R.string.name_tips, ToastUtil.LENGTH_SHORT);
+				} else if (TextUtils.isEmpty(phone)) {
+					ToastUtil.show(context, R.string.phone_tips, ToastUtil.LENGTH_SHORT);
+				} else if (TextUtils.isEmpty(address)) {
+					ToastUtil.show(context, R.string.address_tips, ToastUtil.LENGTH_SHORT);
+				} else {
+					submitOrder();
+				}
 			}
 
 			break;
@@ -307,8 +326,12 @@ public class OrderDetailActivity extends BaseActivity implements OnClickListener
 
 		OrderRequest request = new OrderRequest();
 		request.setProductId(id);
-		request.setOrderType(orderType); // 1=秒杀订单，2=兑换订单
-		request.setPhone(phone);
+		request.setOrderType(orderType); // 1=秒杀订单，2=商品订单，3=兑换订单
+		if (sortId == 3) {
+			request.setPhone(phoneNum);
+		} else {
+			request.setPhone(phone);
+		}
 		request.setAddress(address);
 		request.setIsAddmyamont(isAddmyamont);
 		request.setRealName(name);

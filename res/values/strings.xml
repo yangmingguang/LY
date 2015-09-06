@@ -195,6 +195,7 @@
     <string name="name_tips">请填写收货人名称！</string>
     <string name="phone_tips">请填写收货人手机号！</string>
     <string name="address_tips">请填写收货人地址！</string>
+    <string name="phone_number_tips">请填写手机号码！</string>
     
 
 </resources>

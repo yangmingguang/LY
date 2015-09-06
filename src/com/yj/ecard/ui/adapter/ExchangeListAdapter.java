@@ -31,8 +31,15 @@ import com.yj.ecard.ui.adapter.base.ArrayListBaseAdapter;
 
 public class ExchangeListAdapter extends ArrayListBaseAdapter<ExchangeBean> {
 
+	private int sortId;
+
 	public ExchangeListAdapter(Context context) {
 		super(context);
+	}
+
+	public ExchangeListAdapter(Context context, int sortId) {
+		super(context);
+		this.sortId = sortId;
 	}
 
 	@Override
@@ -67,7 +74,8 @@ public class ExchangeListAdapter extends ArrayListBaseAdapter<ExchangeBean> {
 					intent.putExtra("productName", productBean.title);
 					intent.putExtra("price", productBean.price);
 					intent.putExtra("imgUrl", productBean.picUrl);
-					intent.putExtra("orderType", 2); // 1=秒杀订单，2=兑换订单
+					intent.putExtra("orderType", 3); // 1=秒杀订单，2=商品订单，3=兑换订单
+					intent.putExtra("sortId", sortId);// 话费充值，特别处理
 					context.startActivity(intent);
 				}
 			}
@@ -83,6 +91,7 @@ public class ExchangeListAdapter extends ArrayListBaseAdapter<ExchangeBean> {
 				intent.putExtra("shopName", productBean.companyName);
 				intent.putExtra("price", productBean.price);
 				intent.putExtra("imgUrl", productBean.picUrl);
+				intent.putExtra("sortId", sortId);// 话费充值，特别处理
 				context.startActivity(intent);
 			}
 		});

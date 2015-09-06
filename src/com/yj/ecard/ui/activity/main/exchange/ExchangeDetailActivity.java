@@ -45,7 +45,7 @@ import com.yj.ecard.ui.views.viewflow.DetailBannerViewFlow;
 
 public class ExchangeDetailActivity extends BaseActivity {
 
-	private int id;
+	private int id, sortId;
 	private String account;
 	private WebView mWebView;
 	private boolean canExchange;
@@ -72,6 +72,7 @@ public class ExchangeDetailActivity extends BaseActivity {
 	*/
 	private void initViews() {
 		id = getIntent().getIntExtra("id", 0);
+		sortId = getIntent().getIntExtra("sortId", 0);
 		title = getIntent().getStringExtra("title");
 		imgUrl = getIntent().getStringExtra("imgUrl");
 		price = getIntent().getDoubleExtra("price", 0);
@@ -124,7 +125,8 @@ public class ExchangeDetailActivity extends BaseActivity {
 					intent.putExtra("productName", title);
 					intent.putExtra("price", price);
 					intent.putExtra("imgUrl", imgUrl);
-					intent.putExtra("orderType", 2); // 1=秒杀订单，2=兑换订单
+					intent.putExtra("orderType", 3); // 1=秒杀订单，2=商品订单，3=兑换订单
+					intent.putExtra("sortId", sortId); // 话费充值，特别处理
 					startActivity(intent);
 				}
 			}

@@ -80,7 +80,7 @@ public class TabOverflowFragment extends BaseFragment {
 		mListView.setOnRefreshListener(onRefreshListener);
 		mListView.setMode(Mode.DISABLED);
 		mListView.setEmptyView(loadingView);
-		mAdapter = new ExchangeListAdapter(context);
+		mAdapter = new ExchangeListAdapter(context, getSortId());
 		mListView.setAdapter(mAdapter);
 	}
 
