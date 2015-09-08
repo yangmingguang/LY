@@ -70,7 +70,7 @@ public class WebUrl {
 
 	// 16.商家列表
 	public static final String GET_BUSINESS_LIST_URL = NEW_BASE_URL
-			+ "shangjia/getlist?areaId=%s&sortId=%s&latitude=%s&longitude=%s&pageSize=%s&pageIndex=%s";
+			+ "shangjia/getNewlist?areaId=%s&sortId=%s&latitude=%s&longitude=%s&pageSize=%s&pageIndex=%s";
 
 	// 17.商家详情
 	public static final String GET_BUSINESS_DETAIL_URL = NEW_BASE_URL
