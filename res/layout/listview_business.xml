@@ -14,58 +14,72 @@
         android:contentDescription="@null"
         android:scaleType="centerCrop" />
 
-    <LinearLayout
+    <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical"
         android:padding="8dp" >
 
-        <TextView
-            android:id="@+id/tv_title"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:ellipsize="end"
-            android:singleLine="true"
-            android:text="大世界美业"
-            android:textColor="#383838"
-            android:textSize="@dimen/exchange_title_text" />
-
-        <TextView
-            android:id="@+id/tv_content"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="4dp"
-            android:ellipsize="end"
-            android:lines="3"
-            android:text="大世界美业"
-            android:textColor="#787878"
-            android:textSize="@dimen/exchange_subtitle_text" />
-
-        <RelativeLayout
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="6dp" >
+            android:orientation="vertical" >
 
             <TextView
-                android:id="@+id/tv_phone"
+                android:id="@+id/tv_title"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:ellipsize="end"
                 android:singleLine="true"
                 android:text="大世界美业"
-                android:textColor="#787878"
-                android:textSize="@dimen/exchange_subtitle_text" />
-            <TextView
-                android:id="@+id/tv_distance"
+                android:textColor="#383838"
+                android:textSize="@dimen/exchange_title_text" />
+
+            <TextView
+                android:id="@+id/tv_content"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="4dp"
                 android:ellipsize="end"
-                android:singleLine="true"
-                android:layout_alignParentRight="true"
-                android:text="38m"
+                android:lines="3"
+                android:text="大世界美业"
                 android:textColor="#787878"
                 android:textSize="@dimen/exchange_subtitle_text" />
-        </RelativeLayout>
-    </LinearLayout>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="6dp" >
+
+                <TextView
+                    android:id="@+id/tv_phone"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:ellipsize="end"
+                    android:singleLine="true"
+                    android:text="大世界美业"
+                    android:textColor="#787878"
+                    android:textSize="@dimen/exchange_subtitle_text" />
+
+                <TextView
+                    android:id="@+id/tv_distance"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:ellipsize="end"
+                    android:singleLine="true"
+                    android:text="38m"
+                    android:textColor="#787878"
+                    android:textSize="@dimen/exchange_subtitle_text" />
+            </RelativeLayout>
+        </LinearLayout>
+
+        <ImageView
+            android:id="@+id/iv_vip"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="right"
+            android:background="@drawable/ic_vip"
+            android:contentDescription="@null" />
+    </FrameLayout>
 
 </LinearLayout>

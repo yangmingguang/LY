@@ -29,8 +29,8 @@ import com.yj.ecard.publics.utils.ImageLoaderUtil;
 
 public class BusinessListViewHolder {
 
-	private ImageView ivLogo;
 	private boolean hasInited;
+	private ImageView ivLogo, ivVip;
 	private TextView tvTitle, tvContent, tvPhone, tvDistance;
 
 	public BusinessListViewHolder(View view) {
@@ -40,6 +40,7 @@ public class BusinessListViewHolder {
 			tvContent = (TextView) view.findViewById(R.id.tv_content);
 			tvDistance = (TextView) view.findViewById(R.id.tv_distance);
 			ivLogo = (ImageView) view.findViewById(R.id.iv_logo);
+			ivVip = (ImageView) view.findViewById(R.id.iv_vip);
 			hasInited = true;
 		}
 	}
@@ -60,6 +61,11 @@ public class BusinessListViewHolder {
 			tvDistance.setText(businessBean.distance);
 			ImageLoaderUtil.load(context, ImageType.NETWORK, businessBean.picUrl, R.drawable.banner_detail_default,
 					R.drawable.banner_detail_default, ivLogo);
+			if (businessBean.vip == 1) {
+				ivVip.setVisibility(View.VISIBLE);
+			} else {
+				ivVip.setVisibility(View.GONE);
+			}
 		}
 	}
 

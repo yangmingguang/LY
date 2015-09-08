@@ -27,5 +27,6 @@ public class BusinessBean {
 	public double latitude;
 	public double longitude;
 	public String distance;
+	public int vip;
 
 }
