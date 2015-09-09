@@ -21,6 +21,8 @@ public class AreaIdRequest {
 
 	public double lat;
 	public double lng;
+	public int userId;
+	public String userPwd;
 
 	/** 
 	* @return lat 
@@ -52,6 +54,22 @@ public class AreaIdRequest {
 
 	public void setLng(double lng) {
 		this.lng = lng;
+	}
+
+	public int getUserId() {
+		return userId;
+	}
+
+	public void setUserId(int userId) {
+		this.userId = userId;
+	}
+
+	public String getUserPwd() {
+		return userPwd;
+	}
+
+	public void setUserPwd(String userPwd) {
+		this.userPwd = userPwd;
 	}
 
 }

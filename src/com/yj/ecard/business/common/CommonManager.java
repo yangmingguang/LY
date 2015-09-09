@@ -480,6 +480,8 @@ public class CommonManager {
 		AreaIdRequest request = new AreaIdRequest();
 		request.setLat(Double.parseDouble(getLocationlat(context)));
 		request.setLng(Double.parseDouble(getLocationlng(context)));
+		request.setUserId(UserManager.getInstance().getUserId(context));
+		request.setUserPwd(UserManager.getInstance().getPassword(context));
 		DataFetcher.getInstance().getAreaIdResult(request, new Listener<JSONObject>() {
 
 			@Override

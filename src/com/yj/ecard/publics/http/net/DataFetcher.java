@@ -901,7 +901,8 @@ public class DataFetcher {
 	 */
 	public void getAreaIdResult(AreaIdRequest request, Listener<JSONObject> listener, ErrorListener errorListener,
 			boolean shouldCache) {
-		String requestUrl = String.format(WebUrl.GET_AREAID_URL, request.lng, request.lat);
+		String requestUrl = String.format(WebUrl.GET_AREAID_URL, request.lng, request.lat, request.userId,
+				request.userPwd);
 		get(requestUrl, listener, errorListener, shouldCache);
 	}
 

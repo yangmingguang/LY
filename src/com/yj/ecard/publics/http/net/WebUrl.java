@@ -160,7 +160,7 @@ public class WebUrl {
 	public static final String POST_SEE_AD_URL = NEW_BASE_URL + "advs/seeAdv";
 
 	// 44.获取区域ID
-	public static final String GET_AREAID_URL = NEW_BASE_URL + "users/GetAreaid?lng=%s&lat=%s";
+	public static final String GET_AREAID_URL = NEW_BASE_URL + "users/GetAreaid?lng=%s&lat=%s&userId=%s&userPwd=%s";
 
 	// 45.获取锁屏列表
 	public static final String GET_SCREENLOCK_LIST_URL = NEW_BASE_URL + "advs/GetHpList?userName=%s";
