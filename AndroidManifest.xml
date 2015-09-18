@@ -5,7 +5,7 @@
     android:versionName="2.0.37" >
 
     <uses-sdk
-        android:minSdkVersion="9"
+        android:minSdkVersion="11"
         android:targetSdkVersion="19" />
 
     <!-- Required  一些系统要求的权限，如访问网络等 -->
@@ -410,6 +410,13 @@
             android:configChanges="orientation|screenSize|keyboardHidden"
             android:label="@string/title_address_list"
             android:screenOrientation="portrait" />
+        
+        <!-- 地区分类PopupWindow -->
+        <activity
+            android:name="com.yj.ecard.ui.activity.main.business.PopSortActivity"
+            android:configChanges="orientation|screenSize|keyboardHidden"
+            android:screenOrientation="portrait"
+            android:theme="@style/MyPopupWindowStyle" />
 
         <!-- ************************************注册广播类Start*************************************** -->
         <!-- 系统启动广播接收 -->

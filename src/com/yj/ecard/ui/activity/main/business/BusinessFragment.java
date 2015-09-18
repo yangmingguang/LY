@@ -46,6 +46,7 @@ import com.yj.ecard.ui.views.pulltorefresh.PullToRefreshListView;
 
 public class BusinessFragment extends BaseFragment {
 
+	private int sortId, areaId;
 	private int pageIndex = 1;
 	private TextView tvLocation;
 	private ListView mListView;
@@ -69,6 +70,21 @@ public class BusinessFragment extends BaseFragment {
 		return rootView;
 	}
 
+	@Override
+	public void onResume() {
+		super.onResume();
+		if (CommonManager.getInstance().getMenuItemClick(context)) {
+			CommonManager.getInstance().setMenuItemClick(context, false);
+			sortId = CommonManager.getInstance().getShopSortValue(context);
+			areaId = CommonManager.getInstance().getAreaSortValue(context);
+
+			mList.clear();
+			mListView.setEmptyView(loadingView);
+			pageIndex = 1;
+			loadAllData();
+		}
+	}
+
 	/** 
 	* @Title: loadAllData 
 	* @Description: TODO(这里用一句话描述这个方法的作用) 
@@ -77,8 +93,8 @@ public class BusinessFragment extends BaseFragment {
 	* @throws 
 	*/
 	private void loadAllData() {
-		int sortId = 0;
-		BusinessTabManager.getInstance().getBusinessListData(context, handler, sortId, pageIndex);
+
+		BusinessTabManager.getInstance().getBusinessListData(context, handler, areaId, sortId, pageIndex);
 	}
 
 	/** 
@@ -89,6 +105,9 @@ public class BusinessFragment extends BaseFragment {
 	* @throws 
 	*/
 	private void initViews() {
+		sortId = 0;
+		areaId = CommonManager.getInstance().getAreaId(context);
+
 		emptyView = LayoutInflater.from(context).inflate(R.layout.empty, null);
 		loadingView = LayoutInflater.from(context).inflate(R.layout.loading, null);
 		mPtrListView = (PullToRefreshListView) rootView.findViewById(R.id.lv_business);

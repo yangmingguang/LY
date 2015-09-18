@@ -72,9 +72,10 @@ public class BusinessTabManager {
 	* @return void    返回类型 
 	* @throws
 	 */
-	public void getBusinessListData(final Context context, final WeakHandler handler, int sortId, int pageIndex) {
+	public void getBusinessListData(final Context context, final WeakHandler handler, int areaId, int sortId,
+			int pageIndex) {
 		BusinessListRequest request = new BusinessListRequest();
-		request.setAreaId(CommonManager.getInstance().getAreaId(context));
+		request.setAreaId(areaId);
 		request.setSortId(sortId);
 		request.setLatitude(Double.parseDouble(CommonManager.getInstance().getLocationlat(context)));
 		request.setLongitude(Double.parseDouble(CommonManager.getInstance().getLocationlng(context)));

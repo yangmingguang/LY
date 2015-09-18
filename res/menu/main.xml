@@ -1,9 +1,10 @@
-<menu xmlns:android="http://schemas.android.com/apk/res/android" >
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto" >
 
     <item
-        android:id="@+id/action_settings"
-        android:orderInCategory="100"
-        android:showAsAction="never"
-        android:title="@string/action_settings"/>
+        android:id="@+id/all_business"
+        android:icon="@drawable/ic_menu_point"
+        android:title="全部商家"
+        app:showAsAction="always"/>
 
 </menu>

@@ -46,6 +46,7 @@ import com.yj.ecard.publics.http.model.request.SeckillRecordRequest;
 import com.yj.ecard.publics.http.model.request.SeckillRequest;
 import com.yj.ecard.publics.http.model.request.SeeAdRequest;
 import com.yj.ecard.publics.http.model.request.ShareRequest;
+import com.yj.ecard.publics.http.model.request.SortListRequest;
 import com.yj.ecard.publics.http.model.request.TelAdListRequest;
 import com.yj.ecard.publics.http.model.request.UpdateRequest;
 import com.yj.ecard.publics.http.model.request.UserDataRequest;
@@ -65,6 +66,7 @@ import com.yj.ecard.publics.http.volley.Response.ErrorListener;
 import com.yj.ecard.publics.http.volley.Response.Listener;
 import com.yj.ecard.publics.http.volley.toolbox.JsonObjectRequest;
 import com.yj.ecard.publics.http.volley.toolbox.RequestQueueManager;
+import com.yj.ecard.publics.utils.Constan;
 import com.yj.ecard.publics.utils.JsonUtil;
 import com.yj.ecard.publics.utils.LogUtil;
 
@@ -1044,4 +1046,35 @@ public class DataFetcher {
 		post(WebUrl.POST_ORDER_URL, requestObejct, listener, errorListener);
 	}
 
+	/**
+	 * 
+	* @Title: getSortListResult 
+	* @Description: 获取地区、商家分类列表
+	* @param @param request
+	* @param @param listener
+	* @param @param errorListener
+	* @param @param shouldCache    设定文件 
+	* @return void    返回类型 
+	* @throws
+	 */
+	public void getSortListResult(SortListRequest request, Listener<JSONObject> listener, ErrorListener errorListener,
+			boolean shouldCache) {
+		String url = null;
+
+		switch (request.type) {
+		// 地区分类
+		case Constan.AREA_TYPE:
+			url = WebUrl.GET_AREA_LIST_URL;
+			break;
+
+		// 商家分类	
+		case Constan.SHOP_TYPE:
+			url = WebUrl.GET_SHOP_LIST_URL;
+			break;
+		}
+
+		String requestUrl = String.format(url, request.areaId);
+
+		get(requestUrl, listener, errorListener, shouldCache);
+	}
 }

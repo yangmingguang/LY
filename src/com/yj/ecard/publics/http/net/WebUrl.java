@@ -191,4 +191,10 @@ public class WebUrl {
 	// 53.提交订单
 	public static final String POST_ORDER_URL = NEW_BASE_URL + "lyorder/AddOrder";
 
+	// 54.获取地区分类列表
+	public static final String GET_AREA_LIST_URL = NEW_BASE_URL + "shangjia/GetAreaList?areaId=%s";
+
+	// 55.获取商家分类列表
+	public static final String GET_SHOP_LIST_URL = NEW_BASE_URL + "shangjia/GetClasssort?areaId=%s";
+
 }

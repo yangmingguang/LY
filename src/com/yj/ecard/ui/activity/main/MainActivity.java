@@ -25,7 +25,9 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
+import android.view.Menu;
 import android.view.MenuItem;
+import android.view.MenuItem.OnMenuItemClickListener;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.ImageView;
@@ -42,6 +44,7 @@ import com.yj.ecard.publics.utils.ToastUtil;
 import com.yj.ecard.publics.utils.Utils;
 import com.yj.ecard.service.PhoneService;
 import com.yj.ecard.ui.activity.base.BaseActivity;
+import com.yj.ecard.ui.activity.main.business.PopSortActivity;
 import com.yj.ecard.ui.activity.main.slidingmenu.AboutActivity;
 import com.yj.ecard.ui.activity.user.ModifyPassWordActivity;
 
@@ -55,6 +58,7 @@ import com.yj.ecard.ui.activity.user.ModifyPassWordActivity;
 
 public class MainActivity extends BaseActivity implements OnClickListener, PointsChangeNotify, PointsEarnNotify {
 
+	private MenuItem menuItem;
 	private ImageView ivHead, ivSwitch;
 	private DrawerLayout mDrawerLayout;
 	private ActionBarDrawerToggle mDrawerToggle;
@@ -92,6 +96,33 @@ public class MainActivity extends BaseActivity implements OnClickListener, Point
 			break;
 		}
 		return super.onOptionsItemSelected(item);
+	}
+
+	@Override
+	public boolean onCreateOptionsMenu(Menu menu) {
+		getMenuInflater().inflate(R.menu.main, menu);
+		menuItem = menu.findItem(R.id.all_business);
+		menuItem.setVisible(false);
+		menuItem.setOnMenuItemClickListener(new OnMenuItemClickListener() {
+
+			@Override
+			public boolean onMenuItemClick(MenuItem paramMenuItem) {
+				startActivity(new Intent(context, PopSortActivity.class));
+				CommonManager.getInstance().setMenuItemClick(context, true);
+				return false;
+			}
+		});
+		return super.onCreateOptionsMenu(menu);
+	}
+
+	public void showMenuItem(boolean isShow) {
+		if (menuItem != null) {
+			if (isShow) {
+				menuItem.setVisible(true);
+			} else {
+				menuItem.setVisible(false);
+			}
+		}
 	}
 
 	/** When using the ActionBarDrawerToggle, you must call it during 

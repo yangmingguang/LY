@@ -79,6 +79,8 @@ public class Constan {
 	public static final String PROFESSION_ID = "professionId";
 	public static final String SWITCH_STATE = "switchState";
 	public static final String MY_AMOUNT = "myAmount";
+	public static final String AREA_SORT_ID = "areaSortId";
+	public static final String SHOP_SORT_ID = "shopSortId";
 
 	public static final int OPTION_0 = 0;
 	public static final int OPTION_1 = 1;
@@ -88,5 +90,8 @@ public class Constan {
 	public static final int OPTION_5 = 5;
 	public static final int OPTION_6 = 6;
 	public static final String OPTION_CODE = "optionCode";
+
+	public static final int AREA_TYPE = 1;
+	public static final int SHOP_TYPE = 2;
 
 }
