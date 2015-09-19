@@ -12,10 +12,14 @@ package com.yj.ecard.ui.activity.main.home;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.json.JSONObject;
+
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler.Callback;
 import android.os.Message;
+import android.os.Parcelable;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -28,8 +32,18 @@ import com.yj.ecard.R;
 import com.yj.ecard.business.common.CommonManager;
 import com.yj.ecard.business.main.BusinessTabManager;
 import com.yj.ecard.business.main.MeTabManager;
+import com.yj.ecard.publics.http.model.request.SortListRequest;
 import com.yj.ecard.publics.http.model.response.BusinessListResponse;
+import com.yj.ecard.publics.http.model.response.SortListResponse;
+import com.yj.ecard.publics.http.net.DataFetcher;
+import com.yj.ecard.publics.http.volley.Response.ErrorListener;
+import com.yj.ecard.publics.http.volley.Response.Listener;
+import com.yj.ecard.publics.http.volley.VolleyError;
 import com.yj.ecard.publics.model.BusinessBean;
+import com.yj.ecard.publics.model.SortBean;
+import com.yj.ecard.publics.utils.Constan;
+import com.yj.ecard.publics.utils.JsonUtil;
+import com.yj.ecard.publics.utils.LogUtil;
 import com.yj.ecard.publics.utils.WeakHandler;
 import com.yj.ecard.ui.activity.base.BaseActivity;
 import com.yj.ecard.ui.activity.main.business.PopSortActivity;
@@ -58,6 +72,8 @@ public class FeatureBusinessActivity extends BaseActivity {
 	private PullToRefreshListView mPtrListView;
 	private View headerView, loadingView, emptyView;
 	private List<BusinessBean> mList = new ArrayList<BusinessBean>();
+	private List<SortBean> areaList = new ArrayList<SortBean>();
+	private List<SortBean> shopList = new ArrayList<SortBean>();
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -90,7 +106,10 @@ public class FeatureBusinessActivity extends BaseActivity {
 
 			@Override
 			public boolean onMenuItemClick(MenuItem paramMenuItem) {
-				startActivity(new Intent(context, PopSortActivity.class));
+				Intent intent = new Intent(context, PopSortActivity.class);
+				intent.putParcelableArrayListExtra("areaList", (ArrayList<? extends Parcelable>) areaList);
+				intent.putParcelableArrayListExtra("shopList", (ArrayList<? extends Parcelable>) shopList);
+				startActivity(intent);
 				isClicked = true;
 				return false;
 			}
@@ -107,6 +126,10 @@ public class FeatureBusinessActivity extends BaseActivity {
 	* @throws 
 	*/
 	private void initViews() {
+		// 默认全部
+		CommonManager.getInstance().setAreaSortValue(context, 0);
+		CommonManager.getInstance().setShopSortValue(context, 0);
+
 		sortId = 0;
 		areaId = CommonManager.getInstance().getAreaId(context);
 
@@ -157,6 +180,9 @@ public class FeatureBusinessActivity extends BaseActivity {
 	*/
 	private void loadAllData() {
 		BusinessTabManager.getInstance().getBusinessListData(context, handler, areaId, sortId, pageIndex);
+
+		getSortListData(this, Constan.AREA_TYPE);
+		getSortListData(this, Constan.SHOP_TYPE);
 	}
 
 	/**
@@ -192,4 +218,61 @@ public class FeatureBusinessActivity extends BaseActivity {
 			return true;
 		}
 	});
+
+	/**
+	 * 
+	* @Title: getSortListData 
+	* @Description: TODO(这里用一句话描述这个方法的作用) 
+	* @param @param context
+	* @param @param type    设定文件 
+	* @return void    返回类型 
+	* @throws
+	 */
+	public void getSortListData(final Context context, final int type) {
+		SortListRequest request = new SortListRequest();
+		request.setType(type);
+		request.setAreaId(CommonManager.getInstance().getAreaId(context));
+		DataFetcher.getInstance().getSortListResult(request, new Listener<JSONObject>() {
+
+			@Override
+			public void onResponse(JSONObject response) {
+				// TODO Auto-generated method stub
+				LogUtil.getLogger().d("response==>" + response.toString());
+				final SortListResponse mSortListResponse = (SortListResponse) JsonUtil.jsonToBean(response,
+						SortListResponse.class);
+
+				// 数据响应状态
+				int stateCode = mSortListResponse.status.code;
+				switch (stateCode) {
+				case Constan.SUCCESS_CODE:
+					switch (type) {
+					case Constan.AREA_TYPE:
+						areaList = mSortListResponse.sortList;
+						break;
+
+					case Constan.SHOP_TYPE:
+						shopList = mSortListResponse.sortList;
+						break;
+
+					}
+					break;
+
+				case Constan.EMPTY_CODE:
+
+					break;
+
+				case Constan.ERROR_CODE:
+
+					break;
+				}
+
+			}
+		}, new ErrorListener() {
+
+			@Override
+			public void onErrorResponse(VolleyError error) {
+				// TODO Auto-generated method stub
+			}
+		}, true);
+	}
 }

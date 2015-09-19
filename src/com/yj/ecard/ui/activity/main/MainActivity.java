@@ -9,16 +9,23 @@
 
 package com.yj.ecard.ui.activity.main;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import net.youmi.android.AdManager;
 import net.youmi.android.offers.EarnPointsOrderList;
 import net.youmi.android.offers.OffersManager;
 import net.youmi.android.offers.PointsChangeNotify;
 import net.youmi.android.offers.PointsEarnNotify;
 import net.youmi.android.offers.PointsManager;
+
+import org.json.JSONObject;
+
 import android.content.Context;
 import android.content.Intent;
 import android.content.res.Configuration;
 import android.os.Bundle;
+import android.os.Parcelable;
 import android.support.v4.app.ActionBarDrawerToggle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
@@ -38,8 +45,17 @@ import com.yj.ecard.R;
 import com.yj.ecard.business.common.CommonManager;
 import com.yj.ecard.business.screenlock.ScreenLockManager;
 import com.yj.ecard.business.user.UserManager;
+import com.yj.ecard.publics.http.model.request.SortListRequest;
+import com.yj.ecard.publics.http.model.response.SortListResponse;
+import com.yj.ecard.publics.http.net.DataFetcher;
+import com.yj.ecard.publics.http.volley.Response.ErrorListener;
+import com.yj.ecard.publics.http.volley.Response.Listener;
+import com.yj.ecard.publics.http.volley.VolleyError;
+import com.yj.ecard.publics.model.SortBean;
 import com.yj.ecard.publics.utils.Constan;
 import com.yj.ecard.publics.utils.ImageLoaderUtil;
+import com.yj.ecard.publics.utils.JsonUtil;
+import com.yj.ecard.publics.utils.LogUtil;
 import com.yj.ecard.publics.utils.ToastUtil;
 import com.yj.ecard.publics.utils.Utils;
 import com.yj.ecard.service.PhoneService;
@@ -62,6 +78,8 @@ public class MainActivity extends BaseActivity implements OnClickListener, Point
 	private ImageView ivHead, ivSwitch;
 	private DrawerLayout mDrawerLayout;
 	private ActionBarDrawerToggle mDrawerToggle;
+	private List<SortBean> areaList = new ArrayList<SortBean>();
+	private List<SortBean> shopList = new ArrayList<SortBean>();
 
 	private final int[] btns = { R.id.iv_user_head, R.id.btn_password, R.id.btn_custom, R.id.btn_cache,
 			R.id.btn_switch, R.id.btn_version, R.id.btn_about, R.id.btn_exit };
@@ -107,7 +125,10 @@ public class MainActivity extends BaseActivity implements OnClickListener, Point
 
 			@Override
 			public boolean onMenuItemClick(MenuItem paramMenuItem) {
-				startActivity(new Intent(context, PopSortActivity.class));
+				Intent intent = new Intent(context, PopSortActivity.class);
+				intent.putParcelableArrayListExtra("areaList", (ArrayList<? extends Parcelable>) areaList);
+				intent.putParcelableArrayListExtra("shopList", (ArrayList<? extends Parcelable>) shopList);
+				startActivity(intent);
 				CommonManager.getInstance().setMenuItemClick(context, true);
 				return false;
 			}
@@ -149,6 +170,10 @@ public class MainActivity extends BaseActivity implements OnClickListener, Point
 	* @throws 
 	*/
 	private void initViews() {
+		// 默认全部
+		CommonManager.getInstance().setAreaSortValue(context, 0);
+		CommonManager.getInstance().setShopSortValue(context, 0);
+
 		mDrawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
 		mDrawerLayout.setDrawerShadow(R.drawable.drawer_shadow, GravityCompat.START);
 		mDrawerToggle = new ActionBarDrawerToggle(this, mDrawerLayout, R.drawable.ic_drawer, R.string.drawer_open,
@@ -221,6 +246,10 @@ public class MainActivity extends BaseActivity implements OnClickListener, Point
 		if (state) {
 			startScreenLock(); // 开启锁屏后台服务
 		}
+
+		// 获取地区
+		getSortListData(this, Constan.AREA_TYPE);
+		getSortListData(this, Constan.SHOP_TYPE);
 	}
 
 	/** 
@@ -402,6 +431,63 @@ public class MainActivity extends BaseActivity implements OnClickListener, Point
 	public void onPointEarn(Context arg0, EarnPointsOrderList arg1) {
 		// TODO Auto-generated method stub
 
+	}
+
+	/**
+	 * 
+	* @Title: getSortListData 
+	* @Description: TODO(这里用一句话描述这个方法的作用) 
+	* @param @param context
+	* @param @param type    设定文件 
+	* @return void    返回类型 
+	* @throws
+	 */
+	public void getSortListData(final Context context, final int type) {
+		SortListRequest request = new SortListRequest();
+		request.setType(type);
+		request.setAreaId(CommonManager.getInstance().getAreaId(context));
+		DataFetcher.getInstance().getSortListResult(request, new Listener<JSONObject>() {
+
+			@Override
+			public void onResponse(JSONObject response) {
+				// TODO Auto-generated method stub
+				LogUtil.getLogger().d("response==>" + response.toString());
+				final SortListResponse mSortListResponse = (SortListResponse) JsonUtil.jsonToBean(response,
+						SortListResponse.class);
+
+				// 数据响应状态
+				int stateCode = mSortListResponse.status.code;
+				switch (stateCode) {
+				case Constan.SUCCESS_CODE:
+					switch (type) {
+					case Constan.AREA_TYPE:
+						areaList = mSortListResponse.sortList;
+						break;
+
+					case Constan.SHOP_TYPE:
+						shopList = mSortListResponse.sortList;
+						break;
+
+					}
+					break;
+
+				case Constan.EMPTY_CODE:
+
+					break;
+
+				case Constan.ERROR_CODE:
+
+					break;
+				}
+
+			}
+		}, new ErrorListener() {
+
+			@Override
+			public void onErrorResponse(VolleyError error) {
+				// TODO Auto-generated method stub
+			}
+		}, true);
 	}
 
 }
