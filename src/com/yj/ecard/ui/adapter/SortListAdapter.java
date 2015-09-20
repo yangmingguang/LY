@@ -73,7 +73,6 @@ public class SortListAdapter extends ArrayListBaseAdapter<SortBean> {
 					break;
 				}
 				notifyDataSetChanged();
-				activity.finish();
 			}
 		});
 
