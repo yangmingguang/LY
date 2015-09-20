@@ -20,6 +20,7 @@ import android.view.ViewGroup;
 import android.widget.GridView;
 
 import com.yj.ecard.R;
+import com.yj.ecard.business.common.CommonManager;
 import com.yj.ecard.publics.model.SortBean;
 import com.yj.ecard.publics.utils.Constan;
 import com.yj.ecard.ui.adapter.SortListAdapter;
@@ -44,7 +45,6 @@ public class PopSortActivity extends Activity {
 		// dialog样式默认不全屏，要设置全屏显示
 		getWindow().setLayout(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT);
 		initView();
-		//loadAllData();
 	}
 
 	// 实现onTouchEvent触屏函数但点击屏幕时销毁本Activity
@@ -62,6 +62,8 @@ public class PopSortActivity extends Activity {
 	* @throws 
 	*/
 	private void initView() {
+		CommonManager.getInstance().setAreaClick(this, false);
+		CommonManager.getInstance().setSortClick(this, false);
 		List<SortBean> areaList = getIntent().getParcelableArrayListExtra("areaList");
 		List<SortBean> shopList = getIntent().getParcelableArrayListExtra("shopList");
 

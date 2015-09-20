@@ -286,6 +286,22 @@ public class CommonManager {
 		return SharedPrefsUtil.getValue(context, "menuItemClick", false);
 	}
 
+	public void setAreaClick(Context context, boolean isClick) {
+		SharedPrefsUtil.putValue(context, "areaClick", isClick);
+	}
+
+	public boolean getAreaClick(Context context) {
+		return SharedPrefsUtil.getValue(context, "areaClick", false);
+	}
+
+	public void setSortClick(Context context, boolean isClick) {
+		SharedPrefsUtil.putValue(context, "sortClick", isClick);
+	}
+
+	public boolean getSortClick(Context context) {
+		return SharedPrefsUtil.getValue(context, "sortClick", false);
+	}
+
 	/**
 	 * 
 	* @Title: initLocation 
