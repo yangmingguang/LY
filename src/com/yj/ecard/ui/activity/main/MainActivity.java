@@ -242,6 +242,7 @@ public class MainActivity extends BaseActivity implements OnClickListener, Point
 		CommonManager.getInstance().initLocation(context);// 开启定位服务
 		CommonManager.getInstance().getShareContentData(context); // 获取分享内容
 		CommonManager.getInstance().checkNewVersion(this, true);// 新版本检测
+		CommonManager.getInstance().getWelcomeData(context);// 下载欢迎图片
 		boolean state = CommonManager.getInstance().getSwitchState(context);
 		if (state) {
 			startScreenLock(); // 开启锁屏后台服务

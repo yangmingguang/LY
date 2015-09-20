@@ -56,6 +56,7 @@ import com.yj.ecard.publics.http.model.request.ValidateCodeRequest;
 import com.yj.ecard.publics.http.model.request.ValueSpikeDetailRequest;
 import com.yj.ecard.publics.http.model.request.ValueSpikeExchangeRequest;
 import com.yj.ecard.publics.http.model.request.ValueSpikeListRequest;
+import com.yj.ecard.publics.http.model.request.WelcomeRequest;
 import com.yj.ecard.publics.http.model.request.WithdrawBalanceRequest;
 import com.yj.ecard.publics.http.model.request.WithdrawRequest;
 import com.yj.ecard.publics.http.model.request.WonderfulAdDetailRequest;
@@ -1075,6 +1076,23 @@ public class DataFetcher {
 
 		String requestUrl = String.format(url, request.areaId);
 
+		get(requestUrl, listener, errorListener, shouldCache);
+	}
+
+	/**
+	 * 
+	* @Title: getWelcomeResult 
+	* @Description: 获取欢迎图片
+	* @param @param request
+	* @param @param listener
+	* @param @param errorListener
+	* @param @param shouldCache    设定文件 
+	* @return void    返回类型 
+	* @throws
+	 */
+	public void getWelcomeResult(WelcomeRequest request, Listener<JSONObject> listener, ErrorListener errorListener,
+			boolean shouldCache) {
+		String requestUrl = String.format(WebUrl.GET_WELCOME_URL);
 		get(requestUrl, listener, errorListener, shouldCache);
 	}
 }

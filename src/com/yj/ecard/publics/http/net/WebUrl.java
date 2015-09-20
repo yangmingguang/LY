@@ -197,4 +197,7 @@ public class WebUrl {
 	// 55.获取商家分类列表
 	public static final String GET_SHOP_LIST_URL = NEW_BASE_URL + "shangjia/GetClasssort?areaId=%s";
 
+	// 56.获取欢迎页图片
+	public static final String GET_WELCOME_URL = NEW_BASE_URL + "welcome/getWelcom";
+
 }

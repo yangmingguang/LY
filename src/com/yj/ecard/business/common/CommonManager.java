@@ -28,9 +28,11 @@ import com.yj.ecard.business.user.UserManager;
 import com.yj.ecard.publics.http.model.request.AreaIdRequest;
 import com.yj.ecard.publics.http.model.request.ShareRequest;
 import com.yj.ecard.publics.http.model.request.UpdateRequest;
+import com.yj.ecard.publics.http.model.request.WelcomeRequest;
 import com.yj.ecard.publics.http.model.response.AreaIdResponse;
 import com.yj.ecard.publics.http.model.response.ShareResponse;
 import com.yj.ecard.publics.http.model.response.UpdateResponse;
+import com.yj.ecard.publics.http.model.response.WelcomeResponse;
 import com.yj.ecard.publics.http.net.DataFetcher;
 import com.yj.ecard.publics.http.volley.Response.ErrorListener;
 import com.yj.ecard.publics.http.volley.Response.Listener;
@@ -539,5 +541,106 @@ public class CommonManager {
 
 			}
 		}, true);
+	}
+
+	/**
+	 * 
+	* @Title: getWelcomeData 
+	* @Description: 获取欢迎图片
+	* @param @param context    设定文件 
+	* @return void    返回类型 
+	* @throws
+	 */
+	public void getWelcomeData(final Context context) {
+		WelcomeRequest request = new WelcomeRequest();
+		DataFetcher.getInstance().getWelcomeResult(request, new Listener<JSONObject>() {
+
+			@Override
+			public void onResponse(JSONObject response) {
+				// TODO Auto-generated method stub
+				LogUtil.getLogger().d("response==>" + response.toString());
+				final WelcomeResponse mWelcomeResponse = (WelcomeResponse) JsonUtil.jsonToBean(response,
+						WelcomeResponse.class);
+
+				// 数据响应状态
+				int stateCode = mWelcomeResponse.status.code;
+				switch (stateCode) {
+				case Constan.SUCCESS_CODE:
+					startDownloadImage(context, mWelcomeResponse.picUrl);
+					break;
+
+				case Constan.EMPTY_CODE:
+
+					break;
+
+				case Constan.ERROR_CODE:
+
+					break;
+				}
+
+			}
+		}, new ErrorListener() {
+
+			@Override
+			public void onErrorResponse(VolleyError error) {
+				// TODO Auto-generated method stub
+			}
+		}, true);
+	}
+
+	/**
+	 * 
+	* @Title: startDownloadImage 
+	* @Description: 开始下载图片
+	* @param @param context
+	* @param @param url
+	* @param @param isLargeUrl    设定文件 
+	* @return void    返回类型 
+	* @throws
+	 */
+	private void startDownloadImage(final Context context, final String url) {
+		// 判断文件目录是否存在
+		String path = StorageUtils.IMAGE_PATH;
+		File dir = new File(path);
+		if (!dir.exists()) {
+			dir.mkdirs();
+		}
+
+		// 文件名称
+		final String targetPath = path + "app_welcome.jpg";
+
+		try {
+			DownloadService.getDownloadManager(context).addNewDownload(url, "leying", targetPath, true, false,
+					new RequestCallBack<File>() {
+
+						@Override
+						public void onStart() {
+							// TODO Auto-generated method stub
+							System.out.println("onStart");
+						}
+
+						@Override
+						public void onLoading(long total, long current, boolean isUploading) {
+							// TODO Auto-generated method stub
+							System.out.println("total = " + total + ",current = " + current);
+							//CustomNotificationManager.getInstance().updateProgress((int) total, (int) current);
+						}
+
+						@Override
+						public void onSuccess(ResponseInfo<File> responseInfo) {
+							// TODO Auto-generated method stub
+							System.out.println("=======欢迎页图片下载成功=======");
+						}
+
+						@Override
+						public void onFailure(HttpException error, String msg) {
+							// TODO Auto-generated method stub
+							System.out.println("onFailure");
+						}
+					});
+		} catch (DbException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 }
