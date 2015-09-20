@@ -19,8 +19,9 @@ import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
-import android.os.Handler;
 import android.util.DisplayMetrics;
+import android.view.animation.AlphaAnimation;
+import android.view.animation.Animation;
 import android.widget.ImageView;
 
 import com.yj.ecard.R;
@@ -45,7 +46,6 @@ public class WelcomeActivity extends Activity {
 
 	private ImageView imageView;
 	private Context context = this;
-	private Handler handler = new Handler();
 	private static final String welcomeUrl = StorageUtils.IMAGE_PATH + "app_welcome.jpg";
 
 	@Override
@@ -72,7 +72,8 @@ public class WelcomeActivity extends Activity {
 	private void initParams() {
 		// 设置Welcome图片
 		imageView = (ImageView) findViewById(R.id.img_welcome);
-		Utils.setBackgroundResource(this, R.drawable.ic_welcome, imageView);
+		// 显示欢迎页
+		showWelcome();
 
 		// 存储屏幕宽度，方便后续使用
 		DisplayMetrics dm = new DisplayMetrics();
@@ -82,9 +83,6 @@ public class WelcomeActivity extends Activity {
 
 		DBService.getInstance(context).updateCall(0); // 初始化--未在通话中
 		CommonManager.getInstance().initLocation(context);// 开启定位服务
-
-		// 显示欢迎页
-		showWelcome();
 
 		// 进入下一个界面
 		showNextPage();
@@ -98,20 +96,18 @@ public class WelcomeActivity extends Activity {
 	* @throws 
 	*/
 	private void showWelcome() {
-		handler.postDelayed(new Runnable() {
+		File imageFile = new File(welcomeUrl);
+		if (imageFile.exists()) {
+			Bitmap bitmap = BitmapFactory.decodeFile(welcomeUrl);
+			imageView.setImageBitmap(bitmap);
+		} else {
+			Utils.setBackgroundResource(this, R.drawable.ic_welcome, imageView);
+		}
 
-			@Override
-			public void run() {
-				// TODO Auto-generated method stub
-				File imageFile = new File(welcomeUrl);
-				if (imageFile.exists()) {
-					Bitmap bitmap = BitmapFactory.decodeFile(welcomeUrl);
-					// 显示欢迎页
-					imageView.setImageBitmap(bitmap);
-					return;
-				}
-			}
-		}, 1000);
+		//初始化  
+		Animation alphaAnimation = new AlphaAnimation(0.2f, 1.0f);
+		alphaAnimation.setDuration(800); //设置动画时间
+		imageView.startAnimation(alphaAnimation);
 	}
 
 	/** 
