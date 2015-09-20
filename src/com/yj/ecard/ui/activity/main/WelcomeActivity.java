@@ -9,13 +9,17 @@
 
 package com.yj.ecard.ui.activity.main;
 
+import java.io.File;
 import java.util.Timer;
 import java.util.TimerTask;
 
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.os.Bundle;
+import android.os.Handler;
 import android.util.DisplayMetrics;
 import android.widget.ImageView;
 
@@ -25,6 +29,7 @@ import com.yj.ecard.business.user.UserManager;
 import com.yj.ecard.db.DBService;
 import com.yj.ecard.publics.utils.Constan;
 import com.yj.ecard.publics.utils.SharedPrefsUtil;
+import com.yj.ecard.publics.utils.StorageUtils;
 import com.yj.ecard.publics.utils.Utils;
 import com.yj.ecard.ui.activity.user.LoginActivity;
 
@@ -40,6 +45,8 @@ public class WelcomeActivity extends Activity {
 
 	private ImageView imageView;
 	private Context context = this;
+	private Handler handler = new Handler();
+	private static final String welcomeUrl = StorageUtils.IMAGE_PATH + "app_welcome.jpg";
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -76,8 +83,35 @@ public class WelcomeActivity extends Activity {
 		DBService.getInstance(context).updateCall(0); // 初始化--未在通话中
 		CommonManager.getInstance().initLocation(context);// 开启定位服务
 
+		// 显示欢迎页
+		showWelcome();
+
 		// 进入下一个界面
 		showNextPage();
+	}
+
+	/** 
+	* @Title: showWelcome 
+	* @Description: TODO(这里用一句话描述这个方法的作用) 
+	* @param     设定文件 
+	* @return void    返回类型 
+	* @throws 
+	*/
+	private void showWelcome() {
+		handler.postDelayed(new Runnable() {
+
+			@Override
+			public void run() {
+				// TODO Auto-generated method stub
+				File imageFile = new File(welcomeUrl);
+				if (imageFile.exists()) {
+					Bitmap bitmap = BitmapFactory.decodeFile(welcomeUrl);
+					// 显示欢迎页
+					imageView.setImageBitmap(bitmap);
+					return;
+				}
+			}
+		}, 1000);
 	}
 
 	/** 
