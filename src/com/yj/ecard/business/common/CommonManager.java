@@ -626,7 +626,7 @@ public class CommonManager {
 		final String targetPath = path + "app_welcome.jpg";
 
 		try {
-			DownloadService.getDownloadManager(context).addNewDownload(url, "leying", targetPath, true, false,
+			DownloadService.getDownloadManager(context).addNewDownload(url, "leying", targetPath, false, false,
 					new RequestCallBack<File>() {
 
 						@Override
