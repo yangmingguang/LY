@@ -195,6 +195,7 @@ public class FeatureBusinessActivity extends BaseActivity {
 			mPtrListView.onRefreshComplete();
 			switch (msg.what) {
 			case MeTabManager.onSuccess:
+				emptyView.setVisibility(View.GONE);
 				BusinessListResponse response = (BusinessListResponse) msg.obj;
 				mList.addAll(response.data);
 				mAdapter.setList(mList);
@@ -208,11 +209,11 @@ public class FeatureBusinessActivity extends BaseActivity {
 				break;
 
 			case MeTabManager.onEmpty:
-				mListView.setEmptyView(emptyView);
+				mPtrListView.setEmptyView(emptyView);
 				break;
 
 			case MeTabManager.onFailure:
-				mListView.setEmptyView(emptyView);
+				mPtrListView.setEmptyView(emptyView);
 				break;
 			}
 			return true;

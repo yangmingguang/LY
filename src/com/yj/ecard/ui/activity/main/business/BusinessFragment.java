@@ -156,6 +156,7 @@ public class BusinessFragment extends BaseFragment {
 			mPtrListView.onRefreshComplete();
 			switch (msg.what) {
 			case MeTabManager.onSuccess:
+				emptyView.setVisibility(View.GONE);
 				BusinessListResponse response = (BusinessListResponse) msg.obj;
 				mList.addAll(response.data);
 				mAdapter.setList(mList);
@@ -169,7 +170,7 @@ public class BusinessFragment extends BaseFragment {
 				break;
 
 			case MeTabManager.onEmpty:
-				mListView.setEmptyView(emptyView);
+				mPtrListView.setEmptyView(emptyView);
 				break;
 
 			case MeTabManager.onFailure:

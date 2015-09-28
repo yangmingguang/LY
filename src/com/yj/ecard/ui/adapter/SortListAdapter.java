@@ -66,17 +66,13 @@ public class SortListAdapter extends ArrayListBaseAdapter<SortBean> {
 				switch (type) {
 				case Constan.AREA_TYPE:
 					CommonManager.getInstance().setAreaSortValue(context, sortBean.id);
-					CommonManager.getInstance().setAreaClick(context, true); // 标记已点击
 					notifyDataSetChanged();
 					break;
 
 				case Constan.SHOP_TYPE:
 					CommonManager.getInstance().setShopSortValue(context, sortBean.id);
-					boolean isClick = CommonManager.getInstance().getAreaClick(context); // 必须先是区域已选取了
 					notifyDataSetChanged();
-					if (isClick) {
-						activity.finish();
-					}
+					activity.finish();
 					break;
 				}
 			}
