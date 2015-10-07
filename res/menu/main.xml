@@ -1,10 +1,10 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:test="http://schemas.android.com/apk/res-auto" >
+    xmlns:app="http://schemas.android.com/apk/res-auto" >
 
     <item
         android:id="@+id/all_business"
-        android:icon="@drawable/ic_menu_point"
         android:title="@string/app_name"
-        test:showAsAction="always"/>
+        app:actionLayout="@layout/menu_city_item"
+        app:showAsAction="always"/>
 
 </menu>

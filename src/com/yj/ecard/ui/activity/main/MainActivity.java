@@ -34,7 +34,6 @@ import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.MenuItem.OnMenuItemClickListener;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.ImageView;
@@ -75,6 +74,7 @@ import com.yj.ecard.ui.activity.user.ModifyPassWordActivity;
 public class MainActivity extends BaseActivity implements OnClickListener, PointsChangeNotify, PointsEarnNotify {
 
 	private MenuItem menuItem;
+	private View mCityMenuView;
 	private ImageView ivHead, ivSwitch;
 	private DrawerLayout mDrawerLayout;
 	private ActionBarDrawerToggle mDrawerToggle;
@@ -121,18 +121,33 @@ public class MainActivity extends BaseActivity implements OnClickListener, Point
 		getMenuInflater().inflate(R.menu.main, menu);
 		menuItem = menu.findItem(R.id.all_business);
 		menuItem.setVisible(false);
-		menuItem.setOnMenuItemClickListener(new OnMenuItemClickListener() {
+		mCityMenuView = menuItem.getActionView();
+
+		/*		menuItem.setOnMenuItemClickListener(new OnMenuItemClickListener() {
+
+					@Override
+					public boolean onMenuItemClick(MenuItem paramMenuItem) {
+						Intent intent = new Intent(context, PopSortActivity.class);
+						intent.putParcelableArrayListExtra("areaList", (ArrayList<? extends Parcelable>) areaList);
+						intent.putParcelableArrayListExtra("shopList", (ArrayList<? extends Parcelable>) shopList);
+						startActivity(intent);
+						CommonManager.getInstance().setMenuItemClick(context, true);
+						return false;
+					}
+				});*/
+
+		mCityMenuView.setOnClickListener(new OnClickListener() {
 
 			@Override
-			public boolean onMenuItemClick(MenuItem paramMenuItem) {
+			public void onClick(View v) {
 				Intent intent = new Intent(context, PopSortActivity.class);
 				intent.putParcelableArrayListExtra("areaList", (ArrayList<? extends Parcelable>) areaList);
 				intent.putParcelableArrayListExtra("shopList", (ArrayList<? extends Parcelable>) shopList);
 				startActivity(intent);
 				CommonManager.getInstance().setMenuItemClick(context, true);
-				return false;
 			}
 		});
+
 		return super.onCreateOptionsMenu(menu);
 	}
 

@@ -23,8 +23,8 @@ import android.os.Parcelable;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.MenuItem.OnMenuItemClickListener;
 import android.view.View;
+import android.view.View.OnClickListener;
 import android.widget.ListView;
 import android.widget.TextView;
 
@@ -63,6 +63,7 @@ import com.yj.ecard.ui.views.pulltorefresh.PullToRefreshListView;
 
 public class FeatureBusinessActivity extends BaseActivity {
 
+	private View mCityMenuView;
 	private int sortId, areaId;
 	private int pageIndex = 1;
 	private TextView tvLocation;
@@ -102,16 +103,30 @@ public class FeatureBusinessActivity extends BaseActivity {
 	public boolean onCreateOptionsMenu(Menu menu) {
 		getMenuInflater().inflate(R.menu.main, menu);
 		MenuItem menuItem = menu.findItem(R.id.all_business);
-		menuItem.setOnMenuItemClickListener(new OnMenuItemClickListener() {
+		mCityMenuView = menuItem.getActionView();
+
+		/*		menuItem.setOnMenuItemClickListener(new OnMenuItemClickListener() {
+
+					@Override
+					public boolean onMenuItemClick(MenuItem paramMenuItem) {
+						Intent intent = new Intent(context, PopSortActivity.class);
+						intent.putParcelableArrayListExtra("areaList", (ArrayList<? extends Parcelable>) areaList);
+						intent.putParcelableArrayListExtra("shopList", (ArrayList<? extends Parcelable>) shopList);
+						startActivity(intent);
+						isClicked = true;
+						return false;
+					}
+				});*/
+
+		mCityMenuView.setOnClickListener(new OnClickListener() {
 
 			@Override
-			public boolean onMenuItemClick(MenuItem paramMenuItem) {
+			public void onClick(View v) {
 				Intent intent = new Intent(context, PopSortActivity.class);
 				intent.putParcelableArrayListExtra("areaList", (ArrayList<? extends Parcelable>) areaList);
 				intent.putParcelableArrayListExtra("shopList", (ArrayList<? extends Parcelable>) shopList);
 				startActivity(intent);
 				isClicked = true;
-				return false;
 			}
 		});
 
