@@ -5,30 +5,34 @@
     android:background="@drawable/selector_slidingmenu_item"
     android:orientation="vertical" >
 
-    <LinearLayout
+    <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:gravity="center_vertical"
         android:padding="12dp" >
 
         <TextView
             android:id="@+id/tv_title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
             android:drawableLeft="@drawable/ic_desciption"
             android:drawablePadding="4dp"
-            android:gravity="center"
+            android:gravity="center_vertical"
+            android:layout_alignParentLeft="true"
             android:textColor="#FF8847"
+            android:layout_toLeftOf="@+id/tv_exchange_state"
             android:textSize="@dimen/exchange_title_text" />
 
         <TextView
             android:id="@+id/tv_exchange_state"
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
             android:gravity="right"
             android:textColor="#FF8847"
             android:textSize="@dimen/exchange_subtitle_text" />
-    </LinearLayout>
+    </RelativeLayout>
 
     <View
         android:layout_width="match_parent"
