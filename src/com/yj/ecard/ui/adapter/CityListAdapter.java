@@ -9,6 +9,7 @@
 
 package com.yj.ecard.ui.adapter;
 
+import android.app.Activity;
 import android.content.Context;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -16,6 +17,7 @@ import android.view.ViewGroup;
 import android.widget.SectionIndexer;
 
 import com.yj.ecard.R;
+import com.yj.ecard.business.common.CommonManager;
 import com.yj.ecard.publics.model.CityBean;
 import com.yj.ecard.publics.utils.ToastUtil;
 import com.yj.ecard.ui.adapter.base.ArrayListBaseAdapter;
@@ -64,6 +66,10 @@ public class CityListAdapter extends ArrayListBaseAdapter<CityBean> implements S
 			@Override
 			public void onClick(View view) {
 				ToastUtil.show(context, cityBean.getCityName(), ToastUtil.LENGTH_SHORT);
+				// 存储城市id、名称
+				CommonManager.getInstance().setAreaId(context, cityBean.getId());
+				CommonManager.getInstance().setLocationCity(context, cityBean.getCityName());
+				((Activity) context).finish();
 			}
 		});
 

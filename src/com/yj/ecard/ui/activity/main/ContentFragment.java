@@ -66,7 +66,7 @@ public class ContentFragment extends BaseFragment {
 					if (null == homeFragement)
 						homeFragement = HomeFragment.newInstance(null);
 					switchFragments(homeFragement);
-					mainActivity.showMenuItem(false);
+					mainActivity.showMenuItem(true, true);
 					break;
 
 				// 商家
@@ -74,7 +74,7 @@ public class ContentFragment extends BaseFragment {
 					if (null == businessFragment)
 						businessFragment = BusinessFragment.newInstance(null);
 					switchFragments(businessFragment);
-					mainActivity.showMenuItem(true);
+					mainActivity.showMenuItem(true, false);
 					break;
 
 				// 我的
@@ -82,7 +82,7 @@ public class ContentFragment extends BaseFragment {
 					if (null == meFragment)
 						meFragment = MeFragment.newInstance(null);
 					switchFragments(meFragment);
-					mainActivity.showMenuItem(false);
+					mainActivity.showMenuItem(false, false);
 					break;
 
 				// 赚钱
@@ -91,7 +91,7 @@ public class ContentFragment extends BaseFragment {
 						moneyFragment = MoneyFragment.newInstance(null);
 					switchFragments(moneyFragment);
 					((MoneyFragment) moneyFragment).showWall();
-					mainActivity.showMenuItem(false);
+					mainActivity.showMenuItem(false, false);
 					break;
 
 				// 兑换
@@ -99,7 +99,7 @@ public class ContentFragment extends BaseFragment {
 					if (null == exchangeFragment)
 						exchangeFragment = ExchangeFragment.newInstance(null);
 					switchFragments(exchangeFragment);
-					mainActivity.showMenuItem(false);
+					mainActivity.showMenuItem(false, false);
 					break;
 				}
 			}

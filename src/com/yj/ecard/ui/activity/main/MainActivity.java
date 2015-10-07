@@ -75,6 +75,8 @@ public class MainActivity extends BaseActivity implements OnClickListener, Point
 
 	private MenuItem menuItem;
 	private View mCityMenuView;
+	private TextView tvMenuName;
+	private boolean isHomeTab = true;
 	private ImageView ivHead, ivSwitch;
 	private DrawerLayout mDrawerLayout;
 	private ActionBarDrawerToggle mDrawerToggle;
@@ -102,6 +104,13 @@ public class MainActivity extends BaseActivity implements OnClickListener, Point
 			ImageLoaderUtil.load(context, ImageType.NETWORK, path, R.drawable.ic_default_head,
 					R.drawable.ic_default_head, ivHead);
 		}
+		if (tvMenuName != null && isHomeTab) {
+			String city = CommonManager.getInstance().getLocationCity(context);
+			tvMenuName.setText(city);
+		}
+		// 获取地区
+		getSortListData(this, Constan.AREA_TYPE);
+		getSortListData(this, Constan.SHOP_TYPE);
 	}
 
 	@Override
@@ -120,43 +129,42 @@ public class MainActivity extends BaseActivity implements OnClickListener, Point
 	public boolean onCreateOptionsMenu(Menu menu) {
 		getMenuInflater().inflate(R.menu.main, menu);
 		menuItem = menu.findItem(R.id.all_business);
-		menuItem.setVisible(false);
 		mCityMenuView = menuItem.getActionView();
-
-		/*		menuItem.setOnMenuItemClickListener(new OnMenuItemClickListener() {
-
-					@Override
-					public boolean onMenuItemClick(MenuItem paramMenuItem) {
-						Intent intent = new Intent(context, PopSortActivity.class);
-						intent.putParcelableArrayListExtra("areaList", (ArrayList<? extends Parcelable>) areaList);
-						intent.putParcelableArrayListExtra("shopList", (ArrayList<? extends Parcelable>) shopList);
-						startActivity(intent);
-						CommonManager.getInstance().setMenuItemClick(context, true);
-						return false;
-					}
-				});*/
-
+		tvMenuName = (TextView) mCityMenuView.findViewById(R.id.tv_city);
+		String city = CommonManager.getInstance().getLocationCity(context);
+		tvMenuName.setText(city);
 		mCityMenuView.setOnClickListener(new OnClickListener() {
 
 			@Override
 			public void onClick(View v) {
-				Intent intent = new Intent(context, PopSortActivity.class);
-				intent.putParcelableArrayListExtra("areaList", (ArrayList<? extends Parcelable>) areaList);
-				intent.putParcelableArrayListExtra("shopList", (ArrayList<? extends Parcelable>) shopList);
-				startActivity(intent);
-				CommonManager.getInstance().setMenuItemClick(context, true);
+				if (isHomeTab) {
+					startActivity(new Intent(context, CityListActivity.class));
+				} else {
+					Intent intent = new Intent(context, PopSortActivity.class);
+					intent.putParcelableArrayListExtra("areaList", (ArrayList<? extends Parcelable>) areaList);
+					intent.putParcelableArrayListExtra("shopList", (ArrayList<? extends Parcelable>) shopList);
+					startActivity(intent);
+					CommonManager.getInstance().setMenuItemClick(context, true);
+				}
 			}
 		});
-
 		return super.onCreateOptionsMenu(menu);
 	}
 
-	public void showMenuItem(boolean isShow) {
+	public void showMenuItem(boolean isShow, boolean isHomeTab) {
+		this.isHomeTab = isHomeTab;
 		if (menuItem != null) {
+			menuItem.setVisible(false);
 			if (isShow) {
 				menuItem.setVisible(true);
 			} else {
 				menuItem.setVisible(false);
+			}
+			if (isHomeTab) {
+				String city = CommonManager.getInstance().getLocationCity(context);
+				tvMenuName.setText(city);
+			} else {
+				tvMenuName.setText("全部");
 			}
 		}
 	}
@@ -262,10 +270,6 @@ public class MainActivity extends BaseActivity implements OnClickListener, Point
 		if (state) {
 			startScreenLock(); // 开启锁屏后台服务
 		}
-
-		// 获取地区
-		getSortListData(this, Constan.AREA_TYPE);
-		getSortListData(this, Constan.SHOP_TYPE);
 	}
 
 	/** 
@@ -311,8 +315,8 @@ public class MainActivity extends BaseActivity implements OnClickListener, Point
 	public void onClick(View v) {
 		switch (v.getId()) {
 		case R.id.iv_user_head:
-			//ToastUtil.show(context, "Click Me!", ToastUtil.LENGTH_SHORT);
-			startActivity(new Intent(context, CityListActivity.class));
+			// ToastUtil.show(context, "Click Me!", ToastUtil.LENGTH_SHORT);
+			// startActivity(new Intent(context, CityListActivity.class));
 			break;
 
 		case R.id.btn_password:
