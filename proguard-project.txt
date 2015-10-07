@@ -101,6 +101,7 @@
 -keep class com.yj.ecard.business.** { *; }
 -keep class com.yj.ecard.publics.http.volley.** { *; } 
 -keep class com.yj.ecard.business.download.** { *; }  
+-keep class com.yj.ecard.service.** { *; }  
  
 
 
