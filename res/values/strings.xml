@@ -55,6 +55,7 @@
     <string name="title_product_detail">产品详情</string>
     <string name="title_order_detail">订单详情</string>
     <string name="title_address_list">收货地址列表</string>
+    <string name="title_city_list">城市列表</string>
 
     <!-- HomeTab -->
     <string name="footer_btn_home">首页</string>

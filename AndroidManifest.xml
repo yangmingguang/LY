@@ -83,6 +83,7 @@
             android:configChanges="orientation|screenSize|keyboardHidden"
             android:launchMode="singleTask"
             android:screenOrientation="portrait"
+            android:label="@string/title_city_list"
             android:windowSoftInputMode="stateHidden|adjustPan" >
         </activity>
 
