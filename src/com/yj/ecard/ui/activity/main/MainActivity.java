@@ -297,6 +297,7 @@ public class MainActivity extends BaseActivity implements OnClickListener, Point
 		switch (v.getId()) {
 		case R.id.iv_user_head:
 			//ToastUtil.show(context, "Click Me!", ToastUtil.LENGTH_SHORT);
+			startActivity(new Intent(context, CityListActivity.class));
 			break;
 
 		case R.id.btn_password:

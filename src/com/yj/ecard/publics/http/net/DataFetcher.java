@@ -21,6 +21,7 @@ import com.yj.ecard.publics.http.model.request.BannerRequest;
 import com.yj.ecard.publics.http.model.request.BusinessDetailRequest;
 import com.yj.ecard.publics.http.model.request.BusinessListRequest;
 import com.yj.ecard.publics.http.model.request.CheckCodeRequest;
+import com.yj.ecard.publics.http.model.request.CityListRequest;
 import com.yj.ecard.publics.http.model.request.CrashRequest;
 import com.yj.ecard.publics.http.model.request.DailyAttendanceRequest;
 import com.yj.ecard.publics.http.model.request.DeletePreferentialRequest;
@@ -1093,6 +1094,23 @@ public class DataFetcher {
 	public void getWelcomeResult(WelcomeRequest request, Listener<JSONObject> listener, ErrorListener errorListener,
 			boolean shouldCache) {
 		String requestUrl = String.format(WebUrl.GET_WELCOME_URL);
+		get(requestUrl, listener, errorListener, shouldCache);
+	}
+
+	/**
+	 * 
+	 * @Title: getCityListResult 
+	 * @Description: 获取城市列表
+	 * @param @param request
+	 * @param @param listener
+	 * @param @param errorListener
+	 * @param @param shouldCache    设定文件 
+	 * @return void    返回类型 
+	 * @throws
+	 */
+	public void getCityListResult(CityListRequest request, Listener<JSONObject> listener, ErrorListener errorListener,
+			boolean shouldCache) {
+		String requestUrl = String.format(WebUrl.GET_CITY_LIST_URL);
 		get(requestUrl, listener, errorListener, shouldCache);
 	}
 }

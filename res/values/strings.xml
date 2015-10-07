@@ -119,6 +119,7 @@
     <string name="draw_screen_tips">左划进入详情，右划解锁!</string>
     <string name="switch_open">开启划屏!</string>
     <string name="switch_close">关闭划屏!</string>
+    <string name="search_hint">请输入关键字</string>
 
     <!-- User -->
     <string name="username_hint">请输入手机号码</string>

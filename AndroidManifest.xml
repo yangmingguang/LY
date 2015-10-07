@@ -77,6 +77,15 @@
             </intent-filter>
         </activity>
 
+        <!-- 城市列表 -->
+        <activity
+            android:name="com.yj.ecard.ui.activity.main.CityListActivity"
+            android:configChanges="orientation|screenSize|keyboardHidden"
+            android:launchMode="singleTask"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="stateHidden|adjustPan" >
+        </activity>
+
         <!-- 用户登录 -->
         <activity
             android:name="com.yj.ecard.ui.activity.user.LoginActivity"
@@ -410,7 +419,7 @@
             android:configChanges="orientation|screenSize|keyboardHidden"
             android:label="@string/title_address_list"
             android:screenOrientation="portrait" />
-        
+
         <!-- 地区分类PopupWindow -->
         <activity
             android:name="com.yj.ecard.ui.activity.main.business.PopSortActivity"

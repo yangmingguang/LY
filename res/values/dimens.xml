@@ -84,5 +84,8 @@
     <dimen name="exchange_detail_thirdtitle">14sp</dimen>
     <dimen name="exchange_detail_fourthtitle">10sp</dimen>
     <dimen name="exchange_detail_btn_height">36dp</dimen>
-
+    
+    <!-- citylist -->
+    <dimen name="index_bar_view_text_size">11sp</dimen>
+    
 </resources>

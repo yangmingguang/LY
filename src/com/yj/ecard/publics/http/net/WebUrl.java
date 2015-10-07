@@ -200,4 +200,7 @@ public class WebUrl {
 	// 56.获取欢迎页图片
 	public static final String GET_WELCOME_URL = NEW_BASE_URL + "welcome/getWelcom";
 
+	// 57.获取城市列表
+	public static final String GET_CITY_LIST_URL = NEW_BASE_URL + "citys/lis";
+
 }
