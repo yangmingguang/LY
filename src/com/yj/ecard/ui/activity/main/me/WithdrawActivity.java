@@ -16,6 +16,7 @@ import android.text.TextUtils;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.EditText;
+import android.widget.TextView;
 
 import com.yj.ecard.R;
 import com.yj.ecard.business.user.UserManager;
@@ -28,6 +29,7 @@ import com.yj.ecard.publics.http.volley.VolleyError;
 import com.yj.ecard.publics.utils.Constan;
 import com.yj.ecard.publics.utils.JsonUtil;
 import com.yj.ecard.publics.utils.LogUtil;
+import com.yj.ecard.publics.utils.ResourceUtil;
 import com.yj.ecard.publics.utils.ToastUtil;
 import com.yj.ecard.publics.utils.Utils;
 import com.yj.ecard.ui.activity.base.BaseActivity;
@@ -42,6 +44,7 @@ import com.yj.ecard.ui.activity.base.BaseActivity;
 
 public class WithdrawActivity extends BaseActivity implements OnClickListener {
 
+	private TextView tvRemark;
 	private String realName, bankCardnum, bankName, cashAmount;
 	private final int[] btns = { R.id.btn_cancel, R.id.btn_confirm };
 	private EditText etName, etCardNum, etBank, etBalance, etCashBalance;
@@ -61,6 +64,8 @@ public class WithdrawActivity extends BaseActivity implements OnClickListener {
 	* @throws 
 	*/
 	private void initViews() {
+		tvRemark = (TextView) findViewById(R.id.tv_remark);
+		tvRemark.setText(ResourceUtil.getString(context, R.string.withdraw_remark));
 		etName = (EditText) findViewById(R.id.et_name);
 		etCardNum = (EditText) findViewById(R.id.et_cardnum);
 		etBank = (EditText) findViewById(R.id.et_bank);

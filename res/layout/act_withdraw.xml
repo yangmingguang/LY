@@ -56,8 +56,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="@null"
-                android:hint="@string/withdraw_balance_hint"
                 android:enabled="false"
+                android:hint="@string/withdraw_balance_hint"
                 android:padding="12dp"
                 android:textSize="16sp" />
 
@@ -85,6 +85,7 @@
             android:textSize="14sp" />
 
         <LinearLayout
+            android:id="@+id/ll_btn"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_below="@+id/tv_withdraw_tips"
@@ -114,6 +115,15 @@
                 android:textColor="@color/white"
                 android:textSize="18.0sp" />
         </LinearLayout>
+
+        <TextView
+            android:layout_below="@+id/ll_btn"
+            android:id="@+id/tv_remark"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textColor="#ff0000"
+            android:layout_marginTop="20dp"
+            android:textSize="14sp" />
     </RelativeLayout>
 
 </ScrollView>

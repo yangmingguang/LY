@@ -69,7 +69,7 @@
     <string name="btn_business_subtitle">名店特色风采</string>
     <string name="btn_exchange_title">兑换礼品</string>
     <string name="btn_exchange_subtitle">话费充值等</string>
-    <string name="invite_friend_title">邀请好友立赚3元 + 好友收入30%的奖励</string>
+    <string name="invite_friend_title">邀请活跃用户奖励3元\n+ 好友收入30%奖励</string>
     <string name="btn_invite_friend">邀请好友</string>
     <string name="total_income_title">82.89元</string>
     <string name="total_income_subtitle">累计收益</string>
@@ -198,6 +198,6 @@
     <string name="phone_tips">请填写收货人手机号！</string>
     <string name="address_tips">请填写收货人地址！</string>
     <string name="phone_number_tips">请填写手机号码！</string>
-    
+    <string name="withdraw_remark">*提现说明：\n 等级规则：用户级别V2以上 \n 升级规则：邀请活跃用户30人 \n 提现金额：每笔提现金额为50元的倍数 \n 提现周期：工作日24小内，节假日延迟 \n 备注：如遇支付平台系统故障或网络故障，提现\n 可能会稍有延迟，敬请谅解。</string>
 
 </resources>
