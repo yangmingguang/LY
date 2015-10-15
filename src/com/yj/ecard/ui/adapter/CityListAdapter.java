@@ -66,9 +66,11 @@ public class CityListAdapter extends ArrayListBaseAdapter<CityBean> implements S
 			@Override
 			public void onClick(View view) {
 				ToastUtil.show(context, cityBean.getCityName(), ToastUtil.LENGTH_SHORT);
-				// 存储城市id、名称
+				// 存储城市id、名称、经纬度
 				CommonManager.getInstance().setAreaId(context, cityBean.getId());
 				CommonManager.getInstance().setLocationCity(context, cityBean.getCityName());
+				CommonManager.getInstance().setLocationLat(context, cityBean.getLng());
+				CommonManager.getInstance().setLocationLng(context, cityBean.getLat());
 				((Activity) context).finish();
 			}
 		});

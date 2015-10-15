@@ -23,6 +23,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.yj.ecard.R;
+import com.yj.ecard.business.common.CommonManager;
 import com.yj.ecard.business.main.HomeTabManager;
 import com.yj.ecard.business.user.UserManager;
 import com.yj.ecard.publics.utils.Utils;
@@ -43,6 +44,7 @@ import com.yj.ecard.ui.views.viewflow.BannerViewFlow;
 
 public class HomeFragment extends BaseFragment implements OnClickListener {
 
+	private int mAreaId = -1;
 	private ImageView ivLogo;
 	private BannerViewFlow bannerViewFlow;
 	private TextView tvBalance, tvPrice, tvTitle;
@@ -70,6 +72,19 @@ public class HomeFragment extends BaseFragment implements OnClickListener {
 		super.onResume();
 		// 余额
 		HomeTabManager.getInstance().getBalanceData(context, tvBalance);
+
+		if (isChangeCity()) {
+			loadAllData(); //加载所有数据
+		}
+	}
+
+	private boolean isChangeCity() {
+		int currentAreaId = CommonManager.getInstance().getAreaId(context);
+		if (mAreaId != currentAreaId) {
+			mAreaId = currentAreaId;
+			return true;
+		}
+		return false;
 	}
 
 	/** 
@@ -97,8 +112,6 @@ public class HomeFragment extends BaseFragment implements OnClickListener {
 			rootView.findViewById(btn).setOnClickListener(this);
 
 		bannerViewFlow = new BannerViewFlow(context, rootView, R.id.fb_viewflow, R.id.fb_viewflowindic, null);
-
-		loadAllData();//加载所有数据
 	}
 
 	/** 
@@ -109,6 +122,7 @@ public class HomeFragment extends BaseFragment implements OnClickListener {
 	* @throws 
 	*/
 	private void loadAllData() {
+		loadingView.setVisibility(View.VISIBLE);
 		// 余额
 		// HomeTabManager.getInstance().getBalanceData(context, tvBalance);
 		// 广告
