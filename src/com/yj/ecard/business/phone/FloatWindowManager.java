@@ -19,6 +19,7 @@ import android.graphics.BitmapFactory;
 import android.graphics.PixelFormat;
 import android.os.Handler;
 import android.os.Message;
+import android.telephony.TelephonyManager;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -255,6 +256,12 @@ public class FloatWindowManager {
 			} catch (Exception e) {
 				// 
 			}
+		}
+
+		TelephonyManager manager = (TelephonyManager) context.getSystemService(context.TELEPHONY_SERVICE);
+		if (manager.getSimState() != TelephonyManager.SIM_STATE_READY) {
+			// 更新通话状态--SIM卡异常
+			DBService.getInstance(context).updateCall(0);
 		}
 	}
 

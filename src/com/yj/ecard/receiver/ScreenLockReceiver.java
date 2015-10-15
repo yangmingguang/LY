@@ -36,14 +36,17 @@ public class ScreenLockReceiver extends BroadcastReceiver {
 					context.startActivity(tempIntent);
 				}*/
 		} else if (intentAction.equals(Intent.ACTION_SCREEN_OFF)) {
+			// 是否开启划屏
+			int drawState = DBService.getInstance(context).getScreenLockState();
 			// 获取当前通话状态
 			int state = DBService.getInstance(context).getCallState();
-			if (state == 0) {
-
-				if (!ScreenLockActivity.isShow) {
-					Intent tempIntent = new Intent(context, ScreenLockActivity.class);
-					tempIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-					context.startActivity(tempIntent);
+			if (drawState == 0) {
+				if (state == 0) {
+					if (!ScreenLockActivity.isShow) {
+						Intent tempIntent = new Intent(context, ScreenLockActivity.class);
+						tempIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+						context.startActivity(tempIntent);
+					}
 				}
 			}
 		}

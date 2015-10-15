@@ -373,4 +373,33 @@ public class DBService {
 		return count;
 	}
 
+	/**
+	 * 
+	* @Title: setScreenLockState 
+	* @Description: TODO(这里用一句话描述这个方法的作用) 
+	* @param @param result    设定文件 
+	* @return void    返回类型 
+	* @throws
+	 */
+	public void setScreenLockState(int result) {
+		String sql = "UPDATE tb_screenlock_state SET isLock = ? where id = 1";
+		db.execSQL(sql, new Object[] { result });
+	}
+
+	/**
+	 * 
+	* @Title: getScreenLockState 
+	* @Description: TODO(这里用一句话描述这个方法的作用) 
+	* @param @return    设定文件 
+	* @return int    返回类型 
+	* @throws
+	 */
+	public int getScreenLockState() {
+		Cursor cursor = db.rawQuery("select count(*) from tb_screenlock_state where isLock = 1", null);
+		cursor.moveToFirst();
+		int count = cursor.getInt(0);
+		cursor.close();
+		return count;
+	}
+
 }

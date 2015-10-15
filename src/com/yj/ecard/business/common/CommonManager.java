@@ -254,14 +254,6 @@ public class CommonManager {
 		return SharedPrefsUtil.getValue(context, Constan.PROFESSION_ID, 0);
 	}
 
-	public void setSwitchState(Context context, boolean isOpen) {
-		SharedPrefsUtil.putValue(context, Constan.SWITCH_STATE, isOpen);
-	}
-
-	public boolean getSwitchState(Context context) {
-		return SharedPrefsUtil.getValue(context, Constan.SWITCH_STATE, true);
-	}
-
 	public void setAreaSortValue(Context context, int id) {
 		SharedPrefsUtil.putValue(context, Constan.AREA_SORT_ID, id);
 	}

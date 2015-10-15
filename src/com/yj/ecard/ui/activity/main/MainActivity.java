@@ -44,6 +44,7 @@ import com.yj.ecard.R;
 import com.yj.ecard.business.common.CommonManager;
 import com.yj.ecard.business.screenlock.ScreenLockManager;
 import com.yj.ecard.business.user.UserManager;
+import com.yj.ecard.db.DBService;
 import com.yj.ecard.publics.http.model.request.SortListRequest;
 import com.yj.ecard.publics.http.model.response.SortListResponse;
 import com.yj.ecard.publics.http.net.DataFetcher;
@@ -244,8 +245,8 @@ public class MainActivity extends BaseActivity implements OnClickListener, Point
 	* @throws
 	 */
 	private void setSwitchState() {
-		boolean state = CommonManager.getInstance().getSwitchState(context);
-		if (state) {
+		int state = DBService.getInstance(context).getScreenLockState();
+		if (state == 0) {
 			ivSwitch.setBackgroundResource(R.drawable.setting_open);
 		} else {
 			ivSwitch.setBackgroundResource(R.drawable.setting_close);
@@ -266,8 +267,8 @@ public class MainActivity extends BaseActivity implements OnClickListener, Point
 		CommonManager.getInstance().getShareContentData(context); // 获取分享内容
 		CommonManager.getInstance().checkNewVersion(this, true);// 新版本检测
 		CommonManager.getInstance().getWelcomeData(context);// 下载欢迎图片
-		boolean state = CommonManager.getInstance().getSwitchState(context);
-		if (state) {
+		int state = DBService.getInstance(context).getScreenLockState();
+		if (state == 0) {
 			startScreenLock(); // 开启锁屏后台服务
 		}
 	}
@@ -334,14 +335,15 @@ public class MainActivity extends BaseActivity implements OnClickListener, Point
 
 		case R.id.btn_switch:
 			int resId = R.string.switch_close;
-			boolean state = CommonManager.getInstance().getSwitchState(context);
-			if (state) {
+			// boolean state = CommonManager.getInstance().getSwitchState(context);
+			int state = DBService.getInstance(context).getScreenLockState();
+			if (state == 0) {
 				resId = R.string.switch_close;
-				CommonManager.getInstance().setSwitchState(context, false);
+				DBService.getInstance(context).setScreenLockState(1); // 1关闭   0开启
 				stopScreenLock();
 			} else {
 				resId = R.string.switch_open;
-				CommonManager.getInstance().setSwitchState(context, true);
+				DBService.getInstance(context).setScreenLockState(0); // 1关闭   0开启
 				startScreenLock();
 			}
 			setSwitchState();

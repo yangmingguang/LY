@@ -95,7 +95,7 @@ public class PhoneService extends Service {
 	@Override
 	public int onStartCommand(Intent intent, int flags, int startId) {
 
-		LogUtil.getLogger().d("======onStartCommand======");
+		LogUtil.getLogger().d("======PhoneService onStartCommand======");
 
 		if (null != intent) {
 			int state = intent.getExtras().getInt(Constan.COMMAND_FLAG);

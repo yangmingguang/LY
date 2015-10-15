@@ -9,15 +9,19 @@
 
 package com.yj.ecard.service;
 
+import android.app.AlarmManager;
 import android.app.KeyguardManager;
+import android.app.PendingIntent;
 import android.app.Service;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.os.IBinder;
+import android.os.SystemClock;
 import android.util.Log;
 
-import com.yj.ecard.business.common.CommonManager;
+import com.yj.ecard.db.DBService;
+import com.yj.ecard.publics.utils.LogUtil;
 import com.yj.ecard.receiver.ScreenLockReceiver;
 
 /**
@@ -34,6 +38,8 @@ public class ScreenLockService extends Service {
 
 	private Intent startIntent = null;
 	private ScreenLockReceiver mReceiver;
+	private AlarmManager manager;
+	private PendingIntent pendingIntent;
 
 	@Override
 	public IBinder onBind(Intent intent) {
@@ -44,6 +50,8 @@ public class ScreenLockService extends Service {
 	@Override
 	public void onCreate() {
 		super.onCreate();
+		// 开始闹钟
+		startAlarm();
 
 		IntentFilter filter = new IntentFilter();
 		filter.addAction(Intent.ACTION_SCREEN_ON);
@@ -59,13 +67,32 @@ public class ScreenLockService extends Service {
 
 	}
 
+	/**
+	 * 
+	 * @Title: startAlarm
+	 * @Description: 使用定时
+	 * @param 设定文件
+	 * @return void 返回类型
+	 * @throws
+	 */
+	private void startAlarm() {
+		manager = (AlarmManager) getSystemService(Context.ALARM_SERVICE);
+		// 包装需要执行Service的Intent
+		Intent intent = new Intent(this, this.getClass());
+		pendingIntent = PendingIntent.getService(this, 0, intent, PendingIntent.FLAG_UPDATE_CURRENT);
+		// 触发服务的起始时间
+		long triggerAtTime = SystemClock.elapsedRealtime();
+		// 使用AlarmManger的setRepeating方法设置定期执行的时间间隔（seconds秒）和需要执行的Service
+		manager.setRepeating(AlarmManager.ELAPSED_REALTIME, triggerAtTime, 8 * 1000, pendingIntent);
+	}
+
 	@Override
 	public int onStartCommand(Intent intent, int flags, int startId) {
+		LogUtil.getLogger().d("======ScreenLockService onStartCommand======");
+
 		startIntent = intent;
 
-		Log.e(TAG, "OnStartCommand -> action: " + intent.getAction() + "\n startId: " + startId);
-
-		return super.onStartCommand(intent, flags, startId);
+		return START_STICKY;
 	}
 
 	@Override
@@ -75,9 +102,9 @@ public class ScreenLockService extends Service {
 		unregisterReceiver(mReceiver);
 
 		// 是否开启划屏
-		boolean drawState = CommonManager.getInstance().getSwitchState(getApplicationContext());
+		int drawState = DBService.getInstance(getApplicationContext()).getScreenLockState();
 
-		if (startIntent != null && drawState) {
+		if (startIntent != null && drawState == 0) {
 			Log.e(TAG, "OnDestroy -> startIntent is not null");
 			startService(startIntent);
 		}

@@ -24,7 +24,7 @@ import android.database.sqlite.SQLiteOpenHelper;
 public class DBHelper extends SQLiteOpenHelper {
 
 	private static DBHelper mDBHelper;
-	private static final int DATABASE_VERSION = 1008;
+	private static final int DATABASE_VERSION = 1009;
 	private static final int FIRST_DATABASE_VERSION = 1000;
 	private static final String DATABASE_NAME = "leying.db";
 
@@ -63,6 +63,7 @@ public class DBHelper extends SQLiteOpenHelper {
 		db.execSQL("drop table if exists tb_ad_record");
 		db.execSQL("drop table if exists tb_screenlock_ad_record");
 		db.execSQL("drop table if exists tb_call_state");
+		db.execSQL("drop table if exists tb_screenlock_state");
 
 		String sql1 = "CREATE TABLE tb_tel_ad(" + "id int(10), " + "smallUrl varchar(100), "
 				+ "largeUrl varchar(100), " + "smallLocalPath varchar(100), " + "largeLocalPath varchar(100), "
@@ -77,11 +78,16 @@ public class DBHelper extends SQLiteOpenHelper {
 		String sql5 = "CREATE TABLE tb_call_state(id int(4),isCall int(4))";
 		String sql6 = "INSERT INTO tb_call_state(id,isCall) VALUES (1,0)";
 
+		String sql7 = "CREATE TABLE tb_screenlock_state(id int(4),isLock int(4))";
+		String sql8 = "INSERT INTO tb_screenlock_state(id,isLock) VALUES (1,0)";
+
 		db.execSQL(sql1);
 		db.execSQL(sql2);
 		db.execSQL(sql3);
 		db.execSQL(sql4);
 		db.execSQL(sql5);
 		db.execSQL(sql6);
+		db.execSQL(sql7);
+		db.execSQL(sql8);
 	}
 }
