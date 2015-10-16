@@ -69,8 +69,8 @@ public class CityListAdapter extends ArrayListBaseAdapter<CityBean> implements S
 				// 存储城市id、名称、经纬度
 				CommonManager.getInstance().setAreaId(context, cityBean.getId());
 				CommonManager.getInstance().setLocationCity(context, cityBean.getCityName());
-				CommonManager.getInstance().setLocationLat(context, cityBean.getLng());
-				CommonManager.getInstance().setLocationLng(context, cityBean.getLat());
+				CommonManager.getInstance().setLocationLat(context, cityBean.getLat());
+				CommonManager.getInstance().setLocationLng(context, cityBean.getLng());
 				((Activity) context).finish();
 			}
 		});
