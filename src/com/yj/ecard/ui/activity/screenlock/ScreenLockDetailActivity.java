@@ -10,12 +10,18 @@
 package com.yj.ecard.ui.activity.screenlock;
 
 import android.os.Bundle;
+import android.os.Handler;
 import android.view.MenuItem;
+import android.view.View;
+import android.webkit.WebChromeClient;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
+import android.widget.ProgressBar;
 
 import com.yj.ecard.R;
+import com.yj.ecard.business.phone.PhoneManager;
+import com.yj.ecard.publics.utils.Constan;
 import com.yj.ecard.ui.activity.base.BaseActivity;
 
 /**
@@ -28,7 +34,10 @@ import com.yj.ecard.ui.activity.base.BaseActivity;
 
 public class ScreenLockDetailActivity extends BaseActivity {
 
+	private int advId;
 	private WebView mWebView;
+	private ProgressBar mProgressBar;
+	private boolean inited = true;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -49,10 +58,13 @@ public class ScreenLockDetailActivity extends BaseActivity {
 	}
 
 	private void initView() {
+		advId = getIntent().getIntExtra("advId", 0);
 		String webUrl = getIntent().getStringExtra("webUrl");
+		mProgressBar = (ProgressBar) findViewById(R.id.myProgressBar);
 		mWebView = (WebView) findViewById(R.id.webview);
 		WebSettings webSettings = mWebView.getSettings();
 		webSettings.setJavaScriptEnabled(true);
+
 		mWebView.setWebViewClient(new WebViewClient() {
 			@Override
 			public boolean shouldOverrideUrlLoading(WebView view, String url) {
@@ -60,7 +72,46 @@ public class ScreenLockDetailActivity extends BaseActivity {
 				return true;
 			}
 		});
+
+		mWebView.setWebChromeClient(new WebChromeClient() {
+			@Override
+			public void onProgressChanged(WebView view, int newProgress) {
+				if (newProgress == 100) {
+					mProgressBar.setVisibility(View.GONE);
+					loadData();
+				} else {
+					if (mProgressBar.getVisibility() == View.GONE)
+						mProgressBar.setVisibility(View.VISIBLE);
+					mProgressBar.setProgress(newProgress);
+				}
+				super.onProgressChanged(view, newProgress);
+			}
+
+		});
+
 		mWebView.loadUrl(webUrl);
+	}
+
+	/**
+	 * 
+	* @Title: loadData 
+	* @Description: 延迟6秒 
+	* @param     设定文件 
+	* @return void    返回类型 
+	* @throws
+	 */
+	private void loadData() {
+		if (inited) {
+			inited = false;
+			new Handler().postDelayed(new Runnable() {
+
+				@Override
+				public void run() {
+					// TODO Auto-generated method stub
+					PhoneManager.getInstance().postSeeAdData(context, advId, Constan.TAB_DRAW, 1);
+				}
+			}, 6000);
+		}
 	}
 
 	@Override

@@ -248,8 +248,9 @@ public class ScreenLockActivity extends Activity {
 				sort = 1;
 				Intent intent = new Intent(context, ScreenLockDetailActivity.class);
 				intent.putExtra("webUrl", webUrl);
+				intent.putExtra("advId", advId);
 				startActivity(intent);
-				PhoneManager.getInstance().postSeeAdData(context, advId, Constan.TAB_DRAW, sort);
+				// PhoneManager.getInstance().postSeeAdData(context, advId, Constan.TAB_DRAW, sort);
 				finish();
 
 			} else if (endX - beginX > minMove && Math.abs(velocityX) > minVelocity) {//右滑
