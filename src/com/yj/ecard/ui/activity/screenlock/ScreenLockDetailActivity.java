@@ -9,10 +9,13 @@
 
 package com.yj.ecard.ui.activity.screenlock;
 
+import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
 import android.view.MenuItem;
 import android.view.View;
+import android.webkit.DownloadListener;
 import android.webkit.WebChromeClient;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
@@ -65,6 +68,7 @@ public class ScreenLockDetailActivity extends BaseActivity {
 		WebSettings webSettings = mWebView.getSettings();
 		webSettings.setJavaScriptEnabled(true);
 
+		// 支持内嵌
 		mWebView.setWebViewClient(new WebViewClient() {
 			@Override
 			public boolean shouldOverrideUrlLoading(WebView view, String url) {
@@ -73,6 +77,7 @@ public class ScreenLockDetailActivity extends BaseActivity {
 			}
 		});
 
+		// 支持进度条
 		mWebView.setWebChromeClient(new WebChromeClient() {
 			@Override
 			public void onProgressChanged(WebView view, int newProgress) {
@@ -87,6 +92,20 @@ public class ScreenLockDetailActivity extends BaseActivity {
 				super.onProgressChanged(view, newProgress);
 			}
 
+		});
+
+		// 支持下载
+		mWebView.setDownloadListener(new DownloadListener() {
+
+			@Override
+			public void onDownloadStart(String url, String userAgent, String contentDisposition, String mimetype,
+					long contentLength) {
+				// TODO Auto-generated method stub
+				Uri uri = Uri.parse(url);
+				Intent intent = new Intent(Intent.ACTION_VIEW, uri);
+				startActivity(intent);
+
+			}
 		});
 
 		mWebView.loadUrl(webUrl);
