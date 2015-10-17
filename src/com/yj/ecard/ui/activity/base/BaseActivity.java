@@ -12,6 +12,7 @@ package com.yj.ecard.ui.activity.base;
 import android.content.Context;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
+import android.view.Menu;
 import android.view.MenuItem;
 
 /**
@@ -31,6 +32,12 @@ public class BaseActivity extends ActionBarActivity {
 		super.onCreate(savedInstanceState);
 		context = getApplicationContext();
 		initActionBar();
+	}
+
+	@Override
+	public boolean onCreateOptionsMenu(Menu menu) {
+		// TODO Auto-generated method stub
+		return super.onCreateOptionsMenu(menu);
 	}
 
 	@Override

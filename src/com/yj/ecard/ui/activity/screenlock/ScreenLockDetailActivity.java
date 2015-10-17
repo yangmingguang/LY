@@ -10,9 +10,10 @@
 package com.yj.ecard.ui.activity.screenlock;
 
 import android.os.Bundle;
+import android.view.MenuItem;
 import android.webkit.WebSettings;
-import android.webkit.WebSettings.LayoutAlgorithm;
 import android.webkit.WebView;
+import android.webkit.WebViewClient;
 
 import com.yj.ecard.R;
 import com.yj.ecard.ui.activity.base.BaseActivity;
@@ -34,38 +35,40 @@ public class ScreenLockDetailActivity extends BaseActivity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.act_screen_lock_detail);
 		initView();
-		loadAllData();
 	}
 
-	/** 
-	* @Title: initViews 
-	* @Description: TODO(这里用一句话描述这个方法的作用) 
-	* @param     设定文件 
-	* @return void    返回类型 
-	* @throws 
-	*/
+	@Override
+	public boolean onOptionsItemSelected(MenuItem item) {
+		// TODO Auto-generated method stub
+		switch (item.getItemId()) {
+		case android.R.id.home:
+			onBackPressed();
+			return true;
+		}
+		return false;
+	}
+
 	private void initView() {
+		String webUrl = getIntent().getStringExtra("webUrl");
 		mWebView = (WebView) findViewById(R.id.webview);
-		mWebView.setScrollBarStyle(0);
-		WebSettings settings = mWebView.getSettings();
-		settings.setDefaultTextEncodingName("utf-8");// 避免中文乱码  
-		settings.setNeedInitialFocus(false);
-		settings.setSupportZoom(true);
-		settings.setLoadWithOverviewMode(true);//适应屏幕
-		settings.setLayoutAlgorithm(LayoutAlgorithm.SINGLE_COLUMN);
-		settings.setLoadsImagesAutomatically(true);//自动加载图片
-		settings.setCacheMode(WebSettings.LOAD_DEFAULT | WebSettings.LOAD_CACHE_ELSE_NETWORK);
+		WebSettings webSettings = mWebView.getSettings();
+		webSettings.setJavaScriptEnabled(true);
+		mWebView.setWebViewClient(new WebViewClient() {
+			@Override
+			public boolean shouldOverrideUrlLoading(WebView view, String url) {
+				view.loadUrl(url);
+				return true;
+			}
+		});
+		mWebView.loadUrl(webUrl);
 	}
 
-	/** 
-	* @Title: loadAllData 
-	* @Description: TODO(这里用一句话描述这个方法的作用) 
-	* @param     设定文件 
-	* @return void    返回类型 
-	* @throws 
-	*/
-	private void loadAllData() {
-		String webUrl = getIntent().getStringExtra("webUrl");
-		mWebView.loadUrl(webUrl);
+	@Override
+	public void onBackPressed() {
+		if (mWebView.canGoBack()) {
+			mWebView.goBack();
+		} else {
+			finish();
+		}
 	}
 }
