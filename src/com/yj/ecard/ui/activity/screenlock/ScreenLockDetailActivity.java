@@ -13,6 +13,7 @@ import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
+import android.os.Message;
 import android.view.MenuItem;
 import android.view.View;
 import android.webkit.DownloadListener;
@@ -21,6 +22,7 @@ import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
 import android.widget.ProgressBar;
+import android.widget.TextView;
 
 import com.yj.ecard.R;
 import com.yj.ecard.business.phone.PhoneManager;
@@ -38,9 +40,12 @@ import com.yj.ecard.ui.activity.base.BaseActivity;
 public class ScreenLockDetailActivity extends BaseActivity {
 
 	private int advId;
+	private int count = 7;
+	private TextView tvTime;
 	private WebView mWebView;
-	private ProgressBar mProgressBar;
 	private boolean inited = true;
+	private ProgressBar mProgressBar;
+	private Runnable runnable;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -60,9 +65,19 @@ public class ScreenLockDetailActivity extends BaseActivity {
 		return false;
 	}
 
+	@Override
+	protected void onDestroy() {
+		// TODO Auto-generated method stub
+		super.onDestroy();
+		if (handler != null && runnable != null) {
+			handler.removeCallbacks(runnable);
+		}
+	}
+
 	private void initView() {
 		advId = getIntent().getIntExtra("advId", 0);
 		String webUrl = getIntent().getStringExtra("webUrl");
+		tvTime = (TextView) findViewById(R.id.tv_time);
 		mProgressBar = (ProgressBar) findViewById(R.id.myProgressBar);
 		mWebView = (WebView) findViewById(R.id.webview);
 		WebSettings webSettings = mWebView.getSettings();
@@ -122,16 +137,36 @@ public class ScreenLockDetailActivity extends BaseActivity {
 	private void loadData() {
 		if (inited) {
 			inited = false;
-			new Handler().postDelayed(new Runnable() {
-
+			runnable = new Runnable() {
 				@Override
 				public void run() {
-					// TODO Auto-generated method stub
-					PhoneManager.getInstance().postSeeAdData(context, advId, Constan.TAB_DRAW, 1);
+					// TODO Auto-generated method stub  
+					handler.sendEmptyMessage(0); //要做的事情  
+					handler.postDelayed(this, 1000); //每1秒执行一次runnable.  
 				}
-			}, 6000);
+			};
+			handler.postDelayed(runnable, 0);
 		}
 	}
+
+	private Handler handler = new Handler() {
+		@Override
+		public void handleMessage(Message msg) {
+			switch (msg.what) {
+			case 0:
+				count--;
+				if (count < 0) {
+					tvTime.setVisibility(View.GONE);
+					handler.removeCallbacks(runnable);
+					PhoneManager.getInstance().postSeeAdData(context, advId, Constan.TAB_DRAW, 1);
+				} else {
+					tvTime.setText(count + "秒可收钱");
+					tvTime.setVisibility(View.VISIBLE);
+				}
+				break;
+			}
+		}
+	};
 
 	@Override
 	public void onBackPressed() {
