@@ -27,6 +27,7 @@ import android.widget.TextView;
 import com.yj.ecard.R;
 import com.yj.ecard.business.phone.PhoneManager;
 import com.yj.ecard.publics.utils.Constan;
+import com.yj.ecard.publics.utils.NetworkUtils;
 import com.yj.ecard.ui.activity.base.BaseActivity;
 
 /**
@@ -135,7 +136,7 @@ public class ScreenLockDetailActivity extends BaseActivity {
 	* @throws
 	 */
 	private void loadData() {
-		if (inited) {
+		if (inited && NetworkUtils.isNetworkAvailable(context)) {
 			inited = false;
 			runnable = new Runnable() {
 				@Override
