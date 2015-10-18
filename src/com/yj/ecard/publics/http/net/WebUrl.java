@@ -203,4 +203,8 @@ public class WebUrl {
 	// 57.获取城市列表
 	public static final String GET_CITY_LIST_URL = NEW_BASE_URL + "citys/lis";
 
+	// 58.提现记录
+	public static final String GET_WITHDRAW_RECORD_LIST_URL = NEW_BASE_URL
+			+ "tixian/GetMycashList?userName=%s&userPwd=%s&pageIndex=%s&pageSize=%s";
+
 }

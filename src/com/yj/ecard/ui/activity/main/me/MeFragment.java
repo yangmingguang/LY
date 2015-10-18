@@ -58,7 +58,7 @@ public class MeFragment extends BaseFragment implements OnClickListener {
 	private TextView tvUserName, tvAmount, tvIncome, tvFriendIncome, tvFriendNum;
 	private final int[] btns = { R.id.btn_income, R.id.btn_complete_data, R.id.btn_my_preferential,
 			R.id.btn_friend_num, R.id.btn_friend_income, R.id.btn_exchange_record, R.id.btn_ranking_list,
-			R.id.btn_account_withdraw, R.id.btn_seckill_record };
+			R.id.btn_account_withdraw, R.id.btn_seckill_record, R.id.btn_withdraw_record };
 
 	public static Fragment newInstance(Bundle bundle) {
 		MeFragment fragment = new MeFragment();
@@ -227,6 +227,11 @@ public class MeFragment extends BaseFragment implements OnClickListener {
 		case R.id.btn_account_withdraw:
 			Utils.showProgressDialog(context);// 显示dialog
 			MeTabManager.getInstance().getWithdrawBalanceData(context, handler);
+			break;
+
+		// 提现记录	
+		case R.id.btn_withdraw_record:
+			startActivity(new Intent(context, WithdrawRecordActivity.class));
 			break;
 		}
 	}

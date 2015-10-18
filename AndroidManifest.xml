@@ -81,9 +81,9 @@
         <activity
             android:name="com.yj.ecard.ui.activity.main.CityListActivity"
             android:configChanges="orientation|screenSize|keyboardHidden"
+            android:label="@string/title_city_list"
             android:launchMode="singleTask"
             android:screenOrientation="portrait"
-            android:label="@string/title_city_list"
             android:windowSoftInputMode="stateHidden|adjustPan" >
         </activity>
 
@@ -427,6 +427,13 @@
             android:configChanges="orientation|screenSize|keyboardHidden"
             android:screenOrientation="portrait"
             android:theme="@style/MyPopupWindowStyle" />
+
+        <!-- 提现记录 -->
+        <activity
+            android:name="com.yj.ecard.ui.activity.main.me.WithdrawRecordActivity"
+            android:configChanges="orientation|screenSize|keyboardHidden"
+            android:label="@string/title_withdraw_record"
+            android:screenOrientation="portrait" />
 
         <!-- ************************************注册广播类Start*************************************** -->
         <!-- 系统启动广播接收 -->

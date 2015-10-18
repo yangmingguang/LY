@@ -56,6 +56,7 @@
     <string name="title_order_detail">订单详情</string>
     <string name="title_address_list">收货地址列表</string>
     <string name="title_city_list">城市列表</string>
+    <string name="title_withdraw_record">提现记录</string>
 
     <!-- HomeTab -->
     <string name="footer_btn_home">首页</string>
@@ -103,6 +104,7 @@
     <string name="option_7">排行榜</string>
     <string name="option_8">账户提现</string>
     <string name="option_9">秒杀记录</string>
+    <string name="option_10">提现记录</string>
 
     <!-- other -->
     <string name="loading">Loading...</string>

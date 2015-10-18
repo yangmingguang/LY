@@ -59,6 +59,7 @@ import com.yj.ecard.publics.http.model.request.ValueSpikeExchangeRequest;
 import com.yj.ecard.publics.http.model.request.ValueSpikeListRequest;
 import com.yj.ecard.publics.http.model.request.WelcomeRequest;
 import com.yj.ecard.publics.http.model.request.WithdrawBalanceRequest;
+import com.yj.ecard.publics.http.model.request.WithdrawRecordListRequest;
 import com.yj.ecard.publics.http.model.request.WithdrawRequest;
 import com.yj.ecard.publics.http.model.request.WonderfulAdDetailRequest;
 import com.yj.ecard.publics.http.model.request.WonderfulAdListRequest;
@@ -1111,6 +1112,24 @@ public class DataFetcher {
 	public void getCityListResult(CityListRequest request, Listener<JSONObject> listener, ErrorListener errorListener,
 			boolean shouldCache) {
 		String requestUrl = String.format(WebUrl.GET_CITY_LIST_URL);
+		get(requestUrl, listener, errorListener, shouldCache);
+	}
+
+	/**
+	 * 
+	* @Title: getWithdrawRecordListResult 
+	* @Description: 获取提现记录
+	* @param @param request
+	* @param @param listener
+	* @param @param errorListener
+	* @param @param shouldCache    设定文件 
+	* @return void    返回类型 
+	* @throws
+	 */
+	public void getWithdrawRecordListResult(WithdrawRecordListRequest request, Listener<JSONObject> listener,
+			ErrorListener errorListener, boolean shouldCache) {
+		String requestUrl = String.format(WebUrl.GET_WITHDRAW_RECORD_LIST_URL, request.userName, request.userPwd,
+				request.pager.pageIndex, request.pager.pageSize);
 		get(requestUrl, listener, errorListener, shouldCache);
 	}
 }
