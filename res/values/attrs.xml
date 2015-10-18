@@ -22,4 +22,9 @@
         <attr name="inactiveRadius" format="dimension"></attr>
     </declare-styleable>
 
+    <!-- PointerView -->
+    <declare-styleable name="PointerView">
+        <attr name="mCircle_color" format="color"></attr>
+    </declare-styleable>
+
 </resources>

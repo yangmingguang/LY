@@ -31,6 +31,7 @@
             android:layout_centerVertical="true"
             android:gravity="right"
             android:textColor="#FF8847"
+            android:visibility="gone"
             android:textSize="@dimen/exchange_subtitle_text" />
     </RelativeLayout>
 

@@ -20,6 +20,7 @@ import android.view.View;
 import android.widget.ListView;
 
 import com.yj.ecard.R;
+import com.yj.ecard.business.user.UserManager;
 import com.yj.ecard.publics.http.model.request.Pager;
 import com.yj.ecard.publics.http.model.request.WithdrawRecordListRequest;
 import com.yj.ecard.publics.http.model.response.WithdrawRecordListResponse;
@@ -110,10 +111,8 @@ public class WithdrawRecordActivity extends BaseActivity {
 	 */
 	private void loadAllData() {
 		WithdrawRecordListRequest request = new WithdrawRecordListRequest();
-		//request.setUserName(UserManager.getInstance().getUserName(context));
-		request.setUserName("15993335573");
-		//request.setUserPwd(UserManager.getInstance().getPassword(context));
-		request.setUserPwd("051DBF4F9F54BD82");
+		request.setUserName(UserManager.getInstance().getUserName(context));
+		request.setUserPwd(UserManager.getInstance().getPassword(context));
 		Pager pager = new Pager(pageIndex);
 		request.setPager(pager);
 		DataFetcher.getInstance().getWithdrawRecordListResult(request, new Listener<JSONObject>() {

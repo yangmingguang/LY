@@ -72,12 +72,88 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="6dp"
+            android:layout_marginTop="8dp"
             android:drawablePadding="4dp"
             android:gravity="center"
             android:text="*如果银行信息填写错误，会导致提现失败"
-            android:textColor="#383838"
-            android:textSize="14sp" />
+            android:textColor="#787878"
+            android:textSize="13sp" />
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="30dp"
+            android:layout_marginRight="30dp"
+            android:layout_marginTop="15dp" >
+
+            <com.yj.ecard.ui.views.custom.PointerView
+                android:id="@+id/pointer1"
+                android:layout_width="15dp"
+                android:layout_height="15dp"
+                android:contentDescription="@null" />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="4dp"
+                android:layout_centerVertical="true"
+                android:layout_toLeftOf="@+id/pointer2"
+                android:layout_toRightOf="@+id/pointer1"
+                android:background="#7CFC00" />
+
+            <com.yj.ecard.ui.views.custom.PointerView
+                android:id="@+id/pointer2"
+                android:layout_width="15dp"
+                android:layout_height="15dp"
+                android:layout_centerInParent="true"
+                android:contentDescription="@null" />
+
+            <View
+                android:id="@+id/state"
+                android:layout_width="match_parent"
+                android:layout_height="4dp"
+                android:layout_centerVertical="true"
+                android:layout_toLeftOf="@+id/pointer3"
+                android:layout_toRightOf="@+id/pointer2"
+                android:background="#eeeeee" />
+
+            <com.yj.ecard.ui.views.custom.PointerView
+                android:id="@+id/pointer3"
+                android:layout_width="15dp"
+                android:layout_height="15dp"
+                android:layout_alignParentRight="true"
+                android:contentDescription="@null" />
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="12dp"
+            android:layout_marginRight="12dp"
+            android:layout_marginTop="4dp" >
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="提现申请"
+                android:textColor="#787878"
+                android:textSize="12sp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:text="处理中"
+                android:textColor="#787878"
+                android:textSize="12sp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:text="提现成功"
+                android:textColor="#787878"
+                android:textSize="12sp" />
+        </RelativeLayout>
     </LinearLayout>
 
 </LinearLayout>

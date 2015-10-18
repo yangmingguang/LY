@@ -27,6 +27,7 @@ import com.yj.ecard.publics.model.WithdrawBean;
 
 public class WithdrawRecordListViewHolder {
 
+	private View state;
 	private boolean hasInited;
 	public TextView tvName, tvCard, tvTime, tvAmount;
 
@@ -36,6 +37,7 @@ public class WithdrawRecordListViewHolder {
 			tvCard = (TextView) view.findViewById(R.id.tv_card);
 			tvTime = (TextView) view.findViewById(R.id.tv_time);
 			tvAmount = (TextView) view.findViewById(R.id.tv_amount);
+			state = view.findViewById(R.id.state);
 			hasInited = true;
 		}
 	}
@@ -54,6 +56,12 @@ public class WithdrawRecordListViewHolder {
 			tvCard.setText("卡号：" + withdrawBean.bankCardnum);
 			tvTime.setText(withdrawBean.addTime);
 			tvAmount.setText(Html.fromHtml("提现金额:<font color=#D00000>￥" + withdrawBean.cashAmount + "</font>"));
+			if (withdrawBean.state == 1) {
+				state.setBackgroundResource(R.color.state_green_color);
+			} else {
+				state.setBackgroundResource(R.color.state_gray_color);
+			}
+
 		}
 	}
 }
