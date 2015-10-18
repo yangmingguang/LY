@@ -50,7 +50,7 @@ public class BannerViewFlow {
 		viewFlow.setmSideBuffer(size); // 实际图片张数
 		CircleFlowIndicator indic = (CircleFlowIndicator) rootView.findViewById(viewflowindicId);
 		viewFlow.setFlowIndicator(indic);
-		viewFlow.setTimeSpan(8 * 1000); // 设置时间间隔
+		viewFlow.setTimeSpan(16 * 1000); // 设置时间间隔
 		viewFlow.setSelection(size * 1000); //设置初始位置，图片总数的倍数
 		viewFlow.startAutoFlowTimer(); //启动自动播放 
 		return viewFlow;

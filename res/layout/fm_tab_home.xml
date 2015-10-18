@@ -83,13 +83,6 @@
                             android:text="@string/btn_ad_title"
                             android:textColor="@color/white"
                             android:textSize="@dimen/btn_title_size" />
-
-                  <!--       <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="@string/btn_ad_subtitle"
-                            android:textColor="@color/white"
-                            android:textSize="@dimen/btn_subtitle_size" /> -->
                     </LinearLayout>
                 </LinearLayout>
 
@@ -120,13 +113,6 @@
                             android:text="@string/btn_business_title"
                             android:textColor="@color/white"
                             android:textSize="@dimen/btn_title_size" />
-
-                        <!-- <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="@string/btn_business_subtitle"
-                            android:textColor="@color/white"
-                            android:textSize="@dimen/btn_subtitle_size" /> -->
                     </LinearLayout>
                 </LinearLayout>
 
@@ -157,13 +143,6 @@
                             android:text="@string/btn_exchange_title"
                             android:textColor="@color/white"
                             android:textSize="@dimen/btn_title_size" />
-
-                        <!-- <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="@string/btn_exchange_subtitle"
-                            android:textColor="@color/white"
-                            android:textSize="@dimen/btn_subtitle_size" /> -->
                     </LinearLayout>
                 </LinearLayout>
             </LinearLayout>
@@ -178,21 +157,30 @@
                 android:orientation="horizontal"
                 android:padding="3dp" >
 
-                <TextView
+                <com.yj.ecard.ui.views.textview.MarqueeText
+                    android:id="@+id/tv_invite"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
+                    android:layout_marginLeft="8dp"
+                    android:layout_marginRight="8dp"
                     android:layout_weight="1"
-                    android:gravity="center"
+                    android:ellipsize="marquee"
+                    android:focusable="true"
+                    android:focusableInTouchMode="true"
+                    android:gravity="center_vertical"
+                    android:marqueeRepeatLimit="-1"
+                    android:scrollHorizontally="true"
+                    android:singleLine="true"
                     android:text="@string/invite_friend_title"
                     android:textColor="@color/red"
-                    android:textStyle="bold"
-                    android:textSize="15sp" />
+                    android:textSize="17sp"
+                    android:textStyle="bold" />
 
                 <TextView
                     android:id="@+id/btn_invite"
-                    android:layout_margin="4dp"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
+                    android:layout_margin="4dp"
                     android:layout_weight="3"
                     android:background="@drawable/selector_btn_invite"
                     android:gravity="center"
@@ -323,8 +311,8 @@
                             android:id="@+id/iv_logo"
                             android:layout_width="82dp"
                             android:layout_height="82dp"
-                            android:scaleType="centerCrop"
-                            android:contentDescription="@null" />
+                            android:contentDescription="@null"
+                            android:scaleType="centerCrop" />
 
                         <LinearLayout
                             android:layout_width="wrap_content"
@@ -349,7 +337,6 @@
                                 android:layout_marginTop="6dp"
                                 android:text="￥10.0"
                                 android:textColor="@color/red"
-                             
                                 android:textSize="@dimen/value_spike_text_size" />
                         </LinearLayout>
                     </LinearLayout>
@@ -394,8 +381,8 @@
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:layout_marginTop="4dp"
-                                android:lines="2"
                                 android:gravity="center"
+                                android:lines="2"
                                 android:text="@string/title_stroll_preferential_desc"
                                 android:textColor="#787878"
                                 android:textSize="@dimen/btn_title_size" />
@@ -424,8 +411,8 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="4dp"
-                            android:lines="2"
                             android:gravity="center"
+                            android:lines="2"
                             android:text="@string/title_publish_preferential_desc"
                             android:textColor="#787878"
                             android:textSize="@dimen/btn_title_size" />
