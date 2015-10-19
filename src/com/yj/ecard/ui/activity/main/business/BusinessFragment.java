@@ -50,6 +50,7 @@ public class BusinessFragment extends BaseFragment {
 	private int pageIndex = 1;
 	private TextView tvLocation;
 	private ListView mListView;
+	private boolean inited = false;
 	private BusinessListAdapter mAdapter;
 	private PullToRefreshListView mPtrListView;
 	private View rootView, headerView, loadingView, emptyView;
@@ -77,6 +78,26 @@ public class BusinessFragment extends BaseFragment {
 			CommonManager.getInstance().setMenuItemClick(context, false);
 			sortId = CommonManager.getInstance().getShopSortValue(context);
 			areaId = CommonManager.getInstance().getAreaSortValue(context);
+
+			mList.clear();
+			mListView.setEmptyView(loadingView);
+			pageIndex = 1;
+			loadAllData();
+		}
+	}
+
+	/**
+	 * 
+	* @Title: reloadData 
+	* @Description: 重新加载数据
+	* @param     设定文件 
+	* @return void    返回类型 
+	* @throws
+	 */
+	public void reloadData() {
+		if (inited) {
+			sortId = 0;
+			areaId = CommonManager.getInstance().getAreaId(context);
 
 			mList.clear();
 			mListView.setEmptyView(loadingView);
@@ -154,6 +175,7 @@ public class BusinessFragment extends BaseFragment {
 		@Override
 		public boolean handleMessage(Message msg) {
 			mPtrListView.onRefreshComplete();
+			inited = true;
 			switch (msg.what) {
 			case MeTabManager.onSuccess:
 				emptyView.setVisibility(View.GONE);

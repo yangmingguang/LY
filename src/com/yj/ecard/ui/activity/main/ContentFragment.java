@@ -75,6 +75,7 @@ public class ContentFragment extends BaseFragment {
 						businessFragment = BusinessFragment.newInstance(null);
 					switchFragments(businessFragment);
 					mainActivity.showMenuItem(true, false);
+					((BusinessFragment) businessFragment).reloadData();
 					break;
 
 				// 我的
