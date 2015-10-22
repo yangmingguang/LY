@@ -51,7 +51,7 @@ public class ValueSpikeDetailActivity extends BaseActivity {
 	private WebView mWebView;
 	private DetailBannerViewFlow mDetailBannerViewFlow;
 	private View mScrollView, loadingView, containerView;
-	private TextView tvTitle, tvType, tvMarketPrice, tvPrice, btnState;
+	private TextView tvTitle, tvType, tvMarketPrice, tvSellCount, tvPrice, btnState;
 	private String title, imgUrl, shopName;
 	private double price;
 
@@ -83,6 +83,7 @@ public class ValueSpikeDetailActivity extends BaseActivity {
 		tvType = (TextView) findViewById(R.id.tv_type);
 		tvTitle = (TextView) findViewById(R.id.tv_title);
 		tvMarketPrice = (TextView) findViewById(R.id.tv_marketPrice);
+		tvSellCount = (TextView) findViewById(R.id.tv_sellCount);
 		tvPrice = (TextView) findViewById(R.id.tv_price);
 		btnState = (TextView) findViewById(R.id.btn_state);
 
@@ -160,6 +161,7 @@ public class ValueSpikeDetailActivity extends BaseActivity {
 
 					tvTitle.setText(valueSpikeDetailResponse.title);
 					tvMarketPrice.setText("市场价：￥" + valueSpikeDetailResponse.marketPrice);
+					tvSellCount.setText("销售量：" + valueSpikeDetailResponse.sellCount);
 					tvPrice.setText("乐盈价：￥" + valueSpikeDetailResponse.price);
 					tvType.setText(valueSpikeDetailResponse.freight);
 					// 加载html代码

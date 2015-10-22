@@ -24,6 +24,7 @@ import com.yj.ecard.publics.model.ExchangePicBean;
 public class ValueSpikeDetailResponse extends CommonResponse {
 
 	public String title;
+	public int sellCount;
 	public String freight;
 	public String introduce;
 	public double marketPrice;
