@@ -11,6 +11,8 @@ package com.yj.ecard;
 
 import android.content.Context;
 
+import com.baidu.android.pushservice.PushConstants;
+import com.baidu.android.pushservice.PushManager;
 import com.baidu.frontia.Frontia;
 import com.baidu.frontia.FrontiaApplication;
 import com.nostra13.universalimageloader.cache.disc.naming.Md5FileNameGenerator;
@@ -33,8 +35,17 @@ import com.yj.ecard.publics.utils.ImageLoaderUtil;
 
 public class MyApplication extends FrontiaApplication {
 
-	// 百度  App Key : UwIcYepqCItTGSyVLpWfiGLL    Secret Key : kNi1rUOM8ae8aIXqkWi42XDwziGIhrt4
+	/** 
+	 * 百度Frontia组件  
+	 * App Key : UwIcYepqCItTGSyVLpWfiGLL    
+	 * Secret Key : kNi1rUOM8ae8aIXqkWi42XDwziGIhrt4
+	 */
 
+	/** 
+	 * 百度云推送
+	 * App Key : B5yXQAdhC0hIz1rlGZ7nPeqO   
+	 * Secret Key : zQCDcRyQM8Hkr6LSlc3Q541wGIghBDFC
+	 */
 	@Override
 	public void onCreate() {
 		super.onCreate();
@@ -42,8 +53,10 @@ public class MyApplication extends FrontiaApplication {
 		initDataBase(this);
 		initUIL(this);
 		CrashHandler.getInstance().init(this);
-		// 百度社会化
+		// 百度Frontia组件 
 		Frontia.init(this.getApplicationContext(), "UwIcYepqCItTGSyVLpWfiGLL");
+		// 百度云推送
+		PushManager.startWork(getApplicationContext(), PushConstants.LOGIN_TYPE_API_KEY, "B5yXQAdhC0hIz1rlGZ7nPeqO");
 	}
 
 	/** 
