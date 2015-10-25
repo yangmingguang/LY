@@ -606,7 +606,7 @@ public class CommonManager {
 	* @return void    返回类型 
 	* @throws
 	 */
-	private void startDownloadImage(final Context context, final String url) {
+	public void startDownloadImage(final Context context, final String url) {
 		// 判断文件目录是否存在
 		String path = StorageUtils.IMAGE_PATH;
 		File dir = new File(path);

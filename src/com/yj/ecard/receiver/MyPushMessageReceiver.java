@@ -1,11 +1,11 @@
 /**   
-* @Title: MyPushMessageReceiver.java
-* @Package com.yj.ecard.receiver
-* @Description: TODO(用一句话描述该文件做什么)
-* @author YangMingGuang
-* @date 2015-10-24 下午4:52:57
-* @version V1.0   
-*/
+ * @Title: MyPushMessageReceiver.java
+ * @Package com.yj.ecard.receiver
+ * @Description: TODO(用一句话描述该文件做什么)
+ * @author YangMingGuang
+ * @date 2015-10-24 下午4:52:57
+ * @version V1.0   
+ */
 
 package com.yj.ecard.receiver;
 
@@ -19,6 +19,9 @@ import android.text.TextUtils;
 import android.util.Log;
 
 import com.baidu.frontia.api.FrontiaPushMessageReceiver;
+import com.yj.ecard.business.common.CommonManager;
+import com.yj.ecard.publics.http.model.response.PushWelcomeResponse;
+import com.yj.ecard.publics.utils.JsonUtil;
 import com.yj.ecard.publics.utils.ToastUtil;
 
 /**
@@ -26,19 +29,11 @@ import com.yj.ecard.publics.utils.ToastUtil;
  * onMessage用来接收透传消息； onSetTags、onDelTags、onListTags是tag相关操作的回调；
  * onNotificationClicked在通知被点击时回调； onUnbind是stopWork接口的返回值回调
  * 
- * 返回值中的errorCode，解释如下： 
- *  0 - Success
- *  10001 - Network Problem
- *  30600 - Internal Server Error
- *  30601 - Method Not Allowed 
- *  30602 - Request Params Not Valid
- *  30603 - Authentication Failed 
- *  30604 - Quota Use Up Payment Required 
- *  30605 - Data Required Not Found 
- *  30606 - Request Time Expires Timeout 
- *  30607 - Channel Token Timeout 
- *  30608 - Bind Relation Not Found 
- *  30609 - Bind Number Too Many
+ * 返回值中的errorCode，解释如下： 0 - Success 10001 - Network Problem 30600 - Internal
+ * Server Error 30601 - Method Not Allowed 30602 - Request Params Not Valid
+ * 30603 - Authentication Failed 30604 - Quota Use Up Payment Required 30605 -
+ * Data Required Not Found 30606 - Request Time Expires Timeout 30607 - Channel
+ * Token Timeout 30608 - Bind Relation Not Found 30609 - Bind Number Too Many
  * 
  * 当您遇到以上返回错误时，如果解释不了您的问题，请用同一请求的返回值requestId和errorCode联系我们追查问题。
  * 
@@ -52,12 +47,7 @@ public class MyPushMessageReceiver extends FrontiaPushMessageReceiver {
 	 */
 	@Override
 	public void onBind(Context context, int errorCode, String appid, String userId, String channelId, String requestId) {
-		String responseString = "onBind errorCode=" + errorCode + " appid=" + appid + " userId=" + userId
-				+ " channelId=" + channelId + " requestId=" + requestId;
-		Log.e(TAG, responseString);
 
-		// Demo更新界面展示代码，应用请在这里加入自己的处理逻辑
-		// updateContent(context, responseString);
 	}
 
 	/**
@@ -65,18 +55,47 @@ public class MyPushMessageReceiver extends FrontiaPushMessageReceiver {
 	 */
 	@Override
 	public void onMessage(Context context, String message, String customContentString) {
-		String messageString = "透传消息 message=\"" + message + "\" customContentString=" + customContentString;
-		Log.e(TAG, messageString);
-
-		// 自定义内容获取方式，mykey和myvalue对应透传消息推送时自定义内容中设置的键和值
-		if (!TextUtils.isEmpty(customContentString)) {
-			JSONObject customJson = null;
+		if (!TextUtils.isEmpty(message)) {
 			try {
-				customJson = new JSONObject(customContentString);
-				String myvalue = null;
-				if (customJson.isNull("mykey")) {
-					myvalue = customJson.getString("mykey");
+				JSONObject jsonObject = new JSONObject(message);
+				JSONObject jsonObject1 = (JSONObject) jsonObject.get("sign");
+				if (jsonObject1 != null) {
+					int type = jsonObject1.getInt("type");
+					switch (type) {
+					// 启动画面
+					case 1101:
+						PushWelcomeResponse mPushWelcomeResponse = (PushWelcomeResponse) JsonUtil.jsonToBean(message,
+								PushWelcomeResponse.class);
+						CommonManager.getInstance().startDownloadImage(context, mPushWelcomeResponse.picUrl);
+						break;
+
+					// 电话广告
+					case 1102:
+
+						break;
+
+					// 划屏广告
+					case 1103:
+
+						break;
+
+					// 用户订单通知
+					case 1104:
+
+						break;
+
+					// 商家订单通知
+					case 1105:
+
+						break;
+
+					// 按地区推送不同通知
+					case 1106:
+
+						break;
+					}
 				}
+
 			} catch (JSONException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
@@ -93,27 +112,6 @@ public class MyPushMessageReceiver extends FrontiaPushMessageReceiver {
 	@Override
 	public void onNotificationClicked(Context context, String title, String description, String customContentString) {
 
-		String notifyString = "通知点击 title=\"" + title + "\" description=\"" + description + "\" customContent="
-				+ customContentString;
-		Log.e(TAG, notifyString);
-
-		// 自定义内容获取方式，mykey和myvalue对应通知推送时自定义内容中设置的键和值
-		if (!TextUtils.isEmpty(customContentString)) {
-			JSONObject customJson = null;
-			try {
-				customJson = new JSONObject(customContentString);
-				String myvalue = null;
-				if (customJson.isNull("mykey")) {
-					myvalue = customJson.getString("mykey");
-				}
-			} catch (JSONException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-		}
-
-		// Demo更新界面展示代码，应用请在这里加入自己的处理逻辑
-		updateContent(context, notifyString);
 	}
 
 	/**
@@ -122,12 +120,7 @@ public class MyPushMessageReceiver extends FrontiaPushMessageReceiver {
 	@Override
 	public void onSetTags(Context context, int errorCode, List<String> sucessTags, List<String> failTags,
 			String requestId) {
-		String responseString = "onSetTags errorCode=" + errorCode + " sucessTags=" + sucessTags + " failTags="
-				+ failTags + " requestId=" + requestId;
-		Log.e(TAG, responseString);
 
-		// Demo更新界面展示代码，应用请在这里加入自己的处理逻辑
-		updateContent(context, responseString);
 	}
 
 	/**
@@ -136,12 +129,6 @@ public class MyPushMessageReceiver extends FrontiaPushMessageReceiver {
 	@Override
 	public void onDelTags(Context context, int errorCode, List<String> sucessTags, List<String> failTags,
 			String requestId) {
-		String responseString = "onDelTags errorCode=" + errorCode + " sucessTags=" + sucessTags + " failTags="
-				+ failTags + " requestId=" + requestId;
-		Log.e(TAG, responseString);
-
-		// Demo更新界面展示代码，应用请在这里加入自己的处理逻辑
-		updateContent(context, responseString);
 	}
 
 	/**
@@ -149,11 +136,7 @@ public class MyPushMessageReceiver extends FrontiaPushMessageReceiver {
 	 */
 	@Override
 	public void onListTags(Context context, int errorCode, List<String> tags, String requestId) {
-		String responseString = "onListTags errorCode=" + errorCode + " tags=" + tags;
-		Log.e(TAG, responseString);
 
-		// Demo更新界面展示代码，应用请在这里加入自己的处理逻辑
-		updateContent(context, responseString);
 	}
 
 	/**
@@ -161,21 +144,18 @@ public class MyPushMessageReceiver extends FrontiaPushMessageReceiver {
 	 */
 	@Override
 	public void onUnbind(Context context, int errorCode, String requestId) {
-		String responseString = "onUnbind errorCode=" + errorCode + " requestId = " + requestId;
-		Log.e(TAG, responseString);
 
-		// Demo更新界面展示代码，应用请在这里加入自己的处理逻辑
-		updateContent(context, responseString);
 	}
 
 	private void updateContent(Context context, String content) {
 		Log.e(TAG, "updateContent");
 
-		/*		Intent intent = new Intent();
-				intent.putExtra("result", content);
-				intent.setClass(context.getApplicationContext(), MainActivity.class);
-				intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-				context.getApplicationContext().startActivity(intent);*/
+		/*
+		 * Intent intent = new Intent(); intent.putExtra("result", content);
+		 * intent.setClass(context.getApplicationContext(), MainActivity.class);
+		 * intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+		 * context.getApplicationContext().startActivity(intent);
+		 */
 
 		ToastUtil.show(context, content + "", ToastUtil.LENGTH_LONG);
 	}
