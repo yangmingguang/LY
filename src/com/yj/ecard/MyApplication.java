@@ -11,8 +11,6 @@ package com.yj.ecard;
 
 import android.content.Context;
 
-import com.baidu.android.pushservice.PushConstants;
-import com.baidu.android.pushservice.PushManager;
 import com.baidu.frontia.Frontia;
 import com.baidu.frontia.FrontiaApplication;
 import com.nostra13.universalimageloader.cache.disc.naming.Md5FileNameGenerator;
@@ -56,7 +54,7 @@ public class MyApplication extends FrontiaApplication {
 		// 百度Frontia组件 
 		Frontia.init(this.getApplicationContext(), "UwIcYepqCItTGSyVLpWfiGLL");
 		// 百度云推送
-		PushManager.startWork(getApplicationContext(), PushConstants.LOGIN_TYPE_API_KEY, "B5yXQAdhC0hIz1rlGZ7nPeqO");
+		// PushManager.startWork(getApplicationContext(), PushConstants.LOGIN_TYPE_API_KEY, "B5yXQAdhC0hIz1rlGZ7nPeqO");
 	}
 
 	/** 
