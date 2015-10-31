@@ -16,6 +16,7 @@ import android.content.Intent;
 import android.support.v4.app.NotificationCompat;
 
 import com.yj.ecard.R;
+import com.yj.ecard.publics.http.model.response.PushRecordResponse;
 import com.yj.ecard.publics.utils.Utils;
 import com.yj.ecard.receiver.NotificationReceiver;
 
@@ -103,4 +104,21 @@ public class CustomNotificationManager {
 		mBuilder.setContentTitle(contentTitle).setContentText(Utils.sizeFormat(progress) + "/" + Utils.sizeFormat(max));
 		mNotificationManager.notify(100, mBuilder.build());
 	}
+
+	/**
+	 * 
+	* @Title: showPushMessageNotification 
+	* @Description: 显示推送消息通知栏 
+	* @param @param context
+	* @param @param response    设定文件 
+	* @return void    返回类型 
+	* @throws
+	 */
+	public void showPushMessageNotification(Context context, PushRecordResponse response) {
+		initNotification(context);
+		mBuilder.setContentTitle(response.title);
+		mBuilder.setContentText(response.content);
+		mNotificationManager.notify(response.type, mBuilder.build());
+	}
+
 }

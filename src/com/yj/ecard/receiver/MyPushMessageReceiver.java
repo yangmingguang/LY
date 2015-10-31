@@ -19,8 +19,8 @@ import android.text.TextUtils;
 import android.util.Log;
 
 import com.baidu.frontia.api.FrontiaPushMessageReceiver;
-import com.yj.ecard.business.common.CommonManager;
-import com.yj.ecard.publics.http.model.response.PushWelcomeResponse;
+import com.yj.ecard.business.notification.CustomNotificationManager;
+import com.yj.ecard.publics.http.model.response.PushRecordResponse;
 import com.yj.ecard.publics.utils.JsonUtil;
 import com.yj.ecard.publics.utils.ToastUtil;
 
@@ -58,15 +58,14 @@ public class MyPushMessageReceiver extends FrontiaPushMessageReceiver {
 		if (!TextUtils.isEmpty(message)) {
 			try {
 				JSONObject jsonObject = new JSONObject(message);
-				JSONObject jsonObject1 = (JSONObject) jsonObject.get("sign");
-				if (jsonObject1 != null) {
-					int type = jsonObject1.getInt("type");
+				if (jsonObject != null) {
+					int type = jsonObject.getInt("type");
 					switch (type) {
 					// 启动画面
 					case 1101:
-						PushWelcomeResponse mPushWelcomeResponse = (PushWelcomeResponse) JsonUtil.jsonToBean(message,
-								PushWelcomeResponse.class);
-						CommonManager.getInstance().startDownloadImage(context, mPushWelcomeResponse.picUrl);
+						//PushWelcomeResponse mPushWelcomeResponse = (PushWelcomeResponse) JsonUtil.jsonToBean(message,
+						//		PushWelcomeResponse.class);
+						//CommonManager.getInstance().startDownloadImage(context, mPushWelcomeResponse.picUrl);
 						break;
 
 					// 电话广告
@@ -79,14 +78,12 @@ public class MyPushMessageReceiver extends FrontiaPushMessageReceiver {
 
 						break;
 
-					// 用户订单通知
-					case 1104:
-
-						break;
-
-					// 商家订单通知
-					case 1105:
-
+					case 1104: // 兑换记录
+					case 1105: // 秒杀记录
+						PushRecordResponse mPushRecordResponse = (PushRecordResponse) JsonUtil.jsonToBean(message,
+								PushRecordResponse.class);
+						CustomNotificationManager.getInstance().showPushMessageNotification(context,
+								mPushRecordResponse);
 						break;
 
 					// 按地区推送不同通知
