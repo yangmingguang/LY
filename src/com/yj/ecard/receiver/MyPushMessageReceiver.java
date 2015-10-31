@@ -16,13 +16,12 @@ import org.json.JSONObject;
 
 import android.content.Context;
 import android.text.TextUtils;
-import android.util.Log;
 
 import com.baidu.frontia.api.FrontiaPushMessageReceiver;
 import com.yj.ecard.business.notification.CustomNotificationManager;
+import com.yj.ecard.business.user.UserManager;
 import com.yj.ecard.publics.http.model.response.PushRecordResponse;
 import com.yj.ecard.publics.utils.JsonUtil;
-import com.yj.ecard.publics.utils.ToastUtil;
 
 /**
  * Push消息处理receiver。请编写您需要的回调函数， 一般来说： onBind是必须的，用来处理startWork返回值；
@@ -82,8 +81,12 @@ public class MyPushMessageReceiver extends FrontiaPushMessageReceiver {
 					case 1105: // 秒杀记录
 						PushRecordResponse mPushRecordResponse = (PushRecordResponse) JsonUtil.jsonToBean(message,
 								PushRecordResponse.class);
-						CustomNotificationManager.getInstance().showPushMessageNotification(context,
-								mPushRecordResponse);
+						// 判断当前用户
+						int userId = UserManager.getInstance().getUserId(context);
+						if (mPushRecordResponse != null && userId == mPushRecordResponse.userId) {
+							CustomNotificationManager.getInstance().showPushMessageNotification(context,
+									mPushRecordResponse);
+						}
 						break;
 
 					// 按地区推送不同通知
@@ -145,16 +148,7 @@ public class MyPushMessageReceiver extends FrontiaPushMessageReceiver {
 	}
 
 	private void updateContent(Context context, String content) {
-		Log.e(TAG, "updateContent");
-
-		/*
-		 * Intent intent = new Intent(); intent.putExtra("result", content);
-		 * intent.setClass(context.getApplicationContext(), MainActivity.class);
-		 * intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-		 * context.getApplicationContext().startActivity(intent);
-		 */
-
-		ToastUtil.show(context, content + "", ToastUtil.LENGTH_LONG);
+		// ToastUtil.show(context, content + "", ToastUtil.LENGTH_LONG);
 	}
 
 }

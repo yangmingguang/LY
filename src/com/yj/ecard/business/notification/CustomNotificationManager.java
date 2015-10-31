@@ -9,6 +9,7 @@
 
 package com.yj.ecard.business.notification;
 
+import android.app.Notification;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.content.Context;
@@ -61,24 +62,25 @@ public class CustomNotificationManager {
 	* @return void    返回类型 
 	* @throws
 	 */
-	public void initNotification(Context context) {
+	public void initNotification(Context context, int messageId) {
 		mNotificationManager = (NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE);
 		mBuilder = new NotificationCompat.Builder(context);
 		mBuilder.setWhen(System.currentTimeMillis())// 通知产生的时间，会在通知信息里显示
-				.setContentIntent(getDefalutIntent(context, 0)).setPriority(NotificationCompat.PRIORITY_MAX)// 设置该通知优先级
+				.setContentIntent(getDefalutIntent(context, messageId)).setPriority(NotificationCompat.PRIORITY_MAX)// 设置该通知优先级
 				.setAutoCancel(true)//设置这个标志当用户单击面板就可以让通知将自动取消
 				.setOngoing(false)// ture，设置他为一个正在进行的通知。他们通常是用来表示一个后台任务,用户积极参与(如播放音乐)或以某种方式正在等待,因此占用设备(如一个文件下载,同步操作,主动网络连接)
-				//.setDefaults(Notification.DEFAULT_VIBRATE)// 向通知添加声音、闪灯和振动效果的最简单、最一致的方式是使用当前的用户默认设置，使用defaults属性，可以组合：
+				//.setDefaults(Notification.DEFAULT_SOUND)// 向通知添加声音、闪灯和振动效果的最简单、最一致的方式是使用当前的用户默认设置，使用defaults属性，可以组合：
 				.setSmallIcon(R.drawable.app_icon);
 
 	}
 
-	public PendingIntent getDefalutIntent(Context context, int flags) {
+	public PendingIntent getDefalutIntent(Context context, int messageId) {
 		// 点击的事件处理
 		Intent buttonIntent = new Intent(NotificationReceiver.ACTION_BUTTON);
 		buttonIntent.putExtra(NotificationReceiver.INTENT_BUTTONID_TAG, NotificationReceiver.BUTTON_ONTIFI_BAR_ID);
+		buttonIntent.putExtra(NotificationReceiver.INTENT_MESSAGEID_TAG, messageId);
 		// 这里加了广播，所及INTENT的必须用getBroadcast方法
-		PendingIntent pendingIntent = PendingIntent.getBroadcast(context, 1, buttonIntent,
+		PendingIntent pendingIntent = PendingIntent.getBroadcast(context, messageId, buttonIntent,
 				PendingIntent.FLAG_UPDATE_CURRENT);
 		return pendingIntent;
 	}
@@ -96,6 +98,7 @@ public class CustomNotificationManager {
 		String contentTitle = "";
 		if (max == progress) {
 			mBuilder.setProgress(0, 0, false);
+			mBuilder.setDefaults(Notification.DEFAULT_SOUND);
 			contentTitle = "下载完成，点击安装！";
 		} else {
 			contentTitle = "下载中.";
@@ -115,9 +118,10 @@ public class CustomNotificationManager {
 	* @throws
 	 */
 	public void showPushMessageNotification(Context context, PushRecordResponse response) {
-		initNotification(context);
+		initNotification(context, response.type);
 		mBuilder.setContentTitle(response.title);
 		mBuilder.setContentText(response.content);
+		mBuilder.setDefaults(Notification.DEFAULT_SOUND);
 		mNotificationManager.notify(response.type, mBuilder.build());
 	}
 

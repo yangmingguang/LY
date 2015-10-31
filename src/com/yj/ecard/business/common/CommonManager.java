@@ -44,6 +44,7 @@ import com.yj.ecard.publics.utils.SharedPrefsUtil;
 import com.yj.ecard.publics.utils.StorageUtils;
 import com.yj.ecard.publics.utils.ToastUtil;
 import com.yj.ecard.publics.utils.Utils;
+import com.yj.ecard.receiver.NotificationReceiver;
 import com.yj.ecard.service.LocationService;
 
 /**
@@ -411,7 +412,8 @@ public class CommonManager {
 						public void onStart() {
 							// TODO Auto-generated method stub
 							System.out.println("onStart");
-							CustomNotificationManager.getInstance().initNotification(context);
+							CustomNotificationManager.getInstance().initNotification(context,
+									NotificationReceiver.UPDATE_MESSAGE_ID);
 						}
 
 						@Override
