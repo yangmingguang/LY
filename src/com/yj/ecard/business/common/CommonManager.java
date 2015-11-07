@@ -26,10 +26,13 @@ import com.yj.ecard.business.download.DownloadService;
 import com.yj.ecard.business.notification.CustomNotificationManager;
 import com.yj.ecard.business.user.UserManager;
 import com.yj.ecard.publics.http.model.request.AreaIdRequest;
+import com.yj.ecard.publics.http.model.request.MessageListRequest;
+import com.yj.ecard.publics.http.model.request.Pager;
 import com.yj.ecard.publics.http.model.request.ShareRequest;
 import com.yj.ecard.publics.http.model.request.UpdateRequest;
 import com.yj.ecard.publics.http.model.request.WelcomeRequest;
 import com.yj.ecard.publics.http.model.response.AreaIdResponse;
+import com.yj.ecard.publics.http.model.response.MessageListResponse;
 import com.yj.ecard.publics.http.model.response.ShareResponse;
 import com.yj.ecard.publics.http.model.response.UpdateResponse;
 import com.yj.ecard.publics.http.model.response.WelcomeResponse;
@@ -44,6 +47,7 @@ import com.yj.ecard.publics.utils.SharedPrefsUtil;
 import com.yj.ecard.publics.utils.StorageUtils;
 import com.yj.ecard.publics.utils.ToastUtil;
 import com.yj.ecard.publics.utils.Utils;
+import com.yj.ecard.publics.utils.WeakHandler;
 import com.yj.ecard.receiver.NotificationReceiver;
 import com.yj.ecard.service.LocationService;
 
@@ -57,6 +61,9 @@ import com.yj.ecard.service.LocationService;
 
 public class CommonManager {
 
+	public static final int onSuccess = 200;
+	public static final int onEmpty = 300;
+	public static final int onFailure = 500;
 	private static volatile CommonManager mCommonManager;
 
 	/******************************单例开始********************************/
@@ -652,5 +659,54 @@ public class CommonManager {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+	}
+
+	/**
+	 * 
+	* @Title: getMessageListData 
+	* @Description: 获取消息中心列表数据
+	* @param @param context
+	* @param @param handler
+	* @param @param pageIndex    设定文件 
+	* @return void    返回类型 
+	* @throws
+	 */
+	public void getMessageListData(final Context context, final WeakHandler handler, int pageIndex) {
+		MessageListRequest request = new MessageListRequest();
+		request.setUserId(UserManager.getInstance().getUserId(context));
+		request.setUserPwd(UserManager.getInstance().getPassword(context));
+		Pager pager = new Pager(pageIndex);
+		request.setPager(pager);
+		DataFetcher.getInstance().getMessageListResult(request, new Listener<JSONObject>() {
+
+			@Override
+			public void onResponse(JSONObject response) {
+				// TODO Auto-generated method stub
+				LogUtil.getLogger().d("response==>" + response.toString());
+				MessageListResponse mMessageListResponse = (MessageListResponse) JsonUtil.jsonToBean(response,
+						MessageListResponse.class);
+
+				// 数据响应状态
+				int stateCode = mMessageListResponse.status.code;
+				switch (stateCode) {
+				case Constan.SUCCESS_CODE:
+					handler.sendMessage(handler.obtainMessage(onSuccess, mMessageListResponse));
+					break;
+				case Constan.EMPTY_CODE:
+					handler.sendEmptyMessage(onEmpty);
+					break;
+				case Constan.ERROR_CODE:
+					handler.sendEmptyMessage(onFailure);
+					break;
+				}
+			}
+		}, new ErrorListener() {
+
+			@Override
+			public void onErrorResponse(VolleyError error) {
+				// TODO Auto-generated method stub
+				handler.sendEmptyMessage(onFailure);
+			}
+		}, true);
 	}
 }

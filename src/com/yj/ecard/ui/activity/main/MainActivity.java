@@ -64,6 +64,7 @@ import com.yj.ecard.service.PhoneService;
 import com.yj.ecard.ui.activity.base.BaseActivity;
 import com.yj.ecard.ui.activity.main.business.PopSortActivity;
 import com.yj.ecard.ui.activity.main.slidingmenu.AboutActivity;
+import com.yj.ecard.ui.activity.main.slidingmenu.MessageCenterActivity;
 import com.yj.ecard.ui.activity.user.ModifyPassWordActivity;
 
 /**
@@ -86,8 +87,8 @@ public class MainActivity extends BaseActivity implements OnClickListener, Point
 	private List<SortBean> areaList = new ArrayList<SortBean>();
 	private List<SortBean> shopList = new ArrayList<SortBean>();
 
-	private final int[] btns = { R.id.iv_user_head, R.id.btn_password, R.id.btn_custom, R.id.btn_cache,
-			R.id.btn_switch, R.id.btn_version, R.id.btn_about, R.id.btn_exit };
+	private final int[] btns = { R.id.iv_user_head, R.id.btn_password, R.id.btn_message, R.id.btn_custom,
+			R.id.btn_cache, R.id.btn_switch, R.id.btn_version, R.id.btn_about, R.id.btn_exit };
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -326,6 +327,10 @@ public class MainActivity extends BaseActivity implements OnClickListener, Point
 
 		case R.id.btn_password:
 			startActivity(new Intent(context, ModifyPassWordActivity.class));
+			break;
+
+		case R.id.btn_message:
+			startActivity(new Intent(context, MessageCenterActivity.class));
 			break;
 
 		case R.id.btn_custom:

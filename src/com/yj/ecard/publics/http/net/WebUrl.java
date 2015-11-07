@@ -207,4 +207,8 @@ public class WebUrl {
 	public static final String GET_WITHDRAW_RECORD_LIST_URL = NEW_BASE_URL
 			+ "tixian/GetMycashList?userName=%s&userPwd=%s&pageIndex=%s&pageSize=%s";
 
+	// 59.消息中心
+	public static final String GET_MESSAGE_LIST_URL = NEW_BASE_URL
+			+ "message/GetMessList?userId=%s&userPwd=%s&pageIndex=%s&pageSize=%s";
+
 }

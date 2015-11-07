@@ -32,6 +32,7 @@ import com.yj.ecard.publics.http.model.request.ExchangeRecordListRequest;
 import com.yj.ecard.publics.http.model.request.FriendsListRequest;
 import com.yj.ecard.publics.http.model.request.GetValidateCodeRequest;
 import com.yj.ecard.publics.http.model.request.IncomeListRequest;
+import com.yj.ecard.publics.http.model.request.MessageListRequest;
 import com.yj.ecard.publics.http.model.request.ModifyPwRequest;
 import com.yj.ecard.publics.http.model.request.MyPreferentialListRequest;
 import com.yj.ecard.publics.http.model.request.OrderRequest;
@@ -1129,6 +1130,24 @@ public class DataFetcher {
 	public void getWithdrawRecordListResult(WithdrawRecordListRequest request, Listener<JSONObject> listener,
 			ErrorListener errorListener, boolean shouldCache) {
 		String requestUrl = String.format(WebUrl.GET_WITHDRAW_RECORD_LIST_URL, request.userName, request.userPwd,
+				request.pager.pageIndex, request.pager.pageSize);
+		get(requestUrl, listener, errorListener, shouldCache);
+	}
+
+	/**
+	 * 
+	* @Title: getMessageListResult 
+	* @Description: 获取消息中心列表
+	* @param @param request
+	* @param @param listener
+	* @param @param errorListener
+	* @param @param shouldCache    设定文件 
+	* @return void    返回类型 
+	* @throws
+	 */
+	public void getMessageListResult(MessageListRequest request, Listener<JSONObject> listener,
+			ErrorListener errorListener, boolean shouldCache) {
+		String requestUrl = String.format(WebUrl.GET_MESSAGE_LIST_URL, request.userId, request.userPwd,
 				request.pager.pageIndex, request.pager.pageSize);
 		get(requestUrl, listener, errorListener, shouldCache);
 	}

@@ -57,6 +57,7 @@
     <string name="title_address_list">收货地址列表</string>
     <string name="title_city_list">城市列表</string>
     <string name="title_withdraw_record">提现记录</string>
+    <string name="title_message_center">消息中心</string>
 
     <!-- HomeTab -->
     <string name="footer_btn_home">首页</string>
@@ -93,6 +94,8 @@
     <string name="tab_brief">简介</string>
     <string name="tab_product">产品</string>
     <string name="tab_environment">环境</string>
+    <string name="tab_user_message">用户消息</string>
+    <string name="tab_sys_message">系统消息</string>
 
     <!-- MeTab -->
     <string name="option_1">今日收入：588.0元</string>

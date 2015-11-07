@@ -86,6 +86,14 @@
         <View style="@style/SlidingMenuItemDividerLineStyle" />
 
         <TextView
+            android:id="@+id/btn_message"
+            style="@style/SlidingMenuItemStyle"
+            android:drawableLeft="@drawable/ic_slidingmenu_modify"
+            android:text="@string/slidingmenu_password" />
+
+        <View style="@style/SlidingMenuItemDividerLineStyle" />
+
+        <TextView
             android:id="@+id/btn_custom"
             style="@style/SlidingMenuItemStyle"
             android:drawableLeft="@drawable/ic_slidingmenu_phone"

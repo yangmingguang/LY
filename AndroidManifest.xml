@@ -435,6 +435,15 @@
             android:label="@string/title_withdraw_record"
             android:screenOrientation="portrait" />
 
+        <!-- 消息中心 -->
+        <activity
+            android:name="com.yj.ecard.ui.activity.main.slidingmenu.MessageCenterActivity"
+            android:configChanges="orientation|screenSize|keyboardHidden"
+            android:label="@string/title_message_center"
+            android:launchMode="singleTask"
+            android:screenOrientation="portrait"
+            android:theme="@style/StyledIndicators" />
+
         <!-- ************************************注册广播类Start*************************************** -->
         <!-- 系统启动广播接收 -->
         <receiver android:name="com.yj.ecard.receiver.OSBootReceiver" >
