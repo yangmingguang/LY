@@ -68,7 +68,7 @@ public class MyPreferentialActivity extends BaseActivity {
 		mListView = (PullToRefreshListView) findViewById(R.id.lv_my_preferential);
 		mListView.setOnRefreshListener(onRefreshListener);
 		mListView.setMode(Mode.DISABLED);
-		mListView.setEmptyView(loadingView);
+		mListView.setEmptyView(emptyView);
 		mAdapter = new MyPreferentialListAdapter(this);
 		mListView.setAdapter(mAdapter);
 	}
@@ -127,11 +127,8 @@ public class MyPreferentialActivity extends BaseActivity {
 				break;
 
 			case MeTabManager.onEmpty:
-				mListView.setEmptyView(emptyView);
-				break;
-
 			case MeTabManager.onFailure:
-
+				mListView.setEmptyView(emptyView);
 				break;
 			}
 			return true;

@@ -19,9 +19,18 @@ package com.yj.ecard.publics.http.model.request;
 
 public class MessageListRequest extends CommonRequest {
 
+	public int id;
 	public int type;
 	public int userId;
 	public String userPwd;
+
+	public int getId() {
+		return id;
+	}
+
+	public void setId(int id) {
+		this.id = id;
+	}
 
 	public int getType() {
 		return type;

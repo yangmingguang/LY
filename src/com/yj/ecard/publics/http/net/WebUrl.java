@@ -209,6 +209,9 @@ public class WebUrl {
 
 	// 59.消息中心
 	public static final String GET_MESSAGE_LIST_URL = NEW_BASE_URL
-			+ "message/GetMessList?userId=%s&userPwd=%s&pageIndex=%s&pageSize=%s";
+			+ "message/GetMessList?userId=%s&userPwd=%s&type=%s&pageIndex=%s&pageSize=%s";
+
+	// 60.删除消息
+	public static final String DEL_MESSAGE_URL = NEW_BASE_URL + "message/GetMessList?userId=%s&userPwd=%s&id=%s";
 
 }

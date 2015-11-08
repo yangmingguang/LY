@@ -40,6 +40,7 @@ import com.yj.ecard.publics.http.net.DataFetcher;
 import com.yj.ecard.publics.http.volley.Response.ErrorListener;
 import com.yj.ecard.publics.http.volley.Response.Listener;
 import com.yj.ecard.publics.http.volley.VolleyError;
+import com.yj.ecard.publics.model.MessageBean;
 import com.yj.ecard.publics.utils.Constan;
 import com.yj.ecard.publics.utils.JsonUtil;
 import com.yj.ecard.publics.utils.LogUtil;
@@ -50,6 +51,7 @@ import com.yj.ecard.publics.utils.Utils;
 import com.yj.ecard.publics.utils.WeakHandler;
 import com.yj.ecard.receiver.NotificationReceiver;
 import com.yj.ecard.service.LocationService;
+import com.yj.ecard.ui.adapter.MessageListAdapter;
 
 /**
 * @ClassName: CommonManager
@@ -671,10 +673,11 @@ public class CommonManager {
 	* @return void    返回类型 
 	* @throws
 	 */
-	public void getMessageListData(final Context context, final WeakHandler handler, int pageIndex) {
+	public void getMessageListData(final Context context, final WeakHandler handler, int type, int pageIndex) {
 		MessageListRequest request = new MessageListRequest();
 		request.setUserId(UserManager.getInstance().getUserId(context));
 		request.setUserPwd(UserManager.getInstance().getPassword(context));
+		request.setType(type);
 		Pager pager = new Pager(pageIndex);
 		request.setPager(pager);
 		DataFetcher.getInstance().getMessageListResult(request, new Listener<JSONObject>() {
@@ -706,6 +709,58 @@ public class CommonManager {
 			public void onErrorResponse(VolleyError error) {
 				// TODO Auto-generated method stub
 				handler.sendEmptyMessage(onFailure);
+			}
+		}, true);
+	}
+
+	/**
+	* @Title: deleteMessageData 
+	* @Description: TODO(这里用一句话描述这个方法的作用) 
+	* @param @param context
+	* @param @param mAdapter
+	* @param @param mMessageBean    设定文件 
+	* @return void    返回类型 
+	* @throws
+	 */
+	public void deleteMessageData(final Context context, final MessageListAdapter mAdapter,
+			final MessageBean mMessageBean) {
+		Utils.showProgressDialog(context); // 显示dialog
+		MessageListRequest request = new MessageListRequest();
+		request.setId(mMessageBean.id);
+		request.setUserId(UserManager.getInstance().getUserId(context));
+		request.setUserPwd(UserManager.getInstance().getPassword(context));
+		DataFetcher.getInstance().deleteMessageResult(request, new Listener<JSONObject>() {
+
+			@Override
+			public void onResponse(JSONObject response) {
+				// TODO Auto-generated method stub
+				Utils.dismissProgressDialog(); // 取消dialog
+				LogUtil.getLogger().d("response==>" + response.toString());
+				MessageListResponse mMessageListResponse = (MessageListResponse) JsonUtil.jsonToBean(response,
+						MessageListResponse.class);
+				int stateCode = mMessageListResponse.status.code;
+				switch (stateCode) {
+				case Constan.SUCCESS_CODE:
+					mAdapter.removeItem(mMessageBean);
+					ToastUtil.show(context, mMessageListResponse.status.msg, ToastUtil.LENGTH_LONG);
+					break;
+
+				case Constan.EMPTY_CODE:
+					ToastUtil.show(context, mMessageListResponse.status.msg, ToastUtil.LENGTH_LONG);
+					break;
+
+				case Constan.ERROR_CODE:
+					ToastUtil.show(context, R.string.error_tips, ToastUtil.LENGTH_LONG);
+					break;
+				}
+			}
+		}, new ErrorListener() {
+
+			@Override
+			public void onErrorResponse(VolleyError error) {
+				// TODO Auto-generated method stub
+				Utils.dismissProgressDialog(); // 取消dialog
+				ToastUtil.show(context, R.string.error_tips, ToastUtil.LENGTH_LONG);
 			}
 		}, true);
 	}

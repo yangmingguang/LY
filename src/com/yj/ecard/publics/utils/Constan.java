@@ -94,4 +94,7 @@ public class Constan {
 	public static final int AREA_TYPE = 1;
 	public static final int SHOP_TYPE = 2;
 
+	public static final int USER_MSG_TYPE = 1;
+	public static final int SYS_MSG_TYPE = 2;
+
 }

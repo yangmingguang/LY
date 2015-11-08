@@ -12,6 +12,8 @@ package com.yj.ecard.ui.activity.main.slidingmenu;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 
+import com.yj.ecard.publics.utils.Constan;
+
 /**
 * @ClassName: SysMessageFragment
 * @Description: TODO(这里用一句话描述这个类的作用)
@@ -27,5 +29,10 @@ public class SysMessageFragment extends UserMessageFragment {
 		if (bundle != null)
 			fragment.setArguments(bundle);
 		return fragment;
+	}
+
+	@Override
+	public int getMsgType() {
+		return Constan.SYS_MSG_TYPE;
 	}
 }

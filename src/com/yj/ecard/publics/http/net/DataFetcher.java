@@ -1135,7 +1135,6 @@ public class DataFetcher {
 	}
 
 	/**
-	 * 
 	* @Title: getMessageListResult 
 	* @Description: 获取消息中心列表
 	* @param @param request
@@ -1147,8 +1146,24 @@ public class DataFetcher {
 	 */
 	public void getMessageListResult(MessageListRequest request, Listener<JSONObject> listener,
 			ErrorListener errorListener, boolean shouldCache) {
-		String requestUrl = String.format(WebUrl.GET_MESSAGE_LIST_URL, request.userId, request.userPwd,
+		String requestUrl = String.format(WebUrl.GET_MESSAGE_LIST_URL, request.userId, request.userPwd, request.type,
 				request.pager.pageIndex, request.pager.pageSize);
+		get(requestUrl, listener, errorListener, shouldCache);
+	}
+
+	/**
+	* @Title: deleteMessageResult 
+	* @Description: 根据id删除消息
+	* @param @param request
+	* @param @param listener
+	* @param @param errorListener
+	* @param @param shouldCache    设定文件 
+	* @return void    返回类型 
+	* @throws
+	 */
+	public void deleteMessageResult(MessageListRequest request, Listener<JSONObject> listener,
+			ErrorListener errorListener, boolean shouldCache) {
+		String requestUrl = String.format(WebUrl.DEL_MESSAGE_URL, request.userId, request.userPwd, request.id);
 		get(requestUrl, listener, errorListener, shouldCache);
 	}
 }

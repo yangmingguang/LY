@@ -15,6 +15,7 @@ import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 
 import com.yj.ecard.R;
+import com.yj.ecard.business.common.CommonManager;
 import com.yj.ecard.publics.model.MessageBean;
 import com.yj.ecard.ui.adapter.base.ArrayListBaseAdapter;
 
@@ -52,7 +53,7 @@ public class MessageListAdapter extends ArrayListBaseAdapter<MessageBean> {
 			@Override
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
-				//AddressManager.getInstance().deleteAddressData(context, MessageListAdapter.this, addressBean);
+				CommonManager.getInstance().deleteMessageData(context, MessageListAdapter.this, messageBean);
 			}
 		});
 

@@ -8,14 +8,20 @@
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="#F7F7F8" >
+        android:background="#F7F7F8"
+        android:paddingBottom="4dp"
+        android:paddingLeft="10dp"
+        android:paddingRight="10dp"
+        android:paddingTop="4dp" >
 
         <TextView
             android:id="@+id/tv_time"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerVertical="true"
-            android:text="2015-10-14 10:50" />
+            android:text="2015-10-14 10:50"
+            android:textColor="#787878"
+            android:textSize="14sp" />
 
         <TextView
             android:id="@+id/btn_delete"
@@ -30,13 +36,21 @@
         android:id="@+id/tv_title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="4dp"
+        android:paddingLeft="10dp"
+        android:paddingRight="10dp"
         android:text="2015-10-14 10:50"
-        android:textColor="@color/red" />
+        android:textColor="@color/red"
+        android:textSize="16sp" />
 
     <com.yj.ecard.ui.views.webview.CustomWebView
         android:id="@+id/webview"
         style="@style/ScrollBarStyle"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="2dp"
+        android:layout_marginTop="2dp"
+        android:paddingLeft="10dp"
+        android:paddingRight="10dp" />
 
 </LinearLayout>

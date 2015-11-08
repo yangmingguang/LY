@@ -26,6 +26,7 @@ import com.yj.ecard.business.common.CommonManager;
 import com.yj.ecard.business.main.MeTabManager;
 import com.yj.ecard.publics.http.model.response.MessageListResponse;
 import com.yj.ecard.publics.model.MessageBean;
+import com.yj.ecard.publics.utils.Constan;
 import com.yj.ecard.publics.utils.WeakHandler;
 import com.yj.ecard.ui.activity.base.BaseFragment;
 import com.yj.ecard.ui.adapter.MessageListAdapter;
@@ -78,9 +79,13 @@ public class UserMessageFragment extends BaseFragment {
 		mListView = (PullToRefreshListView) rootView.findViewById(R.id.lv_common);
 		mListView.setOnRefreshListener(onRefreshListener);
 		mListView.setMode(Mode.DISABLED);
-		mListView.setEmptyView(loadingView);
-		mAdapter = new MessageListAdapter(context);
+		mListView.setEmptyView(emptyView);
+		mAdapter = new MessageListAdapter(getActivity());
 		mListView.setAdapter(mAdapter);
+	}
+
+	public int getMsgType() {
+		return Constan.USER_MSG_TYPE;
 	}
 
 	/**
@@ -111,7 +116,7 @@ public class UserMessageFragment extends BaseFragment {
 	* @throws 
 	*/
 	private void loadAllData() {
-		CommonManager.getInstance().getMessageListData(context, handler, pageIndex);
+		CommonManager.getInstance().getMessageListData(context, handler, getMsgType(), pageIndex);
 	}
 
 	/**
@@ -137,11 +142,8 @@ public class UserMessageFragment extends BaseFragment {
 				break;
 
 			case MeTabManager.onEmpty:
-				mListView.setEmptyView(emptyView);
-				break;
-
 			case MeTabManager.onFailure:
-
+				mListView.setEmptyView(emptyView);
 				break;
 			}
 			return true;
