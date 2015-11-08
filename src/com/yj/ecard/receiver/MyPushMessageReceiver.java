@@ -11,9 +11,6 @@ package com.yj.ecard.receiver;
 
 import java.util.List;
 
-import org.json.JSONException;
-import org.json.JSONObject;
-
 import android.content.Context;
 import android.text.TextUtils;
 
@@ -21,7 +18,6 @@ import com.baidu.frontia.api.FrontiaPushMessageReceiver;
 import com.yj.ecard.business.notification.CustomNotificationManager;
 import com.yj.ecard.business.user.UserManager;
 import com.yj.ecard.publics.http.model.response.PushRecordResponse;
-import com.yj.ecard.publics.utils.JsonUtil;
 
 /**
  * Push消息处理receiver。请编写您需要的回调函数， 一般来说： onBind是必须的，用来处理startWork返回值；
@@ -55,48 +51,54 @@ public class MyPushMessageReceiver extends FrontiaPushMessageReceiver {
 	@Override
 	public void onMessage(Context context, String message, String customContentString) {
 		if (!TextUtils.isEmpty(message)) {
+
 			try {
-				JSONObject jsonObject = new JSONObject(message);
-				if (jsonObject != null) {
-					int type = jsonObject.getInt("type");
-					switch (type) {
-					// 启动画面
-					case 1101:
-						//PushWelcomeResponse mPushWelcomeResponse = (PushWelcomeResponse) JsonUtil.jsonToBean(message,
-						//		PushWelcomeResponse.class);
-						//CommonManager.getInstance().startDownloadImage(context, mPushWelcomeResponse.picUrl);
-						break;
 
-					// 电话广告
-					case 1102:
+				String[] msg = message.split("\\|");
+				int len = msg.length;
+				PushRecordResponse mPushRecordResponse = new PushRecordResponse();
+				if (len > 0)
+					mPushRecordResponse.setType(Integer.parseInt(msg[0].toString()));
+				if (len > 1)
+					mPushRecordResponse.setUserId(Integer.parseInt(msg[1].toString()));
+				if (len > 2)
+					mPushRecordResponse.setTitle(msg[2].toString());
+				if (len > 3)
+					mPushRecordResponse.setContent(msg[3].toString());
 
-						break;
+				switch (mPushRecordResponse.getType()) {
+				// 启动画面
+				case 1101:
 
-					// 划屏广告
-					case 1103:
+					break;
 
-						break;
+				// 电话广告
+				case 1102:
 
-					case 1104: // 兑换记录
-					case 1105: // 秒杀记录
-						PushRecordResponse mPushRecordResponse = (PushRecordResponse) JsonUtil.jsonToBean(message,
-								PushRecordResponse.class);
-						// 判断当前用户
-						int userId = UserManager.getInstance().getUserId(context);
-						if (mPushRecordResponse != null && userId == mPushRecordResponse.userId) {
-							CustomNotificationManager.getInstance().showPushMessageNotification(context,
-									mPushRecordResponse);
-						}
-						break;
+					break;
 
-					// 按地区推送不同通知
-					case 1106:
+				// 划屏广告
+				case 1103:
 
-						break;
+					break;
+
+				case 1104: // 兑换记录
+				case 1105: // 秒杀记录
+					// 判断当前用户
+					int userId = UserManager.getInstance().getUserId(context);
+					if (mPushRecordResponse != null && userId == mPushRecordResponse.userId) {
+						CustomNotificationManager.getInstance().showPushMessageNotification(context,
+								mPushRecordResponse);
 					}
+					break;
+
+				// 按地区推送不同通知
+				case 1106:
+
+					break;
 				}
 
-			} catch (JSONException e) {
+			} catch (Exception e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
