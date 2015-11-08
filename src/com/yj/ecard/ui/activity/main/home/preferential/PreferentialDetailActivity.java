@@ -13,6 +13,8 @@ import org.json.JSONObject;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.ImageView;
@@ -20,6 +22,7 @@ import android.widget.TextView;
 
 import com.nostra13.universalimageloader.core.assist.ImageType;
 import com.yj.ecard.R;
+import com.yj.ecard.business.phone.PhoneManager;
 import com.yj.ecard.business.user.UserManager;
 import com.yj.ecard.publics.http.model.request.PreferentialDetailRequest;
 import com.yj.ecard.publics.http.model.response.PreferentialDetailResponse;
@@ -30,6 +33,7 @@ import com.yj.ecard.publics.http.volley.VolleyError;
 import com.yj.ecard.publics.utils.ImageLoaderUtil;
 import com.yj.ecard.publics.utils.JsonUtil;
 import com.yj.ecard.publics.utils.LogUtil;
+import com.yj.ecard.publics.utils.NetworkUtils;
 import com.yj.ecard.ui.activity.base.BaseActivity;
 import com.yj.ecard.ui.views.justify.TextViewEx;
 
@@ -43,11 +47,16 @@ import com.yj.ecard.ui.views.justify.TextViewEx;
 
 public class PreferentialDetailActivity extends BaseActivity {
 
+	private int count = 7;
+	private Runnable runnable;
+	private boolean inited = true;
+
+	private int id;
 	private String picUrl;
 	private ImageView ivLogo;
 	private TextViewEx tvContent;
 	private View contentView, loadingView;
-	private TextView tvTitle, tvTime, tvPhone, tvAddress;
+	private TextView tvTitle, tvDate, tvPhone, tvAddress, tvTime;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -55,6 +64,15 @@ public class PreferentialDetailActivity extends BaseActivity {
 		setContentView(R.layout.act_preferential_detail);
 		initViews();
 		loadAllData();
+	}
+
+	@Override
+	protected void onDestroy() {
+		// TODO Auto-generated method stub
+		super.onDestroy();
+		if (handler != null && runnable != null) {
+			handler.removeCallbacks(runnable);
+		}
 	}
 
 	/** 
@@ -66,6 +84,7 @@ public class PreferentialDetailActivity extends BaseActivity {
 	*/
 	private void initViews() {
 		ivLogo = (ImageView) findViewById(R.id.iv_logo);
+		tvDate = (TextView) findViewById(R.id.tv_date);
 		tvTime = (TextView) findViewById(R.id.tv_time);
 		tvTitle = (TextView) findViewById(R.id.tv_title);
 		tvPhone = (TextView) findViewById(R.id.tv_phone);
@@ -97,7 +116,7 @@ public class PreferentialDetailActivity extends BaseActivity {
 	* @throws 
 	*/
 	private void loadAllData() {
-		int id = getIntent().getIntExtra("id", 0);
+		id = getIntent().getIntExtra("id", 0);
 		int userId = UserManager.getInstance().getUserId(context);
 		String password = UserManager.getInstance().getPassword(context);
 		String userName = UserManager.getInstance().getUserName(context);
@@ -119,7 +138,7 @@ public class PreferentialDetailActivity extends BaseActivity {
 				if (preferentialDetailResponse.status.code == 1) {
 
 					tvTitle.setText(preferentialDetailResponse.title);
-					tvTime.setText("发布日期：" + preferentialDetailResponse.addTime);
+					tvDate.setText("发布日期：" + preferentialDetailResponse.addTime);
 					tvContent.setText(preferentialDetailResponse.content);
 					tvPhone.setText("联系电话：" + preferentialDetailResponse.phone);
 					tvAddress.setText("地址：" + preferentialDetailResponse.address);
@@ -132,6 +151,9 @@ public class PreferentialDetailActivity extends BaseActivity {
 					// 显示内容
 					loadingView.setVisibility(View.GONE);
 					contentView.setVisibility(View.VISIBLE);
+
+					// 开始计时
+					loadData();
 				}
 			}
 		}, new ErrorListener() {
@@ -143,4 +165,47 @@ public class PreferentialDetailActivity extends BaseActivity {
 			}
 		}, true);
 	}
+
+	/**
+	 * 
+	* @Title: loadData 
+	* @Description: 延迟6秒 
+	* @param     设定文件 
+	* @return void    返回类型 
+	* @throws
+	 */
+	private void loadData() {
+		if (inited && NetworkUtils.isNetworkAvailable(context)) {
+			inited = false;
+			runnable = new Runnable() {
+				@Override
+				public void run() {
+					// TODO Auto-generated method stub  
+					handler.sendEmptyMessage(0); //要做的事情  
+					handler.postDelayed(this, 1000); //每1秒执行一次runnable.  
+				}
+			};
+			handler.postDelayed(runnable, 0);
+		}
+	}
+
+	private Handler handler = new Handler() {
+		@Override
+		public void handleMessage(Message msg) {
+			switch (msg.what) {
+			case 0:
+				count--;
+				if (count < 0) {
+					tvTime.setVisibility(View.GONE);
+					handler.removeCallbacks(runnable);
+					// 1=弹屏、2=划屏、3=逛优惠
+					PhoneManager.getInstance().postSeeAdData(context, id, 3, 1);
+				} else {
+					tvTime.setText(count + "秒可收钱");
+					tvTime.setVisibility(View.VISIBLE);
+				}
+				break;
+			}
+		}
+	};
 }
