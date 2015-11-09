@@ -10,6 +10,7 @@
 package com.yj.ecard.ui.activity.main.home.wonderful;
 
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler.Callback;
 import android.os.Message;
@@ -84,8 +85,15 @@ public class BombAdDetailActivity extends BaseActivity implements OnClickListene
 		switch (v.getId()) {
 		case R.id.btn_webSite:
 			if (null != webSite) {
-				Intent intent = new Intent(context, WebViewActivity.class);
-				intent.putExtra("webSite", webSite);
+				//Intent intent = new Intent(context, WebViewActivity.class);
+				//intent.putExtra("webSite", webSite);
+				//startActivity(intent);
+
+				// 使用内置浏览器
+				Intent intent = new Intent();
+				intent.setAction("android.intent.action.VIEW");
+				Uri content_url = Uri.parse(webSite);
+				intent.setData(content_url);
 				startActivity(intent);
 			}
 			break;
