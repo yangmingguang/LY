@@ -27,6 +27,7 @@ public class BusinessDetailResponse extends CommonResponse {
 	public int id;
 	public String merName;
 	public String picUrl;
+	public String webUrl;
 	public String introduction;
 	public String phone;
 	public String address;

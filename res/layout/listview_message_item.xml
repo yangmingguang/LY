@@ -21,7 +21,7 @@
             android:layout_centerVertical="true"
             android:text="2015-10-14 10:50"
             android:textColor="#787878"
-            android:textSize="14sp" />
+            android:textSize="13.6sp" />
 
         <TextView
             android:id="@+id/btn_delete"
@@ -43,14 +43,15 @@
         android:textColor="@color/red"
         android:textSize="16sp" />
 
-    <com.yj.ecard.ui.views.webview.CustomWebView
-        android:id="@+id/webview"
-        style="@style/ScrollBarStyle"
-        android:layout_width="match_parent"
+    <TextView
+        android:id="@+id/tv_content"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="2dp"
-        android:layout_marginTop="2dp"
+        android:layout_marginBottom="4dp"
         android:paddingLeft="10dp"
-        android:paddingRight="10dp" />
+        android:paddingRight="10dp"
+        android:text="2015-10-14 10:50"
+        android:textColor="#383838"
+        android:textSize="16sp" />
 
 </LinearLayout>

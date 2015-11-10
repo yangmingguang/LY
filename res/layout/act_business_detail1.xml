@@ -25,18 +25,36 @@
                 android:contentDescription="@null"
                 android:scaleType="centerCrop" />
 
-            <TextView
-                android:id="@+id/tv_title"
+            <RelativeLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:drawableLeft="@drawable/ic_shop"
-                android:drawablePadding="4dp"
-                android:gravity="center_vertical"
-                android:padding="8dp"
-                android:text="河南乐盈科技有限公司"
-                android:textColor="#383838"
-                android:textSize="18sp"
-                android:textStyle="bold" />
+                android:layout_height="wrap_content" >
+
+                <TextView
+                    android:id="@+id/tv_title"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentLeft="true"
+                    android:layout_centerVertical="true"
+                    android:layout_toLeftOf="@+id/btn_site"
+                    android:drawableLeft="@drawable/ic_shop"
+                    android:drawablePadding="4dp"
+                    android:gravity="center_vertical"
+                    android:padding="8dp"
+                    android:text="河南乐盈科技有限公司"
+                    android:textColor="#383838"
+                    android:textSize="16sp"
+                    android:textStyle="bold" />
+
+                <ImageView
+                    android:id="@+id/btn_site"
+                    android:layout_width="80dp"
+                    android:layout_height="32dp"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    android:background="@drawable/ic_site_flag"
+                    android:contentDescription="@null"
+                    android:visibility="gone" />
+            </RelativeLayout>
 
             <View
                 android:layout_width="match_parent"

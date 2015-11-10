@@ -11,6 +11,8 @@ package com.yj.ecard.ui.activity.main.business;
 
 import java.util.List;
 
+import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler.Callback;
 import android.os.Message;
@@ -46,13 +48,14 @@ import com.yj.ecard.ui.views.webview.CustomWebView;
 
 public class BusinessDetailActivity1 extends BaseActivity implements OnClickListener {
 
+	private String webUrl;
 	private String phoneNumber;
 	private MyListView mListView;
 	private List<ProductBean> productList;
 	private DetailProductListAdapter mAdapter;
 
-	private ImageView ivLogo;
 	private CustomWebView mWebView;
+	private ImageView ivLogo, btnSite;
 	private View loadingView, productView;
 	private TextView tvTitle, tvPhone, tvAddress;
 
@@ -75,6 +78,7 @@ public class BusinessDetailActivity1 extends BaseActivity implements OnClickList
 	*/
 	private void initViews() {
 		ivLogo = (ImageView) findViewById(R.id.iv_logo);
+		btnSite = (ImageView) findViewById(R.id.btn_site);
 		tvTitle = (TextView) findViewById(R.id.tv_title);
 		tvPhone = (TextView) findViewById(R.id.tv_phone);
 		tvAddress = (TextView) findViewById(R.id.tv_address);
@@ -96,6 +100,19 @@ public class BusinessDetailActivity1 extends BaseActivity implements OnClickList
 		settings.setLayoutAlgorithm(LayoutAlgorithm.SINGLE_COLUMN);
 		settings.setLoadsImagesAutomatically(true);//自动加载图片
 		settings.setCacheMode(WebSettings.LOAD_DEFAULT | WebSettings.LOAD_CACHE_ELSE_NETWORK);
+
+		btnSite.setOnClickListener(new OnClickListener() {
+
+			@Override
+			public void onClick(View arg0) {
+				// 使用内置浏览器
+				Intent intent = new Intent();
+				intent.setAction("android.intent.action.VIEW");
+				Uri content_url = Uri.parse(webUrl);
+				intent.setData(content_url);
+				startActivity(intent);
+			}
+		});
 
 		for (int btn : btns)
 			findViewById(btn).setOnClickListener(this);
@@ -147,6 +164,10 @@ public class BusinessDetailActivity1 extends BaseActivity implements OnClickList
 	* @throws 
 	*/
 	protected void setDataInView(BusinessDetailResponse response) {
+		webUrl = response.webUrl;
+		if (webUrl != null) {
+			btnSite.setVisibility(View.VISIBLE);
+		}
 		phoneNumber = response.phone;
 		productList = response.productList;
 		tvTitle.setText(response.merName);
