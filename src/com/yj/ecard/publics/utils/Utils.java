@@ -40,6 +40,7 @@ import android.graphics.BitmapFactory;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
+import android.os.Bundle;
 import android.provider.ContactsContract;
 import android.telephony.TelephonyManager;
 import android.text.Html;
@@ -947,5 +948,35 @@ public class Utils {
 		sinaContent.setShareImage(urlImage);
 		sinaContent.setTitle(title);
 		mController.setShareMedia(sinaContent);
+	}
+
+	/**
+	* @Title: getMetaValue 
+	* @Description: 获取ApiKey
+	* @param @param context
+	* @param @param metaKey
+	* @param @return    设定文件 
+	* @return String    返回类型 
+	* @throws
+	 */
+	public static String getMetaValue(Context context, String metaKey) {
+		Bundle metaData = null;
+		String apiKey = null;
+		if (context == null || metaKey == null) {
+			return null;
+		}
+		try {
+			ApplicationInfo ai = context.getPackageManager().getApplicationInfo(context.getPackageName(),
+					PackageManager.GET_META_DATA);
+			if (null != ai) {
+				metaData = ai.metaData;
+			}
+			if (null != metaData) {
+				apiKey = metaData.getString(metaKey);
+			}
+		} catch (NameNotFoundException e) {
+			// Log.e(TAG, "error " + e.getMessage());
+		}
+		return apiKey;
 	}
 }

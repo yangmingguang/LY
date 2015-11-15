@@ -39,6 +39,8 @@ import android.view.View.OnClickListener;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.baidu.android.pushservice.PushConstants;
+import com.baidu.android.pushservice.PushManager;
 import com.nostra13.universalimageloader.core.assist.ImageType;
 import com.yj.ecard.R;
 import com.yj.ecard.business.common.CommonManager;
@@ -97,7 +99,7 @@ public class MainActivity extends BaseActivity implements OnClickListener, Point
 		loadAllData();
 		initSDK();
 		// 百度云推送
-		// PushManager.startWork(getApplicationContext(), PushConstants.LOGIN_TYPE_API_KEY, "B5yXQAdhC0hIz1rlGZ7nPeqO");
+		PushManager.startWork(getApplicationContext(), PushConstants.LOGIN_TYPE_API_KEY, "B5yXQAdhC0hIz1rlGZ7nPeqO");
 	}
 
 	@Override

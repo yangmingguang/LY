@@ -53,6 +53,8 @@ public class WelcomeActivity extends Activity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.act_welcome);
 		initParams();
+		// 百度云推送
+		// PushManager.startWork(getApplicationContext(), PushConstants.LOGIN_TYPE_API_KEY, "B5yXQAdhC0hIz1rlGZ7nPeqO");
 	}
 
 	@Override
