@@ -52,12 +52,27 @@ import android.view.inputmethod.InputMethodManager;
 import android.webkit.WebView;
 import android.widget.ImageView;
 
-import com.baidu.frontia.Frontia;
-import com.baidu.frontia.api.FrontiaAuthorization.MediaType;
-import com.baidu.frontia.api.FrontiaSocialShare;
-import com.baidu.frontia.api.FrontiaSocialShare.FrontiaTheme;
-import com.baidu.frontia.api.FrontiaSocialShareContent;
-import com.baidu.frontia.api.FrontiaSocialShareListener;
+import com.umeng.socialize.bean.SHARE_MEDIA;
+import com.umeng.socialize.bean.SocializeEntity;
+import com.umeng.socialize.controller.UMServiceFactory;
+import com.umeng.socialize.controller.UMSocialService;
+import com.umeng.socialize.controller.listener.SocializeListeners.SnsPostListener;
+import com.umeng.socialize.media.QQShareContent;
+import com.umeng.socialize.media.QZoneShareContent;
+import com.umeng.socialize.media.RenrenShareContent;
+import com.umeng.socialize.media.SinaShareContent;
+import com.umeng.socialize.media.SmsShareContent;
+import com.umeng.socialize.media.TencentWbShareContent;
+import com.umeng.socialize.media.UMImage;
+import com.umeng.socialize.sso.QZoneSsoHandler;
+import com.umeng.socialize.sso.RenrenSsoHandler;
+import com.umeng.socialize.sso.SinaSsoHandler;
+import com.umeng.socialize.sso.SmsHandler;
+import com.umeng.socialize.sso.TencentWBSsoHandler;
+import com.umeng.socialize.sso.UMQQSsoHandler;
+import com.umeng.socialize.weixin.controller.UMWXHandler;
+import com.umeng.socialize.weixin.media.CircleShareContent;
+import com.umeng.socialize.weixin.media.WeiXinShareContent;
 import com.yj.ecard.R;
 import com.yj.ecard.business.common.CommonManager;
 import com.yj.ecard.business.main.HomeTabManager;
@@ -630,45 +645,117 @@ public class Utils {
 	* @return void    返回类型 
 	* @throws
 	 */
-	public static void toSocialShare(final Activity activity) {
-		FrontiaSocialShareContent mSocialShareContent = new FrontiaSocialShareContent();
-		FrontiaSocialShare mSocialShare = Frontia.getSocialShare();
-		mSocialShare.setContext(activity);
+	/*	public static void toSocialShare(final Activity activity) {
+			FrontiaSocialShareContent mSocialShareContent = new FrontiaSocialShareContent();
+			FrontiaSocialShare mSocialShare = Frontia.getSocialShare();
+			mSocialShare.setContext(activity);
 
-		mSocialShare.setClientId(MediaType.QZONE.toString(), "1103533510"); // QQ空间
-		mSocialShare.setClientId(MediaType.QQFRIEND.toString(), "1103533510"); // QQ好友
-		//mSocialShare.setClientName(MediaType.QQFRIEND.toString(), "乐盈");
-		mSocialShare.setClientId(MediaType.WEIXIN.toString(), "wxb6650aec575b269e"); // 微信
-		mSocialShare.setClientId(MediaType.RENREN.toString(), "477208"); // 人人网
-		mSocialShare.setClientId(MediaType.SINAWEIBO.toString(), "3563448745"); // 新浪微博
-		mSocialShare.setClientId(MediaType.KAIXIN.toString(), "100064908"); // 开心网
-		mSocialShare.setClientId(MediaType.QQWEIBO.toString(), "1103533510"); // 腾讯微博 
+			mSocialShare.setClientId(MediaType.QZONE.toString(), "1103533510"); // QQ空间
+			mSocialShare.setClientId(MediaType.QQFRIEND.toString(), "1103533510"); // QQ好友
+			//mSocialShare.setClientName(MediaType.QQFRIEND.toString(), "乐盈");
+			mSocialShare.setClientId(MediaType.WEIXIN.toString(), "wxb6650aec575b269e"); // 微信
+			mSocialShare.setClientId(MediaType.RENREN.toString(), "477208"); // 人人网
+			mSocialShare.setClientId(MediaType.SINAWEIBO.toString(), "3563448745"); // 新浪微博
+			mSocialShare.setClientId(MediaType.KAIXIN.toString(), "100064908"); // 开心网
+			mSocialShare.setClientId(MediaType.QQWEIBO.toString(), "1103533510"); // 腾讯微博 
 
-		String title = CommonManager.getInstance().getShareTtitle(activity);
-		String content = CommonManager.getInstance().getShareContent(activity);
+			String title = CommonManager.getInstance().getShareTtitle(activity);
+			String content = CommonManager.getInstance().getShareContent(activity);
+			String url = CommonManager.getInstance().getShareUrl(activity);
+			String picUrl = CommonManager.getInstance().getSharePicUrl(activity);
+
+			mSocialShareContent.setTitle(title);
+			mSocialShareContent.setContent(content);
+			mSocialShareContent.setLinkUrl(url);
+			mSocialShareContent.setImageUri(Uri.parse(picUrl));
+			//mSocialShareContent.setImageData(BitmapFactory.decodeResource(activity.getResources(), R.drawable.app_icon));
+			mSocialShare.show(activity.getWindow().getDecorView(), mSocialShareContent, FrontiaTheme.LIGHT,
+					new FrontiaSocialShareListener() {
+						@Override
+						public void onSuccess() {
+							HomeTabManager.getInstance().getShareData(activity);
+						}
+
+						@Override
+						public void onFailure(int errCode, String errMsg) {
+						}
+
+						@Override
+						public void onCancel() {
+						}
+					});
+		}*/
+
+	/**
+	 * 
+	* @Title: toUmengSocialShare 
+	* @Description: 友盟社会化分享 
+	* @param @param activity    设定文件 
+	* @return void    返回类型 
+	* @throws
+	 */
+	public static void toUmengSocialShare(final Activity activity) {
 		String url = CommonManager.getInstance().getShareUrl(activity);
-		String picUrl = CommonManager.getInstance().getSharePicUrl(activity);
 
-		mSocialShareContent.setTitle(title);
-		mSocialShareContent.setContent(content);
-		mSocialShareContent.setLinkUrl(url);
-		mSocialShareContent.setImageUri(Uri.parse(picUrl));
-		//mSocialShareContent.setImageData(BitmapFactory.decodeResource(activity.getResources(), R.drawable.app_icon));
-		mSocialShare.show(activity.getWindow().getDecorView(), mSocialShareContent, FrontiaTheme.LIGHT,
-				new FrontiaSocialShareListener() {
-					@Override
-					public void onSuccess() {
-						HomeTabManager.getInstance().getShareData(activity);
-					}
+		UMSocialService mController = UMServiceFactory.getUMSocialService(url);
+		// 添加新浪SSO授权
+		mController.getConfig().setSsoHandler(new SinaSsoHandler());
+		// 添加腾讯微博SSO授权
+		mController.getConfig().setSsoHandler(new TencentWBSsoHandler());
+		// 添加人人网SSO授权
+		RenrenSsoHandler renrenSsoHandler = new RenrenSsoHandler(activity, "477208",
+				"0fad99b2b772445eaa387d2c404a7622", "6aabc4d4b65c443f858373f0819aeb8a");
+		mController.getConfig().setSsoHandler(renrenSsoHandler);
 
-					@Override
-					public void onFailure(int errCode, String errMsg) {
-					}
+		// 添加短信
+		SmsHandler smsHandler = new SmsHandler();
+		smsHandler.addToSocialSDK();
 
-					@Override
-					public void onCancel() {
-					}
-				});
+		// 添加QQ支持
+		String appId = "1103533510";
+		String appKey = "1ROWSpIjlbPW2pBW";
+		// 添加QQ支持, 并且设置QQ分享内容的target url
+		UMQQSsoHandler qqSsoHandler = new UMQQSsoHandler(activity, appId, appKey);
+		qqSsoHandler.setTargetUrl(url);
+		qqSsoHandler.addToSocialSDK();
+		// 添加QZone平台
+		QZoneSsoHandler qZoneSsoHandler = new QZoneSsoHandler(activity, appId, appKey);
+		qZoneSsoHandler.addToSocialSDK();
+
+		// 注意：在微信授权的时候，必须传递appSecret
+		// wx967daebe835fbeac是你在微信开发平台注册应用的AppID, 这里需要替换成你注册的AppID
+		String appId1 = "wxb6650aec575b269e";
+		String appSecret = "02c884952d5ac5b9e0987c061bf26988";
+		// 添加微信平台
+		UMWXHandler wxHandler = new UMWXHandler(activity, appId1, appSecret);
+		wxHandler.addToSocialSDK();
+		// 支持微信朋友圈
+		UMWXHandler wxCircleHandler = new UMWXHandler(activity, appId1, appSecret);
+		wxCircleHandler.setToCircle(true);
+		wxCircleHandler.addToSocialSDK();
+
+		// 分享回调
+		mController.registerListener(new SnsPostListener() {
+
+			@Override
+			public void onStart() {
+				// Toast.makeText(activity, "share start...", Toast.LENGTH_LONG).show();
+			}
+
+			@Override
+			public void onComplete(SHARE_MEDIA platform, int eCode, SocializeEntity entity) {
+				if (eCode == 200) { // 分享成功
+					HomeTabManager.getInstance().getShareData(activity);
+				}
+			}
+		});
+
+		// 设置分享内容
+		setShareContent(activity, mController);
+		mController.getConfig().setPlatforms(SHARE_MEDIA.WEIXIN, SHARE_MEDIA.WEIXIN_CIRCLE, SHARE_MEDIA.QQ,
+				SHARE_MEDIA.QZONE, SHARE_MEDIA.SINA, SHARE_MEDIA.TENCENT, SHARE_MEDIA.RENREN, SHARE_MEDIA.SMS);
+
+		mController.openShare(activity, false);
 	}
 
 	/**
@@ -790,5 +877,75 @@ public class Utils {
 			actList.get(i).finish();
 		}
 		actList.clear();
+	}
+
+	/**
+	 * 根据不同的平台设置不同的分享内容
+	 */
+	private static void setShareContent(Activity activity, UMSocialService mController) {
+
+		String title = CommonManager.getInstance().getShareTtitle(activity);
+		String content = CommonManager.getInstance().getShareContent(activity);
+		String url = CommonManager.getInstance().getShareUrl(activity);
+		String picUrl = CommonManager.getInstance().getSharePicUrl(activity);
+		UMImage urlImage = new UMImage(activity, picUrl);
+
+		WeiXinShareContent weixinContent = new WeiXinShareContent();
+		weixinContent.setShareContent(content);
+		weixinContent.setTitle(title);
+		weixinContent.setTargetUrl(url);
+		weixinContent.setShareMedia(urlImage);
+		mController.setShareMedia(weixinContent);
+
+		// 设置朋友圈分享的内容
+		CircleShareContent circleMedia = new CircleShareContent();
+		circleMedia.setShareContent(content);
+		circleMedia.setTitle(title);
+		circleMedia.setShareMedia(urlImage);
+		circleMedia.setTargetUrl(url);
+		mController.setShareMedia(circleMedia);
+
+		// 设置renren分享内容
+		RenrenShareContent renrenShareContent = new RenrenShareContent();
+		renrenShareContent.setShareContent(content);
+		renrenShareContent.setShareImage(urlImage);
+		renrenShareContent.setAppWebSite(url);
+		mController.setShareMedia(renrenShareContent);
+
+		// 设置QQ空间分享内容
+		QZoneShareContent qzone = new QZoneShareContent();
+		qzone.setShareContent(content);
+		qzone.setTargetUrl(url);
+		qzone.setTitle(title);
+		qzone.setShareMedia(urlImage);
+		mController.setShareMedia(qzone);
+
+		QQShareContent qqShareContent = new QQShareContent();
+		qqShareContent.setShareContent(content);
+		qqShareContent.setTitle(title);
+		qqShareContent.setShareMedia(urlImage);
+		qqShareContent.setTargetUrl(url);
+		mController.setShareMedia(qqShareContent);
+
+		// 腾讯微博
+		TencentWbShareContent tencent = new TencentWbShareContent();
+		tencent.setShareContent(content);
+		tencent.setTitle(title);
+		tencent.setShareMedia(urlImage);
+		tencent.setTargetUrl(url);
+		mController.setShareMedia(tencent);
+
+		// 短信
+		SmsShareContent sms = new SmsShareContent();
+		sms.setShareContent(content);
+		sms.setShareImage(urlImage);
+		mController.setShareMedia(sms);
+
+		// 新浪
+		SinaShareContent sinaContent = new SinaShareContent();
+		sinaContent.setShareContent(content);
+		sinaContent.setShareImage(urlImage);
+		sinaContent.setTitle(title);
+		mController.setShareMedia(sinaContent);
 	}
 }

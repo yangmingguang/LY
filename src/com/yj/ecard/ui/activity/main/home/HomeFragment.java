@@ -152,7 +152,8 @@ public class HomeFragment extends BaseFragment implements OnClickListener {
 
 		// 邀请好友
 		case R.id.btn_invite:
-			Utils.toSocialShare(context);
+			// Utils.toSocialShare(context);
+			Utils.toUmengSocialShare(getActivity());
 			break;
 
 		// 每日签到	

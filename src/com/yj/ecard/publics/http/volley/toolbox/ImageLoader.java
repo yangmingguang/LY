@@ -26,9 +26,9 @@ import android.widget.ImageView;
 
 import com.yj.ecard.publics.http.volley.Request;
 import com.yj.ecard.publics.http.volley.RequestQueue;
-import com.yj.ecard.publics.http.volley.VolleyError;
 import com.yj.ecard.publics.http.volley.Response.ErrorListener;
 import com.yj.ecard.publics.http.volley.Response.Listener;
+import com.yj.ecard.publics.http.volley.VolleyError;
 
 /**
  * Helper that handles loading and caching images from remote URLs.

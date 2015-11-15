@@ -9,10 +9,9 @@
 
 package com.yj.ecard;
 
+import android.app.Application;
 import android.content.Context;
 
-import com.baidu.frontia.Frontia;
-import com.baidu.frontia.FrontiaApplication;
 import com.nostra13.universalimageloader.cache.disc.naming.Md5FileNameGenerator;
 import com.nostra13.universalimageloader.cache.memory.impl.LruMemoryCache;
 import com.nostra13.universalimageloader.core.ImageLoader;
@@ -31,7 +30,7 @@ import com.yj.ecard.publics.utils.ImageLoaderUtil;
 * 
 */
 
-public class MyApplication extends FrontiaApplication {
+public class MyApplication extends Application {
 
 	/** 
 	 * 百度Frontia组件  
@@ -51,10 +50,6 @@ public class MyApplication extends FrontiaApplication {
 		initDataBase(this);
 		initUIL(this);
 		CrashHandler.getInstance().init(this);
-		// 百度Frontia组件 
-		Frontia.init(this.getApplicationContext(), "UwIcYepqCItTGSyVLpWfiGLL");
-		// 百度云推送
-		// PushManager.startWork(getApplicationContext(), PushConstants.LOGIN_TYPE_API_KEY, "B5yXQAdhC0hIz1rlGZ7nPeqO");
 	}
 
 	/** 

@@ -21,9 +21,9 @@ import java.io.UnsupportedEncodingException;
 import com.yj.ecard.publics.http.volley.NetworkResponse;
 import com.yj.ecard.publics.http.volley.Request;
 import com.yj.ecard.publics.http.volley.Response;
-import com.yj.ecard.publics.http.volley.VolleyLog;
 import com.yj.ecard.publics.http.volley.Response.ErrorListener;
 import com.yj.ecard.publics.http.volley.Response.Listener;
+import com.yj.ecard.publics.http.volley.VolleyLog;
 
 /**
  * A request for retrieving a T type response body at a given URL that also
