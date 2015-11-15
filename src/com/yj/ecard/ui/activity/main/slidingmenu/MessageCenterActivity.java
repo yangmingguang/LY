@@ -49,6 +49,7 @@ public class MessageCenterActivity extends BaseActivity {
 	* @throws 
 	*/
 	private void initViewPager() {
+		int tabIndex = getIntent().getIntExtra("index", 0);
 		String[] titles = { ResourceUtil.getString(context, R.string.tab_user_message),
 				ResourceUtil.getString(context, R.string.tab_sys_message) };
 		mMessagePagerAdapter = new MessagePagerAdapter(this.getSupportFragmentManager(), titles);
@@ -63,6 +64,7 @@ public class MessageCenterActivity extends BaseActivity {
 		});
 		indicator = (TabPageIndicator) findViewById(R.id.vpi_indicator);
 		indicator.setViewPager(mViewPager);
+		indicator.setCurrentItem(tabIndex); // 当前位置
 	}
 
 	/**

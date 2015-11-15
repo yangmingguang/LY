@@ -79,7 +79,7 @@ public class UserMessageFragment extends BaseFragment {
 		mListView = (PullToRefreshListView) rootView.findViewById(R.id.lv_common);
 		mListView.setOnRefreshListener(onRefreshListener);
 		mListView.setMode(Mode.DISABLED);
-		mListView.setEmptyView(emptyView);
+		mListView.setEmptyView(loadingView);
 		mAdapter = new MessageListAdapter(getActivity());
 		mListView.setAdapter(mAdapter);
 	}

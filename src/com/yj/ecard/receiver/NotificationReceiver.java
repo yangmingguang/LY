@@ -16,6 +16,7 @@ import android.content.Intent;
 import com.yj.ecard.business.common.CommonManager;
 import com.yj.ecard.ui.activity.main.home.valuespike.SeckillRecordActivity;
 import com.yj.ecard.ui.activity.main.me.ExchangeRecordActivity;
+import com.yj.ecard.ui.activity.main.slidingmenu.MessageCenterActivity;
 
 /**
 * @ClassName: NotificationReceiver
@@ -27,6 +28,8 @@ import com.yj.ecard.ui.activity.main.me.ExchangeRecordActivity;
 
 public class NotificationReceiver extends BroadcastReceiver {
 
+	public static final int USER_MESSAGE_ID = 0;
+	public static final int SYS_MESSAGE_ID = 1;
 	public static final int UPDATE_MESSAGE_ID = 1000;
 	public static final int PUSH_MESSAGE_ID1 = 1104;
 	public static final int PUSH_MESSAGE_ID2 = 1105;
@@ -66,6 +69,14 @@ public class NotificationReceiver extends BroadcastReceiver {
 					Intent intent2 = new Intent(context, SeckillRecordActivity.class);
 					intent2.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
 					context.startActivity(intent2);
+					break;
+
+				case USER_MESSAGE_ID: // 用户消息
+				case SYS_MESSAGE_ID: // 系统消息
+					Intent intent3 = new Intent(context, MessageCenterActivity.class);
+					intent3.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+					intent3.putExtra("index", messageId);
+					context.startActivity(intent3);
 					break;
 				}
 				break;

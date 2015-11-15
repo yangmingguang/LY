@@ -23,6 +23,7 @@ public class PushRecordResponse {
 	public int userId;
 	public String title;
 	public String content;
+	public String addTime;
 
 	public int getType() {
 		return type;
@@ -54,6 +55,14 @@ public class PushRecordResponse {
 
 	public void setContent(String content) {
 		this.content = content;
+	}
+
+	public String getAddTime() {
+		return addTime;
+	}
+
+	public void setAddTime(String addTime) {
+		this.addTime = addTime;
 	}
 
 }

@@ -18,7 +18,6 @@ import com.baidu.android.pushservice.PushMessageReceiver;
 import com.yj.ecard.business.notification.CustomNotificationManager;
 import com.yj.ecard.business.user.UserManager;
 import com.yj.ecard.publics.http.model.response.PushRecordResponse;
-import com.yj.ecard.publics.utils.ToastUtil;
 
 /*
  * Push消息处理receiver。请编写您需要的回调函数， 一般来说： onBind是必须的，用来处理startWork返回值；
@@ -50,7 +49,7 @@ public class MyPushMessageReceiver extends PushMessageReceiver {
 	public void onBind(Context context, int errorCode, String arg2, String arg3, String arg4, String arg5) {
 		// TODO Auto-generated method stub
 		// 绑定成功
-		ToastUtil.show(context, "====" + errorCode, ToastUtil.LENGTH_LONG);
+		// ToastUtil.show(context, "====" + errorCode, ToastUtil.LENGTH_LONG);
 	}
 
 	@Override
@@ -102,16 +101,14 @@ public class MyPushMessageReceiver extends PushMessageReceiver {
 					mPushRecordResponse.setTitle(msg[2].toString());
 				if (len > 3)
 					mPushRecordResponse.setContent(msg[3].toString());
+				if (len > 4)
+					mPushRecordResponse.setAddTime(msg[4].toString());
 
 				switch (mPushRecordResponse.getType()) {
-				// 用户消息
-				case 0:
 
-					break;
-
-				// 系统消息
-				case 1:
-
+				case 0: // 用户消息
+				case 1: // 系统消息
+					CustomNotificationManager.getInstance().showPushMessageNotification(context, mPushRecordResponse);
 					break;
 
 				case 1104: // 兑换记录
@@ -129,7 +126,7 @@ public class MyPushMessageReceiver extends PushMessageReceiver {
 				e.printStackTrace();
 			}
 
-			ToastUtil.show(context, message, ToastUtil.LENGTH_LONG);
+			// ToastUtil.show(context, message, ToastUtil.LENGTH_LONG);
 		}
 	}
 

@@ -39,6 +39,7 @@
 -dontwarn com.umeng.**
 -dontwarn com.tencent.weibo.sdk.**
 -dontwarn com.facebook.**
+-dontwarn com.baidu.**
 
 
 -keep enum com.facebook.**
@@ -81,6 +82,7 @@
 -libraryjars libs/xUtils-2.6.14.jar
 -libraryjars libs/YoumiSdk_v5.1.0_2015-04-01.jar
 -libraryjars libs/alipaySDK-20150724.jar
+-libraryjars libs/pushservice-4.5.6.88.jar
 
 #支付宝相关
 -keep class com.alipay.android.app.IAlixPay{*;}
