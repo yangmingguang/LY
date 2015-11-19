@@ -2,8 +2,8 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     package="com.yj.ecard"
-    android:versionCode="2055"
-    android:versionName="2.0.55" >
+    android:versionCode="2056"
+    android:versionName="2.0.56" >
 
     <uses-sdk
         android:minSdkVersion="11"
