@@ -42,6 +42,7 @@ import android.widget.TextView;
 import com.baidu.android.pushservice.PushConstants;
 import com.baidu.android.pushservice.PushManager;
 import com.nostra13.universalimageloader.core.assist.ImageType;
+import com.umeng.analytics.MobclickAgent;
 import com.yj.ecard.R;
 import com.yj.ecard.business.common.CommonManager;
 import com.yj.ecard.business.screenlock.ScreenLockManager;
@@ -105,6 +106,9 @@ public class MainActivity extends BaseActivity implements OnClickListener, Point
 	@Override
 	protected void onResume() {
 		super.onResume();
+		// 友盟统计
+		MobclickAgent.onPageStart("MainActivity");
+		MobclickAgent.onResume(this);
 		if (null != ivHead) {
 			String path = UserManager.getInstance().getHeadUrl(context);
 			ImageLoaderUtil.load(context, ImageType.NETWORK, path, R.drawable.ic_default_head,
@@ -117,6 +121,14 @@ public class MainActivity extends BaseActivity implements OnClickListener, Point
 		// 获取地区
 		getSortListData(this, Constan.AREA_TYPE);
 		getSortListData(this, Constan.SHOP_TYPE);
+	}
+
+	@Override
+	protected void onPause() {
+		super.onPause();
+		// 友盟统计
+		MobclickAgent.onPageEnd("MainActivity");
+		MobclickAgent.onPause(this);
 	}
 
 	@Override

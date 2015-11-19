@@ -60,7 +60,7 @@
     <uses-permission android:name="android.permission.GET_ACCOUNTS" />
     <uses-permission android:name="android.permission.USE_CREDENTIALS" />
     <uses-permission android:name="android.permission.MANAGE_ACCOUNTS" />
-    
+
     <application
         android:name="com.yj.ecard.MyApplication"
         android:allowBackup="true"
@@ -559,6 +559,9 @@
         <meta-data
             android:name="UMENG_APPKEY"
             android:value="553c9f86e0f55a3cfd005a42" />
+        <meta-data
+            android:name="UMENG_CHANNEL"
+            android:value="Leying" />
 
         <!-- 分享内容编辑页 -->
         <activity

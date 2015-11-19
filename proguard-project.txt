@@ -68,8 +68,19 @@
 
 -keep class im.yixin.sdk.api.YXMessage {*;}
 -keep class im.yixin.sdk.api.** implements im.yixin.sdk.api.YXMessage$YXMessageData{*;}
+
+# 友盟统计
+-keepclassmembers class * {
+   public <init>(org.json.JSONObject);
+}
+
 -keep public class com.yj.ecard.R$*{
     public static final int *;
+}
+
+-keepclassmembers enum * {
+    public static **[] values();
+    public static ** valueOf(java.lang.String);
 }
 
 #把所有你的jar包都申明进来
