@@ -214,4 +214,7 @@ public class WebUrl {
 	// 60.删除消息
 	public static final String DEL_MESSAGE_URL = NEW_BASE_URL + "message/GetMessList?userId=%s&userPwd=%s&id=%s";
 
+	// 61.逛优惠收金币
+	public static final String GET_PREFERENTIAL_URL = NEW_BASE_URL + "youhui/YouhuiJfnew?sign=%s&advId=%s&userId=%s";
+
 }

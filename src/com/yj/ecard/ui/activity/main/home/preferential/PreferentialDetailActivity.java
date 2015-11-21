@@ -198,10 +198,9 @@ public class PreferentialDetailActivity extends BaseActivity {
 				if (count < 0) {
 					tvTime.setVisibility(View.GONE);
 					handler.removeCallbacks(runnable);
-					// 1=弹屏、2=划屏、3=逛优惠
-					PhoneManager.getInstance().postSeeAdData(context, id, 3, 1);
+					PhoneManager.getInstance().getPreferential(context, id);
 				} else {
-					tvTime.setText(count + "秒可收钱");
+					tvTime.setText(count + "秒后可收钱");
 					tvTime.setVisibility(View.VISIBLE);
 				}
 				break;

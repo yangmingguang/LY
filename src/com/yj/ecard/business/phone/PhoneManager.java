@@ -259,4 +259,58 @@ public class PhoneManager {
 			e.printStackTrace();
 		}
 	}
+
+	/**
+	 * 
+	* @Title: getPreferential 
+	* @Description: 逛优惠收金币
+	* @param @param context
+	* @param @param advId    设定文件 
+	* @return void    返回类型 
+	* @throws
+	 */
+	public void getPreferential(final Context context, int advId) {
+		SeeAdRequest request = new SeeAdRequest();
+		request.setUserId(UserManager.getInstance().getUserId(context));
+		request.setAdvId(advId);
+		String imei = Utils.getIMEI(context);
+		int userId = UserManager.getInstance().getUserId(context);
+		String sign = MD5Util.getMD5(imei + userId + advId); // MD5加密
+		request.setSign(sign);
+		DataFetcher.getInstance().getPreferential(request, new Listener<JSONObject>() {
+
+			@Override
+			public void onResponse(JSONObject response) {
+				// TODO Auto-generated method stub
+				LogUtil.getLogger().d("response==>" + response.toString());
+				SeeAdResponse mSeeAdResponse = (SeeAdResponse) JsonUtil.jsonToBean(response, SeeAdResponse.class);
+
+				// 数据响应状态
+				int stateCode = mSeeAdResponse.status.code;
+				switch (stateCode) {
+				case Constan.SUCCESS_CODE:
+					String successTips = mSeeAdResponse.status.msg;
+					if (null != successTips && !successTips.equals(""))
+						ToastUtil.show(context, successTips, ToastUtil.LENGTH_LONG);
+					break;
+				case Constan.EMPTY_CODE:
+					String emptyTips = mSeeAdResponse.status.msg;
+					if (null != emptyTips && !emptyTips.equals(""))
+						ToastUtil.show(context, emptyTips, ToastUtil.LENGTH_LONG);
+					break;
+				case Constan.ERROR_CODE:
+					ToastUtil.show(context, R.string.error_tips, ToastUtil.LENGTH_SHORT);
+					break;
+				}
+
+			}
+		}, new ErrorListener() {
+
+			@Override
+			public void onErrorResponse(VolleyError error) {
+				// TODO Auto-generated method stub
+				ToastUtil.show(context, R.string.error_tips, ToastUtil.LENGTH_SHORT);
+			}
+		}, true);
+	}
 }

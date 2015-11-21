@@ -1166,4 +1166,20 @@ public class DataFetcher {
 		String requestUrl = String.format(WebUrl.DEL_MESSAGE_URL, request.userId, request.userPwd, request.id);
 		get(requestUrl, listener, errorListener, shouldCache);
 	}
+
+	/**
+	* @Title: getPreferential 
+	* @Description: 逛优惠收金币接口
+	* @param @param request
+	* @param @param listener
+	* @param @param errorListener
+	* @param @param shouldCache    设定文件 
+	* @return void    返回类型 
+	* @throws
+	 */
+	public void getPreferential(SeeAdRequest request, Listener<JSONObject> listener, ErrorListener errorListener,
+			boolean shouldCache) {
+		String requestUrl = String.format(WebUrl.GET_PREFERENTIAL_URL, request.sign, request.advId, request.userId);
+		get(requestUrl, listener, errorListener, shouldCache);
+	}
 }
