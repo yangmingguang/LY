@@ -70,6 +70,7 @@ public class Constan {
 	public static final String SHARE_URL = "shareUrl";
 	public static final String SHARE_PICURL = "sharePicUrl";
 	public static final String LARGE_LOCAL_PATH = "largeLocalPath";
+	public static final String WEB_SITE_URL = "webSiteUrl";
 	public static final String FIELD_ID = "field";
 	public static final String FIELD_TEXT = "fieldText";
 	public static final String SEX_ID = "sexId";

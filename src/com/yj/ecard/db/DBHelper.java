@@ -24,7 +24,7 @@ import android.database.sqlite.SQLiteOpenHelper;
 public class DBHelper extends SQLiteOpenHelper {
 
 	private static DBHelper mDBHelper;
-	private static final int DATABASE_VERSION = 1009;
+	private static final int DATABASE_VERSION = 1010;
 	private static final int FIRST_DATABASE_VERSION = 1000;
 	private static final String DATABASE_NAME = "leying.db";
 
@@ -65,7 +65,7 @@ public class DBHelper extends SQLiteOpenHelper {
 		db.execSQL("drop table if exists tb_call_state");
 		db.execSQL("drop table if exists tb_screenlock_state");
 
-		String sql1 = "CREATE TABLE tb_tel_ad(" + "id int(10), " + "smallUrl varchar(100), "
+		String sql1 = "CREATE TABLE tb_tel_ad(" + "id int(10), " + "webUrl varchar(100), " + "smallUrl varchar(100), "
 				+ "largeUrl varchar(100), " + "smallLocalPath varchar(100), " + "largeLocalPath varchar(100), "
 				+ "smallPicDownload boolean," + "largePicDownload boolean" + ")";
 

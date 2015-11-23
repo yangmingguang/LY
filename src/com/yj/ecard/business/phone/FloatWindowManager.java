@@ -14,12 +14,15 @@ import java.util.Timer;
 import java.util.TimerTask;
 
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.PixelFormat;
+import android.net.Uri;
 import android.os.Handler;
 import android.os.Message;
 import android.telephony.TelephonyManager;
+import android.text.TextUtils;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -53,10 +56,10 @@ public class FloatWindowManager {
 	private int count = 11;
 	private Context context;
 	private boolean isCalling;
-	private ImageView imageView;
 	private TelAdBean mTelAdBean;
 	private View mFloatLayout, bdLayout;
 	private WindowManager mWindowManager;
+	private ImageView imageView, btnWebSite;
 	private TextView textView, tvPhone, tvName;
 	private WindowManager.LayoutParams wmParams;
 	private static volatile FloatWindowManager mFloatWindowManager;
@@ -88,6 +91,14 @@ public class FloatWindowManager {
 		return SharedPrefsUtil.getValue(context, Constan.LARGE_LOCAL_PATH, "");
 	}
 
+	public void setWebSiteUrl(Context context, String url) {
+		SharedPrefsUtil.putValue(context, Constan.WEB_SITE_URL, url);
+	}
+
+	public String getWebSiteUrl(Context context) {
+		return SharedPrefsUtil.getValue(context, Constan.WEB_SITE_URL, "");
+	}
+
 	/**
 	 * 
 	* @Title: showFloatView 
@@ -110,6 +121,7 @@ public class FloatWindowManager {
 			if (isFullScreen) {
 				// 全屏显示
 				mFloatLayout = LayoutInflater.from(context).inflate(R.layout.float_fullscreen_layout, null);
+				btnWebSite = (ImageView) mFloatLayout.findViewById(R.id.btn_website);
 			} else {
 				// 半屏显示
 				mFloatLayout = LayoutInflater.from(context).inflate(R.layout.float_halfscreen_layout, null);
@@ -160,6 +172,7 @@ public class FloatWindowManager {
 				advId = mTelAdBean.id;
 				path = mTelAdBean.smallLocalPath;
 				setLargeLocalPath(context, mTelAdBean.largeLocalPath); // 设置大图片路径
+				setWebSiteUrl(context, mTelAdBean.webUrl); // 设置webUrl
 				if (isShowPhone) {
 					tvPhone.setText(phoneNumber);// 设置来电去电号码显示
 					tvName.setText(Utils.getContactNameByPhoneNumber(context, phoneNumber));// 设置来电去电名称显示
@@ -204,6 +217,29 @@ public class FloatWindowManager {
 				}
 			});
 
+			// 进入官网
+			if (btnWebSite != null) {
+				btnWebSite.setOnClickListener(new OnClickListener() {
+
+					@Override
+					public void onClick(View v) {
+						// TODO Auto-generated method stub
+						// 使用内置浏览器
+						String webUrl = getWebSiteUrl(context); // 使用webUrl
+						if (!TextUtils.isEmpty(webUrl)) {
+							try {
+								Uri uri = Uri.parse(webUrl); // 网址一定要加http   
+								Intent intent = new Intent(Intent.ACTION_VIEW, uri);
+								intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+								context.startActivity(intent);
+								hideFloatView(); // 隐藏悬浮窗
+							} catch (Exception e) {
+								// TODO: handle exception
+							}
+						}
+					}
+				});
+			}
 		}
 	}
 

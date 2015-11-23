@@ -20,6 +20,7 @@ package com.yj.ecard.publics.model;
 public class TelAdBean {
 
 	public int id;
+	public String webUrl;
 	public String smallUrl;
 	public String largeUrl;
 	public String smallLocalPath;
@@ -41,6 +42,14 @@ public class TelAdBean {
 
 	public void setId(int id) {
 		this.id = id;
+	}
+
+	public String getWebUrl() {
+		return webUrl;
+	}
+
+	public void setWebUrl(String webUrl) {
+		this.webUrl = webUrl;
 	}
 
 	/** 

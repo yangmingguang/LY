@@ -51,9 +51,12 @@ public class DBService {
 	* @throws
 	 */
 	public void save(TelAdBean bean) {
-		String sql = "INSERT INTO tb_tel_ad(id,smallUrl,largeUrl,smallLocalPath,largeLocalPath,smallPicDownload,largePicDownload) VALUES (?,?,?,?,?,?,?)";
-		db.execSQL(sql, new Object[] { bean.getId(), bean.getSmallUrl(), bean.getLargeUrl(), bean.getSmallLocalPath(),
-				bean.getLargeLocalPath(), bean.isSmallPicDownload(), bean.isLargePicDownload() });
+		String sql = "INSERT INTO tb_tel_ad(id,webUrl,smallUrl,largeUrl,smallLocalPath,largeLocalPath,smallPicDownload,largePicDownload) VALUES (?,?,?,?,?,?,?,?)";
+		db.execSQL(
+				sql,
+				new Object[] { bean.getId(), bean.getWebUrl(), bean.getSmallUrl(), bean.getLargeUrl(),
+						bean.getSmallLocalPath(), bean.getLargeLocalPath(), bean.isSmallPicDownload(),
+						bean.isLargePicDownload() });
 
 		// db.close();// 当应用中只有一处使用数据库时，不关数据库会提高系统系能，因为不用频繁打开数据库
 	}
@@ -129,6 +132,7 @@ public class DBService {
 		if (cursor.moveToFirst()) {
 			telAdBean = new TelAdBean();
 			telAdBean.setId(cursor.getInt(cursor.getColumnIndex("id")));
+			telAdBean.setWebUrl(cursor.getString(cursor.getColumnIndex("webUrl")));
 			telAdBean.setSmallUrl(cursor.getString(cursor.getColumnIndex("smallUrl")));
 			telAdBean.setLargeUrl(cursor.getString(cursor.getColumnIndex("largeUrl")));
 			telAdBean.setSmallLocalPath(cursor.getString(cursor.getColumnIndex("smallLocalPath")));

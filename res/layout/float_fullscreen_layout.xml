@@ -12,6 +12,14 @@
         android:contentDescription="@null"
         android:scaleType="fitXY" />
 
+    <ImageView
+        android:id="@+id/btn_website"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="right"
+        android:background="@drawable/ic_enter_website"
+        android:contentDescription="@null" />
+
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
