@@ -60,6 +60,9 @@ public class ValueSpikeListViewHolder {
 			if (valueSpikeBean.canbuy == 1 && valueSpikeBean.isStart) {
 				btnState.setText("马上抢");
 				btnState.setBackgroundResource(R.drawable.selector_btn_invite);
+			} else if (valueSpikeBean.canbuy == 2 && valueSpikeBean.isStart) {
+				btnState.setText("抢光了");
+				btnState.setBackgroundResource(R.drawable.ic_btn_gray);
 			} else {
 				btnState.setText("未开始");
 				btnState.setBackgroundResource(R.drawable.ic_btn_gray);
@@ -68,5 +71,4 @@ public class ValueSpikeListViewHolder {
 					R.drawable.banner_detail_default, ivLogo);
 		}
 	}
-
 }

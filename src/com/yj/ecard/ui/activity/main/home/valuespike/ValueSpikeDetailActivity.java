@@ -107,10 +107,16 @@ public class ValueSpikeDetailActivity extends BaseActivity {
 
 		// 立即抢购
 		if (canBuy == 1 && isStart) {
+			btnState.setText("马上抢");
 			btnState.setBackgroundResource(R.drawable.selector_btn_invite);
+		} else if (canBuy == 2 && isStart) {
+			btnState.setText("抢光了");
+			btnState.setBackgroundResource(R.drawable.ic_btn_gray);
 		} else {
+			btnState.setText("未开始");
 			btnState.setBackgroundResource(R.drawable.ic_btn_gray);
 		}
+
 		btnState.setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View v) {
